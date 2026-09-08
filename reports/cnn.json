@@ -1,0 +1,897 @@
+{
+  "model": {
+    "architecture": "mobilenet_v3_small",
+    "pretrained": "IMAGENET1K_V1",
+    "input_size": [
+      224,
+      224
+    ],
+    "parameters": 1519906,
+    "fp32_megabytes": 6.08,
+    "why_not_resnet18": "ResNet18 は fp32 で 46.8MB あり、量子化する前から N-01 の配信目標 30MB を超える。目標を動かすのではなく骨格を変えた"
+  },
+  "generated_at": "2026-09-09T06:50:25+09:00",
+  "n_boot": 2000,
+  "seed": 20260908,
+  "epoch_budget": {
+    "chosen": 3,
+    "chosen_on": "ruler_a_val",
+    "max_epochs": 20,
+    "curve": [
+      {
+        "epoch": 1,
+        "train_loss": 0.1169,
+        "eval_macro_f1": 0.9689
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.0148,
+        "eval_macro_f1": 0.9646
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.0021,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.0048,
+        "eval_macro_f1": 0.9787
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.0069,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.0133,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.0029,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.0041,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.0004,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.0013,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.0005,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.0006,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.0002,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.0007,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 15,
+        "train_loss": 0.0001,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 16,
+        "train_loss": 0.0005,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 17,
+        "train_loss": 0.0002,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 18,
+        "train_loss": 0.0004,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 19,
+        "train_loss": 0.0001,
+        "eval_macro_f1": 1.0
+      },
+      {
+        "epoch": 20,
+        "train_loss": 0.0033,
+        "eval_macro_f1": 1.0
+      }
+    ],
+    "note": "予算を直接指定した"
+  },
+  "rulers": {
+    "a": {
+      "macro_f1": 0.9731,
+      "ci_low": 0.958,
+      "ci_high": 0.9858,
+      "accuracy": 0.9776,
+      "n_images": 1966,
+      "n_groups": 929
+    },
+    "b": {
+      "macro_f1": 0.9276,
+      "ci_low": 0.9085,
+      "ci_high": 0.9443,
+      "accuracy": 0.939,
+      "n_images": 1966,
+      "n_groups": 929
+    },
+    "c": {
+      "macro_f1": 0.6942,
+      "ci_low": 0.6577,
+      "ci_high": 0.7329,
+      "accuracy": 0.7004,
+      "n_images": 1966,
+      "n_groups": 929
+    }
+  },
+  "per_taxon": {
+    "a": {
+      "Lactobacillus reuteri": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus gasseri": {
+        "n": 61,
+        "wrong": 23,
+        "error_rate": 0.377
+      },
+      "Fusobacterium": {
+        "n": 62,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Staphylococcus epidermidis": {
+        "n": 58,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Porphyromonas gingivalis": {
+        "n": 65,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus johnsonii": {
+        "n": 61,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Clostridium perfringens": {
+        "n": 62,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Listeria monocytogenes": {
+        "n": 63,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Propionibacterium acnes": {
+        "n": 61,
+        "wrong": 5,
+        "error_rate": 0.082
+      },
+      "Bacteroides fragilis": {
+        "n": 65,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Streptococcus agalactiae": {
+        "n": 65,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Proteus": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus casei": {
+        "n": 60,
+        "wrong": 11,
+        "error_rate": 0.1833
+      },
+      "Lactobacillus jensenii": {
+        "n": 66,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Enterococcus faecalis": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus delbrueckii": {
+        "n": 59,
+        "wrong": 1,
+        "error_rate": 0.0169
+      },
+      "Lactobacillus plantarum": {
+        "n": 61,
+        "wrong": 1,
+        "error_rate": 0.0164
+      },
+      "Lactobacillus crispatus": {
+        "n": 57,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Acinetobacter baumannii": {
+        "n": 59,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Micrococcus spp": {
+        "n": 63,
+        "wrong": 1,
+        "error_rate": 0.0159
+      },
+      "Lactobacillus rhamnosus": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Neisseria gonorrhoeae": {
+        "n": 68,
+        "wrong": 1,
+        "error_rate": 0.0147
+      },
+      "Lactobacillus paracasei": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Pseudomonas aeruginosa": {
+        "n": 63,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Veillonella": {
+        "n": 58,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Staphylococcus saprophyticus": {
+        "n": 60,
+        "wrong": 1,
+        "error_rate": 0.0167
+      },
+      "Escherichia coli": {
+        "n": 59,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Bifidobacterium spp": {
+        "n": 63,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus salivarius": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Actinomyces israelii": {
+        "n": 67,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Enterococcus faecium": {
+        "n": 56,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Staphylococcus aureus": {
+        "n": 64,
+        "wrong": 0,
+        "error_rate": 0.0
+      }
+    },
+    "b": {
+      "Actinomyces israelii": {
+        "n": 67,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Enterococcus faecium": {
+        "n": 56,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus reuteri": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Neisseria gonorrhoeae": {
+        "n": 68,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Bacteroides fragilis": {
+        "n": 65,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus crispatus": {
+        "n": 57,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus jensenii": {
+        "n": 66,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus paracasei": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus casei": {
+        "n": 60,
+        "wrong": 1,
+        "error_rate": 0.0167
+      },
+      "Porphyromonas gingivalis": {
+        "n": 65,
+        "wrong": 23,
+        "error_rate": 0.3538
+      },
+      "Streptococcus agalactiae": {
+        "n": 65,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Veillonella": {
+        "n": 58,
+        "wrong": 2,
+        "error_rate": 0.0345
+      },
+      "Enterococcus faecalis": {
+        "n": 60,
+        "wrong": 1,
+        "error_rate": 0.0167
+      },
+      "Pseudomonas aeruginosa": {
+        "n": 63,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Staphylococcus aureus": {
+        "n": 64,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Staphylococcus epidermidis": {
+        "n": 58,
+        "wrong": 1,
+        "error_rate": 0.0172
+      },
+      "Bifidobacterium spp": {
+        "n": 63,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Fusobacterium": {
+        "n": 62,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus delbrueckii": {
+        "n": 59,
+        "wrong": 8,
+        "error_rate": 0.1356
+      },
+      "Propionibacterium acnes": {
+        "n": 61,
+        "wrong": 46,
+        "error_rate": 0.7541
+      },
+      "Lactobacillus plantarum": {
+        "n": 61,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Listeria monocytogenes": {
+        "n": 63,
+        "wrong": 21,
+        "error_rate": 0.3333
+      },
+      "Proteus": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Staphylococcus saprophyticus": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Acinetobacter baumannii": {
+        "n": 59,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus johnsonii": {
+        "n": 61,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus salivarius": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Micrococcus spp": {
+        "n": 63,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Clostridium perfringens": {
+        "n": 62,
+        "wrong": 1,
+        "error_rate": 0.0161
+      },
+      "Escherichia coli": {
+        "n": 59,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Lactobacillus gasseri": {
+        "n": 61,
+        "wrong": 16,
+        "error_rate": 0.2623
+      },
+      "Lactobacillus rhamnosus": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      }
+    },
+    "c": {
+      "Lactobacillus casei": {
+        "n": 60,
+        "wrong": 60,
+        "error_rate": 1.0
+      },
+      "Lactobacillus crispatus": {
+        "n": 57,
+        "wrong": 45,
+        "error_rate": 0.7895
+      },
+      "Lactobacillus delbrueckii": {
+        "n": 59,
+        "wrong": 42,
+        "error_rate": 0.7119
+      },
+      "Lactobacillus gasseri": {
+        "n": 61,
+        "wrong": 61,
+        "error_rate": 1.0
+      },
+      "Lactobacillus jensenii": {
+        "n": 66,
+        "wrong": 58,
+        "error_rate": 0.8788
+      },
+      "Lactobacillus johnsonii": {
+        "n": 61,
+        "wrong": 60,
+        "error_rate": 0.9836
+      },
+      "Lactobacillus paracasei": {
+        "n": 60,
+        "wrong": 60,
+        "error_rate": 1.0
+      },
+      "Lactobacillus plantarum": {
+        "n": 61,
+        "wrong": 60,
+        "error_rate": 0.9836
+      },
+      "Lactobacillus reuteri": {
+        "n": 60,
+        "wrong": 15,
+        "error_rate": 0.25
+      },
+      "Lactobacillus rhamnosus": {
+        "n": 60,
+        "wrong": 60,
+        "error_rate": 1.0
+      },
+      "Lactobacillus salivarius": {
+        "n": 60,
+        "wrong": 11,
+        "error_rate": 0.1833
+      },
+      "Neisseria gonorrhoeae": {
+        "n": 68,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Bacteroides fragilis": {
+        "n": 65,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Staphylococcus aureus": {
+        "n": 64,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Staphylococcus epidermidis": {
+        "n": 58,
+        "wrong": 5,
+        "error_rate": 0.0862
+      },
+      "Staphylococcus saprophyticus": {
+        "n": 60,
+        "wrong": 13,
+        "error_rate": 0.2167
+      },
+      "Enterococcus faecalis": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Enterococcus faecium": {
+        "n": 56,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Porphyromonas gingivalis": {
+        "n": 65,
+        "wrong": 10,
+        "error_rate": 0.1538
+      },
+      "Propionibacterium acnes": {
+        "n": 61,
+        "wrong": 10,
+        "error_rate": 0.1639
+      },
+      "Actinomyces israelii": {
+        "n": 67,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Clostridium perfringens": {
+        "n": 62,
+        "wrong": 3,
+        "error_rate": 0.0484
+      },
+      "Pseudomonas aeruginosa": {
+        "n": 63,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Veillonella": {
+        "n": 58,
+        "wrong": 1,
+        "error_rate": 0.0172
+      },
+      "Acinetobacter baumannii": {
+        "n": 59,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Fusobacterium": {
+        "n": 62,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Micrococcus spp": {
+        "n": 63,
+        "wrong": 2,
+        "error_rate": 0.0317
+      },
+      "Streptococcus agalactiae": {
+        "n": 65,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Bifidobacterium spp": {
+        "n": 63,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Escherichia coli": {
+        "n": 59,
+        "wrong": 0,
+        "error_rate": 0.0
+      },
+      "Listeria monocytogenes": {
+        "n": 63,
+        "wrong": 13,
+        "error_rate": 0.2063
+      },
+      "Proteus": {
+        "n": 60,
+        "wrong": 0,
+        "error_rate": 0.0
+      }
+    }
+  },
+  "permutation_control": {
+    "a": {
+      "macro_f1": 0.4356,
+      "ci_low": 0.4074,
+      "ci_high": 0.4625,
+      "accuracy": 0.4791,
+      "n_images": 1966,
+      "n_groups": 929
+    }
+  },
+  "majority_reference": {
+    "a": {
+      "macro_f1": 0.4171,
+      "ci_low": 0.4039,
+      "ci_high": 0.4292,
+      "accuracy": 0.7157,
+      "n_images": 1966,
+      "n_groups": 929
+    },
+    "b": {
+      "macro_f1": 0.4171,
+      "ci_low": 0.4039,
+      "ci_high": 0.4292,
+      "accuracy": 0.7157,
+      "n_images": 1966,
+      "n_groups": 929
+    },
+    "c": {
+      "macro_f1": 0.4171,
+      "ci_low": 0.4039,
+      "ci_high": 0.4292,
+      "accuracy": 0.7157,
+      "n_images": 1966,
+      "n_groups": 929
+    }
+  },
+  "control_reference": {
+    "a": {
+      "macro_f1": 0.9714,
+      "ci_low": 0.9593,
+      "ci_high": 0.9824,
+      "accuracy": 0.9766,
+      "n_images": 1966,
+      "n_groups": 929,
+      "per_taxon_errors": {
+        "Listeria monocytogenes": {
+          "n": 63,
+          "wrong": 18,
+          "error_rate": 0.2857
+        },
+        "Porphyromonas gingivalis": {
+          "n": 65,
+          "wrong": 13,
+          "error_rate": 0.2
+        },
+        "Staphylococcus epidermidis": {
+          "n": 58,
+          "wrong": 6,
+          "error_rate": 0.1034
+        },
+        "Enterococcus faecalis": {
+          "n": 60,
+          "wrong": 2,
+          "error_rate": 0.0333
+        },
+        "Neisseria gonorrhoeae": {
+          "n": 68,
+          "wrong": 2,
+          "error_rate": 0.0294
+        },
+        "Bacteroides fragilis": {
+          "n": 65,
+          "wrong": 1,
+          "error_rate": 0.0154
+        },
+        "Lactobacillus casei": {
+          "n": 60,
+          "wrong": 1,
+          "error_rate": 0.0167
+        },
+        "Veillonella": {
+          "n": 58,
+          "wrong": 1,
+          "error_rate": 0.0172
+        },
+        "Staphylococcus saprophyticus": {
+          "n": 60,
+          "wrong": 1,
+          "error_rate": 0.0167
+        },
+        "Staphylococcus aureus": {
+          "n": 64,
+          "wrong": 1,
+          "error_rate": 0.0156
+        }
+      }
+    },
+    "b": {
+      "macro_f1": 0.9524,
+      "ci_low": 0.9363,
+      "ci_high": 0.9673,
+      "accuracy": 0.9608,
+      "n_images": 1966,
+      "n_groups": 929,
+      "per_taxon_errors": {
+        "Listeria monocytogenes": {
+          "n": 63,
+          "wrong": 28,
+          "error_rate": 0.4444
+        },
+        "Porphyromonas gingivalis": {
+          "n": 65,
+          "wrong": 24,
+          "error_rate": 0.3692
+        },
+        "Staphylococcus epidermidis": {
+          "n": 58,
+          "wrong": 8,
+          "error_rate": 0.1379
+        },
+        "Staphylococcus saprophyticus": {
+          "n": 60,
+          "wrong": 5,
+          "error_rate": 0.0833
+        },
+        "Enterococcus faecalis": {
+          "n": 60,
+          "wrong": 4,
+          "error_rate": 0.0667
+        },
+        "Neisseria gonorrhoeae": {
+          "n": 68,
+          "wrong": 3,
+          "error_rate": 0.0441
+        },
+        "Staphylococcus aureus": {
+          "n": 64,
+          "wrong": 2,
+          "error_rate": 0.0312
+        },
+        "Bacteroides fragilis": {
+          "n": 65,
+          "wrong": 1,
+          "error_rate": 0.0154
+        },
+        "Lactobacillus casei": {
+          "n": 60,
+          "wrong": 1,
+          "error_rate": 0.0167
+        },
+        "Veillonella": {
+          "n": 58,
+          "wrong": 1,
+          "error_rate": 0.0172
+        }
+      }
+    },
+    "c": {
+      "macro_f1": 0.9601,
+      "ci_low": 0.9457,
+      "ci_high": 0.9736,
+      "accuracy": 0.9674,
+      "n_images": 1966,
+      "n_groups": 929,
+      "per_taxon_errors": {
+        "Porphyromonas gingivalis": {
+          "n": 65,
+          "wrong": 24,
+          "error_rate": 0.3692
+        },
+        "Listeria monocytogenes": {
+          "n": 63,
+          "wrong": 20,
+          "error_rate": 0.3175
+        },
+        "Staphylococcus epidermidis": {
+          "n": 58,
+          "wrong": 8,
+          "error_rate": 0.1379
+        },
+        "Neisseria gonorrhoeae": {
+          "n": 68,
+          "wrong": 4,
+          "error_rate": 0.0588
+        },
+        "Staphylococcus saprophyticus": {
+          "n": 60,
+          "wrong": 3,
+          "error_rate": 0.05
+        },
+        "Staphylococcus aureus": {
+          "n": 64,
+          "wrong": 2,
+          "error_rate": 0.0312
+        },
+        "Lactobacillus casei": {
+          "n": 60,
+          "wrong": 1,
+          "error_rate": 0.0167
+        },
+        "Bacteroides fragilis": {
+          "n": 65,
+          "wrong": 1,
+          "error_rate": 0.0154
+        },
+        "Veillonella": {
+          "n": 58,
+          "wrong": 1,
+          "error_rate": 0.0172
+        }
+      }
+    }
+  },
+  "verdict": {
+    "condition_1_beats_hue_on_all_rulers": false,
+    "condition_2_beats_on_hard_taxa": true,
+    "hard_taxa": [
+      "Listeria monocytogenes",
+      "Porphyromonas gingivalis",
+      "Staphylococcus epidermidis"
+    ],
+    "hard_taxa_selection": "物差し B で色の規則の誤り率が 10% 以上だった分類群",
+    "hard_taxa_detail": {
+      "Listeria monocytogenes": {
+        "hue_error_rate": 0.4444,
+        "cnn_error_rate": 0.3333
+      },
+      "Porphyromonas gingivalis": {
+        "hue_error_rate": 0.3692,
+        "cnn_error_rate": 0.3538
+      },
+      "Staphylococcus epidermidis": {
+        "hue_error_rate": 0.1379,
+        "cnn_error_rate": 0.0172
+      },
+      "_totals": {
+        "hue_wrong": 60,
+        "cnn_wrong": 45,
+        "taxa_improved": 3,
+        "taxa_considered": 3
+      }
+    },
+    "adds_nothing": false
+  },
+  "shipped_model": {
+    "trained_on": [
+      "train"
+    ],
+    "selected_on": "val",
+    "test_evaluations": 1,
+    "epochs": 3,
+    "val_macro_f1": 0.9829,
+    "test": {
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "n_images": 286
+    },
+    "checkpoint": "ml/checkpoints/best_model.pth"
+  }
+}

@@ -27,3 +27,6 @@ Thumbs.db
 
 # 権威取得の再開用キャッシュ。集約結果 authority_bacdive.json を追跡するので中間は要らない
 dataset/metadata/.authority_cache/
+
+# 学習の途中成果(fold ごとの予測キャッシュ)
+ml/checkpoints/
