@@ -218,6 +218,35 @@ def split_ruler_a(items: list[dict], rng: random.Random) -> dict:
     return out
 
 
+def split_ruler_a_cv(items: list[dict], k: int, rng: random.Random) -> dict:
+    """物差し A の交差検証版 — 分類群の中で group を k 個へ配る。
+
+    なぜ 70/15/15 と別に要るのか(loop_003):
+      三つの物差しを比べるとき、**評価する母集団が違うと差の出所が分からなくなる**。
+      70/15/15 の A は 286 枚しか評価しないが、B と C は fold を通せば全画像を評価する。
+      286 枚と 1,966 枚の成績を並べると、差が「物差しの違い」なのか「測った枚数の違い」なのか
+      分けられない。A も k 分割にして、三つとも全画像を一度ずつ評価する形に揃える。
+
+    70/15/15 のほうは残す。出荷するモデルは val でモデル選択をする必要があり、
+    そのためには train / val / test の三分割が要るからである(G-08)。
+    """
+    folds: list[list[str]] = [[] for _ in range(k)]
+    for folder in sorted({it["folder"] for it in items}):
+        groups = sorted({it["group_id"] for it in items if it["folder"] == folder})
+        rng.shuffle(groups)
+        assign = {g: i % k for i, g in enumerate(groups)}
+        for it in items:
+            if it["folder"] == folder:
+                folds[assign[it["group_id"]]].append(it["image_id"])
+
+    all_ids = [it["image_id"] for it in items]
+    out = []
+    for f in folds:
+        held = set(f)
+        out.append({"held_out": [], "train": [i for i in all_ids if i not in held], "test": sorted(held)})
+    return {"key": "group_within_taxon", "folds": out}
+
+
 def _balanced_folds(units: list[str], unit_gram: dict[str, str], unit_size: dict[str, int],
                     k: int, rng: random.Random) -> list[list[str]]:
     """単位(分類群 or 科)を k 個の fold へ分ける。
@@ -427,6 +456,7 @@ def finish(items: list[dict], args, skipped_excluded: int, geometry_violations: 
         "seed": SEED,
         "hamming_threshold": args.hamming,
         "ruler_a": split_ruler_a(items, rng),
+        "ruler_a_cv": split_ruler_a_cv(items, args.folds_b, rng),
         "ruler_b": split_holdout(items, "folder", args.folds_b, rng),
         "ruler_c": split_holdout(items, "family", args.folds_c, rng),
     }

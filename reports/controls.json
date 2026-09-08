@@ -1,0 +1,255 @@
+{
+  "generated_at": "2026-09-08T15:11:32+09:00",
+  "n_images_total": 1966,
+  "n_boot": 2000,
+  "stain_quantile": 0.9,
+  "colour_size": 128,
+  "rulers": {
+    "a": "画像単位(分類群の中で group を k 分割)",
+    "b": "分類群ホールドアウト",
+    "c": "科ホールドアウト"
+  },
+  "baselines": {
+    "hue": {
+      "feature": "rb_ratio",
+      "threshold_fitted_on": "train",
+      "oracle_upper_bound_macro_f1": 0.9745,
+      "oracle_threshold": 1.1999,
+      "description": "染まった画素の R/B 比に閾値を一本。学習しない",
+      "a": {
+        "macro_f1": 0.9714,
+        "ci_low": 0.9593,
+        "ci_high": 0.9824,
+        "accuracy": 0.9766,
+        "n_images": 1966,
+        "n_groups": 929,
+        "per_taxon_errors": {
+          "Listeria monocytogenes": {
+            "n": 63,
+            "wrong": 18,
+            "error_rate": 0.2857
+          },
+          "Porphyromonas gingivalis": {
+            "n": 65,
+            "wrong": 13,
+            "error_rate": 0.2
+          },
+          "Staphylococcus epidermidis": {
+            "n": 58,
+            "wrong": 6,
+            "error_rate": 0.1034
+          },
+          "Enterococcus faecalis": {
+            "n": 60,
+            "wrong": 2,
+            "error_rate": 0.0333
+          },
+          "Neisseria gonorrhoeae": {
+            "n": 68,
+            "wrong": 2,
+            "error_rate": 0.0294
+          },
+          "Bacteroides fragilis": {
+            "n": 65,
+            "wrong": 1,
+            "error_rate": 0.0154
+          },
+          "Lactobacillus casei": {
+            "n": 60,
+            "wrong": 1,
+            "error_rate": 0.0167
+          },
+          "Veillonella": {
+            "n": 58,
+            "wrong": 1,
+            "error_rate": 0.0172
+          },
+          "Staphylococcus saprophyticus": {
+            "n": 60,
+            "wrong": 1,
+            "error_rate": 0.0167
+          },
+          "Staphylococcus aureus": {
+            "n": 64,
+            "wrong": 1,
+            "error_rate": 0.0156
+          }
+        }
+      },
+      "b": {
+        "macro_f1": 0.9524,
+        "ci_low": 0.9363,
+        "ci_high": 0.9673,
+        "accuracy": 0.9608,
+        "n_images": 1966,
+        "n_groups": 929,
+        "per_taxon_errors": {
+          "Listeria monocytogenes": {
+            "n": 63,
+            "wrong": 28,
+            "error_rate": 0.4444
+          },
+          "Porphyromonas gingivalis": {
+            "n": 65,
+            "wrong": 24,
+            "error_rate": 0.3692
+          },
+          "Staphylococcus epidermidis": {
+            "n": 58,
+            "wrong": 8,
+            "error_rate": 0.1379
+          },
+          "Staphylococcus saprophyticus": {
+            "n": 60,
+            "wrong": 5,
+            "error_rate": 0.0833
+          },
+          "Enterococcus faecalis": {
+            "n": 60,
+            "wrong": 4,
+            "error_rate": 0.0667
+          },
+          "Neisseria gonorrhoeae": {
+            "n": 68,
+            "wrong": 3,
+            "error_rate": 0.0441
+          },
+          "Staphylococcus aureus": {
+            "n": 64,
+            "wrong": 2,
+            "error_rate": 0.0312
+          },
+          "Bacteroides fragilis": {
+            "n": 65,
+            "wrong": 1,
+            "error_rate": 0.0154
+          },
+          "Lactobacillus casei": {
+            "n": 60,
+            "wrong": 1,
+            "error_rate": 0.0167
+          },
+          "Veillonella": {
+            "n": 58,
+            "wrong": 1,
+            "error_rate": 0.0172
+          }
+        }
+      },
+      "c": {
+        "macro_f1": 0.9601,
+        "ci_low": 0.9457,
+        "ci_high": 0.9736,
+        "accuracy": 0.9674,
+        "n_images": 1966,
+        "n_groups": 929,
+        "per_taxon_errors": {
+          "Porphyromonas gingivalis": {
+            "n": 65,
+            "wrong": 24,
+            "error_rate": 0.3692
+          },
+          "Listeria monocytogenes": {
+            "n": 63,
+            "wrong": 20,
+            "error_rate": 0.3175
+          },
+          "Staphylococcus epidermidis": {
+            "n": 58,
+            "wrong": 8,
+            "error_rate": 0.1379
+          },
+          "Neisseria gonorrhoeae": {
+            "n": 68,
+            "wrong": 4,
+            "error_rate": 0.0588
+          },
+          "Staphylococcus saprophyticus": {
+            "n": 60,
+            "wrong": 3,
+            "error_rate": 0.05
+          },
+          "Staphylococcus aureus": {
+            "n": 64,
+            "wrong": 2,
+            "error_rate": 0.0312
+          },
+          "Lactobacillus casei": {
+            "n": 60,
+            "wrong": 1,
+            "error_rate": 0.0167
+          },
+          "Bacteroides fragilis": {
+            "n": 65,
+            "wrong": 1,
+            "error_rate": 0.0154
+          },
+          "Veillonella": {
+            "n": 58,
+            "wrong": 1,
+            "error_rate": 0.0172
+          }
+        }
+      }
+    },
+    "canvas_size": {
+      "feature": "source_width",
+      "threshold_fitted_on": "train",
+      "description": "画素を一切見ず、キャンバス寸法だけで当てる",
+      "a": {
+        "macro_f1": 0.53,
+        "ci_low": 0.4956,
+        "ci_high": 0.5637,
+        "accuracy": 0.6063,
+        "n_images": 1966,
+        "n_groups": 929
+      },
+      "b": {
+        "macro_f1": 0.5375,
+        "ci_low": 0.5032,
+        "ci_high": 0.5706,
+        "accuracy": 0.617,
+        "n_images": 1966,
+        "n_groups": 929
+      },
+      "c": {
+        "macro_f1": 0.5359,
+        "ci_low": 0.501,
+        "ci_high": 0.5699,
+        "accuracy": 0.6129,
+        "n_images": 1966,
+        "n_groups": 929
+      }
+    },
+    "majority": {
+      "feature": "none",
+      "threshold_fitted_on": "train",
+      "description": "全部を Gram 陽性と答える",
+      "a": {
+        "macro_f1": 0.4171,
+        "ci_low": 0.4039,
+        "ci_high": 0.4292,
+        "accuracy": 0.7157,
+        "n_images": 1966,
+        "n_groups": 929
+      },
+      "b": {
+        "macro_f1": 0.4171,
+        "ci_low": 0.4039,
+        "ci_high": 0.4292,
+        "accuracy": 0.7157,
+        "n_images": 1966,
+        "n_groups": 929
+      },
+      "c": {
+        "macro_f1": 0.4171,
+        "ci_low": 0.4039,
+        "ci_high": 0.4292,
+        "accuracy": 0.7157,
+        "n_images": 1966,
+        "n_groups": 929
+      }
+    }
+  },
+  "note": "対照は CNN より先に測っている。対照の数が先に出ていれば、あとから CNN の数を単独で語れない"
+}
