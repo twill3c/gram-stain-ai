@@ -1,0 +1,109 @@
+{
+  "generated_at": "2026-09-08T14:49:58+09:00",
+  "crop_size": 512,
+  "seed": 20260908,
+  "hamming_threshold": 45,
+  "images_unique": 1966,
+  "images_skipped_excluded_taxa": 62,
+  "geometry_violations": 0,
+  "groups": 929,
+  "groups_with_multiple_images": 388,
+  "largest_group": 12,
+  "grouping": {
+    "slide_cells_merged": 388,
+    "hash_pairs_merged": 3,
+    "images_in_ungroupable_large_cells": 503,
+    "slide_cell_max": 12
+  },
+  "ruler_a_counts": {
+    "train": 1390,
+    "val": 290,
+    "test": 286
+  },
+  "ruler_b_folds": 8,
+  "ruler_c_folds": 6,
+  "ruler_b_held_out": [
+    [
+      "Actinomyces israelii",
+      "Enterococcus faecium",
+      "Lactobacillus reuteri",
+      "Neisseria gonorrhoeae"
+    ],
+    [
+      "Bacteroides fragilis",
+      "Lactobacillus crispatus",
+      "Lactobacillus jensenii",
+      "Lactobacillus paracasei"
+    ],
+    [
+      "Lactobacillus casei",
+      "Porphyromonas gingivalis",
+      "Streptococcus agalactiae",
+      "Veillonella"
+    ],
+    [
+      "Enterococcus faecalis",
+      "Pseudomonas aeruginosa",
+      "Staphylococcus aureus",
+      "Staphylococcus epidermidis"
+    ],
+    [
+      "Bifidobacterium spp",
+      "Fusobacterium",
+      "Lactobacillus delbrueckii",
+      "Propionibacterium acnes"
+    ],
+    [
+      "Lactobacillus plantarum",
+      "Listeria monocytogenes",
+      "Proteus",
+      "Staphylococcus saprophyticus"
+    ],
+    [
+      "Acinetobacter baumannii",
+      "Lactobacillus johnsonii",
+      "Lactobacillus salivarius",
+      "Micrococcus spp"
+    ],
+    [
+      "Clostridium perfringens",
+      "Escherichia coli",
+      "Lactobacillus gasseri",
+      "Lactobacillus rhamnosus"
+    ]
+  ],
+  "ruler_c_held_out": [
+    [
+      "Lactobacillaceae",
+      "Neisseriaceae"
+    ],
+    [
+      "Bacteroidaceae",
+      "Staphylococcaceae"
+    ],
+    [
+      "Enterococcaceae",
+      "Porphyromonadaceae",
+      "Propionibacteriaceae"
+    ],
+    [
+      "Actinomycetaceae",
+      "Clostridiaceae",
+      "Pseudomonadaceae",
+      "Veillonellaceae"
+    ],
+    [
+      "Fusobacteriaceae",
+      "Micrococcaceae",
+      "Moraxellaceae",
+      "Streptococcaceae"
+    ],
+    [
+      "Bifidobacteriaceae",
+      "Enterobacteriaceae",
+      "Listeriaceae",
+      "Morganellaceae"
+    ]
+  ],
+  "limitation": "撮影セッション ID は配布物に無い。同一 (分類群, キャンバス寸法) をスライドの代理として使っているが、これは代理であって本物ではない。1225px のような大きなセルは group を作れないまま残り、その分だけ物差し A は甘い"
+}

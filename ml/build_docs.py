@@ -112,6 +112,36 @@ def main() -> int:
         add("画素を一切見ない分類器の成績を G-11 で実測してから、CNN の成績を語る。")
         add("")
 
+    prep_path = META / "prepare_summary.json"
+    if prep_path.exists():
+        p = json.loads(prep_path.read_text(encoding="utf-8"))
+        g = p["grouping"]
+        add("## 前処理と分割(loop_002)")
+        add("")
+        add("| 項目 | 値 |")
+        add("|---|---|")
+        add(f"| 切り出し | 視野円の内接正方形の中心 {p['crop_size']}x{p['crop_size']} px(リサイズなし) |")
+        add(f"| 視野円の前提に反した画像 | {p['geometry_violations']} 枚 |")
+        add(f"| 学習に使う画像 | {p['images_unique']:,} 枚(除外分類群の {p['images_skipped_excluded_taxa']} 枚を除く) |")
+        add(f"| group | {p['groups']:,} 個(2 枚以上を含むもの {p['groups_with_multiple_images']} 個・最大 {p['largest_group']} 枚) |")
+        add(f"| スライドの代理で結合したセル | {g['slide_cells_merged']}(同一 分類群+寸法・{g['slide_cell_max']} 枚以下) |")
+        add(f"| 知覚ハッシュで結合した対 | {g['hash_pairs_merged']}(ハミング距離 ≤ {p['hamming_threshold']}) |")
+        add(f"| **group を作れなかった画像** | **{g['images_in_ungroupable_large_cells']:,} 枚"
+            f"({g['images_in_ungroupable_large_cells']/p['images_unique']:.1%})** |")
+        add("")
+        add(f"物差し A の枚数: {p['ruler_a_counts']}")
+        add("")
+        add(f"物差し B は分類群を抜く {p['ruler_b_folds']} fold、"
+            f"物差し C は科を抜く {p['ruler_c_folds']} fold。")
+        add("各 fold の test には Gram 陽性と陰性の両方が入るようにしてある ——")
+        add("片方しか無い fold で macro F1 を取ると、存在しないクラスの F1 が 0 として混ざり、")
+        add("成績が fold の作り方の産物になる。")
+        add("")
+        add(f"**限界:** {p['limitation']}")
+        add("")
+        add("閾値をどう決めたかは [`reports/group_calibration/README.md`](../reports/group_calibration/README.md) にある。")
+        add("")
+
     fam = Counter(t["group_family"] for t in included)
     add("## 科ごとの分類群数(物差し C が切る単位)")
     add("")
