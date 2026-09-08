@@ -1,0 +1,189 @@
+# Gram Stain AI
+
+Gram 染色した細菌の顕微鏡画像を、**ブラウザの中だけ**で分類する教育・研究用のデモ。
+画像はサーバへ送られない。GPU 推論サーバも有償 AI API も使わない。
+
+> **医療用途ではありません。** 本システムは医療機器ではなく、出力は医学的診断を意味しません。
+> 診断・治療・患者管理に使用しないでください。
+
+---
+
+## 1. このアプリが答えようとしている問い
+
+「Gram 陽性か陰性かを何%当てられるか」ではない。**その%が何を測っているのか**である。
+
+同じモデル・同じ指標でも、データの割り方を変えると別の問いに答えることになる。
+本プロジェクトは一つの数を出して終わりにせず、**三つの物差し**を並べて出す。
+
+| 物差し | 割り方 | 答えている問い |
+|---|---|---|
+| A 画像単位 | 種の中で group-aware に分割 | この 32 分類群のスライドを見分けられるか |
+| B 種ホールドアウト | ある種の全画像を test へ | 学習で見ていない**種**の Gram 反応を当てられるか |
+| C 科ホールドアウト | ある科の全種を test へ | 学習で見ていない**科**の Gram 反応を当てられるか |
+
+C を置く理由は実測にある。採用した 32 分類群のうち **11 が Lactobacillaceae 科**である。
+種を 1 つ抜いても近縁の 10 が学習側に残るので、**B は「未知の種」を測っているつもりで、
+近縁の見覚えを測りうる**。
+
+さらに、Gram 染色は陽性が紫・陰性が桃〜赤に染まる**色の検査**である。
+だから**学習を一切しない色相統計だけの分類器**を陽性対照として並べる。
+CNN の成績は、この対照との差でしか意味を持たない。
+
+**現時点でこれらはまだ測っていない。** 数が出たらこの節に実測値で書く。
+
+## 2. Demo
+
+未公開(構築中)。
+
+## 3. Features
+
+- Gram 陽性 / 陰性の分類(Stage A)
+- 形態(球菌 / 桿菌)の分類(Stage B・典拠で形態が定まる 30 分類群のみ)
+- 画像アップロード(JPEG / PNG / WebP・10MB まで)とサンプル画像
+- クラス別スコアの表示と、確信度が低いときの注記
+- Gram 染色そのものの解説(4 工程と染め分かれの理由)
+- モデル / データセット / ライセンスの情報ページ
+
+## 4. Architecture
+
+```text
+公開データ(CC BY 4.0)
+  → Python / PyTorch でオフライン学習
+  → ONNX へ変換
+  → GitHub にコミット
+  → Next.js(静的書き出し)+ ONNX Runtime Web
+  → Vercel Hobby
+  → ブラウザ内推論
+```
+
+サーバ関数・データベース・認証・外部 AI API を一つも持たない。
+
+## 5. Dataset
+
+**Bacteria Data for Machine Vision and Digital Biology**(Mendeley Data,
+[10.17632/cvkgfzp7ck.1](https://doi.org/10.17632/cvkgfzp7ck.1), CC BY 4.0)
+
+配布元の記載では 33 種 2,722 枚の RGB 画像(Nikon E200・100 倍対物・Gram 染色後)。
+
+**実測は違った**(2026-09-08・`ml/verify_dataset.py`)。
+
+| 項目 | 記載 | 実測 |
+|---|---|---|
+| zip | — | 34 本 / 3,597,653,809 バイト(うち 1 本は同一内容の重複) |
+| 分類群 | 33 | 33 |
+| 画像 | 2,722 | **2,094** |
+| 一意な画像(SHA-256) | — | **2,028** |
+
+記載と実測が 628 枚違う。記載が結合前後のどちらを指すのか判別できないため、
+**本プロジェクトは実測値だけを使う**。
+
+画像の実物には次の性質がある。
+
+- 正方キャンバスに**円形の視野**が内接し、四隅は黒い。アルファチャンネルが円形マスクになっている
+- 全 2,094 枚が正方・RGBA。キャンバス幅は 739〜1532 px の 100 通り
+- **バイト完全一致の重複が 66 組**。60 組は重複 zip 由来だが、**6 組は同一 zip の中**にある
+  (`Enterococcus faecium/24.png` = `25.png` など、連番の隣どうし)
+- さらに、バイト一致しない**同一視野の近接ショット**が多数ある
+
+つまり **番号が違うことは中身が違うことを意味しない**。
+ファイル名を group ID にして分割すると、同じ画像が train と test の両方に入る。
+
+取得は `python ml/download_dataset.py`。SHA-256 と取得日を `dataset/metadata/` に記録する。
+**画像そのものはリポジトリに入れない。**
+
+### ラベルの出所(循環の禁止)
+
+Gram 反応と形態は画像からではなく**種名から**決まる。その対応表は外部権威に取っている。
+
+- **BacDive**(Leibniz Institute DSMZ・CC BY 4.0)から 33 分類群 × 各最大 100 株を取得
+- 権威の生の回答は `dataset/metadata/authority_bacdive.json`、採用後は `labels.json`
+- 採用規則(語の正規化・一致率の閾値)はコードとデータの両方に明記してある
+
+実測でわかったこと:
+
+- **門から Gram は決められない。** `Veillonella` は Bacillota 門でありながら Gram 陰性である。
+  他の Bacillota はすべて陽性なので、門で決め打つ実装はここだけ静かに間違える
+- **フォルダ名の属は現行の属ではない。** `Lactobacillus` 属は 2020 年に分割され、
+  データセットの 11 フォルダは現在 5 属にまたがる。フォルダ名を属として切ると物差し C を誤る
+- **形態のほうが Gram より合議が割れる。** `Acinetobacter baumannii` は権威 68 株で
+  桿菌 59% / 卵形 41%(coccobacillus)。形態ラベルを付けず Stage B から外した
+
+### 採用結果
+
+| 項目 | 実測 |
+|---|---|
+| 採用した分類群 | 32 / 33 |
+| 除外 | `Candida albicans`(真菌。NCBI Taxonomy taxid 5476 の Lineage が Fungi) |
+| Gram 陽性 / 陰性 | 23 分類群 / 9 分類群 |
+| 典拠の一致率 100% でないもの | `Bifidobacterium spp`(97.1%)、`Fusobacterium`(87.5%) |
+| Stage B 対象 | 30 分類群(`Acinetobacter baumannii` と `Porphyromonas gingivalis` を除く) |
+| 科の数 | 19(最大は Lactobacillaceae の 11) |
+
+## 6. Dataset License / Attribution
+
+[DATA_LICENSE.md](DATA_LICENSE.md) に、出所ごとのライセンス・帰属表示・加工内容を記載している。
+
+## 7. Model
+
+未確定。ResNet18 + ImageNet 転移学習を標準候補とし、EfficientNet-B0 / ResNet50 と比較する。
+
+**ただし ResNet18 の fp32 ONNX は約 47 MB で、配信の目標 30 MB を超える見込みである。**
+精度差が小さければ配信サイズの小さい方を採る。実測してから決める。
+
+## 8. Training
+
+未実施。
+
+## 9. Evaluation
+
+未実施。三つの物差し(A/B/C)と非学習の色相ベースラインを、macro F1 と 95% 信頼区間で並べる。
+
+## 10. Browser Inference
+
+ONNX Runtime Web(wasm・CPU)を自オリジンから配る。CDN を見に行かない。
+
+## 11. Deployment
+
+未実施。Vercel Hobby への静的書き出し。
+
+## 12. Privacy
+
+- アップロード API を持たない
+- 画像をサーバへ保存しない
+- 解析ログへ画像内容を送らない
+- 推論はブラウザのメモリ上で完結する
+- ページ離脱・再読込で画像状態を破棄する
+
+## 13. Medical Disclaimer
+
+Gram Stain AI は教育・研究目的の AI デモである。本システムは医療機器ではなく、
+出力は医学的診断を意味しない。診断・治療・患者管理には使用しないこと。
+実患者画像のアップロードを積極的に促さない。
+
+## 14. Citation
+
+データセット・ラベル典拠の引用は [DATA_LICENSE.md](DATA_LICENSE.md) を参照。
+
+## 15. Licenses
+
+三つを混ぜない(詳細は [DATA_LICENSE.md](DATA_LICENSE.md))。
+
+| 対象 | ライセンス |
+|---|---|
+| ソースコード | MIT([LICENSE](LICENSE)) |
+| データセット | 各出所の条件(画像・ラベル典拠とも CC BY 4.0) |
+| 学習済みモデル | 上記の重なりとして `docs/MODEL.md` に記載 |
+
+---
+
+## 開発
+
+```bash
+python ml/download_dataset.py        # 公式 API から取得し SHA-256 を記録
+python ml/fetch_label_authority.py   # BacDive から典拠を取得
+python ml/build_labels.py            # 採用規則を当てて labels.json を作る
+python -m pytest -q                  # 検査
+```
+
+進め方と設計の記録は [SPEC.md](SPEC.md) / [TEST_SPEC.md](TEST_SPEC.md)、
+ループの実行記録は `logs/loops/` にある。

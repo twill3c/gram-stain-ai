@@ -1,0 +1,322 @@
+{
+  "dataset": "Bacteria Data for Machine Vision and Digital Biology",
+  "doi": "10.17632/cvkgfzp7ck.1",
+  "version": 1,
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "files": [
+    {
+      "filename": "Acinetobacter baumannii-20230901T010945Z-001.zip",
+      "declared_size": 103452178,
+      "actual_size": 103452178,
+      "sha256": "f0917f108e385b151b17cb4f8c8c1a978c64724179ba502af7a25241d3060f63",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/c4b31858-fc0e-4037-b29b-b715a7409d4a/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:26+09:00"
+    },
+    {
+      "filename": "Actinomyces israelii-20230901T011744Z-001.zip",
+      "declared_size": 145073681,
+      "actual_size": 145073681,
+      "sha256": "7d4b06a06ab87c1c69cf88995d4abfc3371e03745c7a29bf4b84e069228079b0",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/d28e35ef-c3a8-40bb-a248-973abada71be/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:26+09:00"
+    },
+    {
+      "filename": "Bacteroides fragilis-20230901T011836Z-001.zip",
+      "declared_size": 133602601,
+      "actual_size": 133602601,
+      "sha256": "3f89748ae840e96fec42663df1268bd9c82aad88583a6f5352a47bf3ea98eb5a",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/62a901b4-db1d-43a3-9c22-005604c5d392/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:27+09:00"
+    },
+    {
+      "filename": "Bifidobacterium spp-20230901T012201Z-001.zip",
+      "declared_size": 135086270,
+      "actual_size": 135086270,
+      "sha256": "ce8ef0c183c64043d4bd3ed1bb1230a4e7197b244c9e0f8cfc1cb6c7859bd37c",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/327531af-a6ce-4a18-8cb4-ab3598194859/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:27+09:00"
+    },
+    {
+      "filename": "Candida albicans-20230901T012246Z-001.zip",
+      "declared_size": 112661303,
+      "actual_size": 112661303,
+      "sha256": "ee585d555be351fc4779aaeb16b1fef542698ebb1a4269a0f0f3083471916e67",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/5a1b32b7-ff13-4bb9-b702-483812330ee6/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:27+09:00"
+    },
+    {
+      "filename": "Clostridium perfringens-20230901T010946Z-001.zip",
+      "declared_size": 116949718,
+      "actual_size": 116949718,
+      "sha256": "ae78b996be3646ef84de4592c1711d80b744a049621ab705a3e70c694b05cb56",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/7cb25232-8441-4846-8603-f58c140c4629/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:28+09:00"
+    },
+    {
+      "filename": "Enterococcus faecalis-20230901T011749Z-001.zip",
+      "declared_size": 100510302,
+      "actual_size": 100510302,
+      "sha256": "90eb9be4aa27ac9af7584e30fe63471091e2a5d3300b20466c6215783f7e4e78",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/da42848d-b071-443f-b26c-5d45c7d83ef8/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:28+09:00"
+    },
+    {
+      "filename": "Enterococcus faecium-20230901T011842Z-001.zip",
+      "declared_size": 103577620,
+      "actual_size": 103577620,
+      "sha256": "c3edb253aaa8e440f97accd07416b3e75c0c7e7416742778d4d7264d5aaa412f",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/678386e2-0486-4129-b4e0-9f353ca939d8/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:28+09:00"
+    },
+    {
+      "filename": "Escherichia coli-20230901T012204Z-001.zip",
+      "declared_size": 101624388,
+      "actual_size": 101624388,
+      "sha256": "7d2f2ff4f25a925e2653fde521fd44653e11fef8ea2bd4482e27c9fcc00384e3",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/8e56f969-8b9e-4ae9-b06a-62729f6f7092/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:29+09:00"
+    },
+    {
+      "filename": "Fusobacterium-20230901T012250Z-001.zip",
+      "declared_size": 111858041,
+      "actual_size": 111858041,
+      "sha256": "f0240badc074dd87744c6970623a2254afb15d76634da33858bc78fcd7ae4af6",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/b96da4b3-4dbe-4a5a-9aa6-a701bdfe878b/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:29+09:00"
+    },
+    {
+      "filename": "Lactobacillus casei-20230901T010948Z-001.zip",
+      "declared_size": 107524117,
+      "actual_size": 107524117,
+      "sha256": "80d864cfcc44bbeb812627e1c62ed4b7f7dfdf69823492ee519daaf5d1d4c36d",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/b272b775-5b53-4fff-bd92-98155da18da4/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:29+09:00"
+    },
+    {
+      "filename": "Lactobacillus crispatus-20230901T011800Z-001.zip",
+      "declared_size": 106210754,
+      "actual_size": 106210754,
+      "sha256": "13f517abeddb411faa8f1c902d2d5bc60fda3c1a035452103d5a9ff7350039cb",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/f23a1204-5106-424b-bd2a-2fe825b96251/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:29+09:00"
+    },
+    {
+      "filename": "Lactobacillus delbrueckii-20230901T011851Z-001.zip",
+      "declared_size": 85214835,
+      "actual_size": 85214835,
+      "sha256": "e556dd35ee706106f1049d6d2052a0938eb65a9ad59ec79d8043715eb3437d64",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/659bee89-19cc-4d4f-9b2f-e84dea48f942/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:30+09:00"
+    },
+    {
+      "filename": "Lactobacillus gasseri-20230901T012207Z-001.zip",
+      "declared_size": 91933121,
+      "actual_size": 91933121,
+      "sha256": "064fb26c9c3698195e6eed7957aa2c1f5ceccbed776fd03955c6ee7bcbfcc810",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/b91ec7fe-256b-4a1b-a1a8-eecd293d0db9/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:02:57+09:00"
+    },
+    {
+      "filename": "Lactobacillus jensenii-20230901T012251Z-001.zip",
+      "declared_size": 100949447,
+      "actual_size": 100949447,
+      "sha256": "934d27e1406c027b262e3939c63410096363fb0583fe53e4208790c8b644e39f",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/e69bc6e2-152a-4130-9930-2f8f6014258d/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:03:54+09:00"
+    },
+    {
+      "filename": "Lactobacillus johnsonii-20230901T011636Z-001.zip",
+      "declared_size": 92545740,
+      "actual_size": 92545740,
+      "sha256": "1ff34dae4a26aa71e590c853b9e1af2f2191d024fd7ba2cecaf075d39f5451fb",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/51f1677b-9767-422d-91af-e00af687e95e/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:04:45+09:00"
+    },
+    {
+      "filename": "Lactobacillus paracasei-20230901T011810Z-001.zip",
+      "declared_size": 98398412,
+      "actual_size": 98398412,
+      "sha256": "45b8a9284d55a3671e5f82195ea96139bba75ed5f61864374c10e845fca7bcc0",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/39c74c79-4670-4af5-9ee7-e1deda23cd55/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:06:05+09:00"
+    },
+    {
+      "filename": "Lactobacillus plantarum-20230901T011855Z-001.zip",
+      "declared_size": 104207437,
+      "actual_size": 104207437,
+      "sha256": "b63daf3d1059090c11552763325ed3159e9bb7b4c019155882379736b7d4abf6",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/88bd565d-9656-40ba-9540-8fd0ec0cf694/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:07:31+09:00"
+    },
+    {
+      "filename": "Lactobacillus reuteri-20230901T012220Z-001.zip",
+      "declared_size": 103101105,
+      "actual_size": 103101105,
+      "sha256": "22225c5aef2f8ac6e9dc914c27f9f135a3abeff902e83509b19837c1c77ece57",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/684d2b8e-b1ee-4e4f-a3f8-f18c5ad66fc4/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:08:46+09:00"
+    },
+    {
+      "filename": "Lactobacillus rhamnosus-20230901T012255Z-001-5FKFIs.zip",
+      "declared_size": 88766780,
+      "actual_size": 88766780,
+      "sha256": "8fa79a9dfcd0f9ef2c47a794971f949b229d0f54f379d5907a3e35b2844d8aa3",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/92d91faf-4602-49b6-a03c-2b5b6af4cff7/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:09:47+09:00"
+    },
+    {
+      "filename": "Lactobacillus rhamnosus-20230901T012255Z-001.zip",
+      "declared_size": 88766780,
+      "actual_size": 88766780,
+      "sha256": "8fa79a9dfcd0f9ef2c47a794971f949b229d0f54f379d5907a3e35b2844d8aa3",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/1a53339f-2a12-4a66-839d-8036ebcfb7b5/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:10:37+09:00"
+    },
+    {
+      "filename": "Lactobacillus salivarius-20230901T010953Z-001.zip",
+      "declared_size": 103005428,
+      "actual_size": 103005428,
+      "sha256": "2288eb7f1dfc5f9568875b66003704d300bf990f34948484d02a12ec80565cbc",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/ffc59006-d0d5-4acf-ba0a-9e9faed100cf/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:11:26+09:00"
+    },
+    {
+      "filename": "Listeria monocytogenes-20230901T011812Z-001.zip",
+      "declared_size": 104199451,
+      "actual_size": 104199451,
+      "sha256": "4289c3ce413ac372d584183b1fd0ca3d8ab35106d4da36224ee61f181816e19b",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/084c7c14-36b2-4fb4-bfa9-b31065405e8c/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:12:53+09:00"
+    },
+    {
+      "filename": "Micrococcus spp-20230901T011903Z-001.zip",
+      "declared_size": 107402192,
+      "actual_size": 107402192,
+      "sha256": "41c4c2ae5e2c5bd6df52e12407e5b64aaeaf35431690c723285dc4b4f38a493a",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/da612c0a-cf48-4b11-880a-9abb0126992a/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:13:40+09:00"
+    },
+    {
+      "filename": "Neisseria gonorrhoeae-20230901T012222Z-001.zip",
+      "declared_size": 102544160,
+      "actual_size": 102544160,
+      "sha256": "2c19fc368e58d69a4d82406cfcfba98dd3df94ee13180cd1d382846c12b34bfc",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/2a238200-72be-410b-af5a-80e95c64f20b/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:14:26+09:00"
+    },
+    {
+      "filename": "Porphyromonas gingivalis-20230901T012259Z-001.zip",
+      "declared_size": 94365137,
+      "actual_size": 94365137,
+      "sha256": "0629b0b72e1f5d2a618a361cf7bb68f1f5052fef1a293727e66e703980094862",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/c5238d79-f36b-4cbc-ac97-f9edff2ba5b7/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:15:32+09:00"
+    },
+    {
+      "filename": "Propionibacterium acnes-20230901T010956Z-001.zip",
+      "declared_size": 130056882,
+      "actual_size": 130056882,
+      "sha256": "ba598a81d70d18dd54ec5058684d347435cbffe7337e416ae41b8efc71381464",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/b36bace9-b066-4d3f-a8d2-4fa845780f68/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:17:41+09:00"
+    },
+    {
+      "filename": "Proteus-20230901T011822Z-001.zip",
+      "declared_size": 93654923,
+      "actual_size": 93654923,
+      "sha256": "9ac6cc634d2d30632f72c2537e3b41c658cac8d242be6faf7433ced823ca0299",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/a676c371-aca8-4986-b9ca-01cf7bb87b06/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:19:15+09:00"
+    },
+    {
+      "filename": "Pseudomonas aeruginosa-20230901T011907Z-001.zip",
+      "declared_size": 99983212,
+      "actual_size": 99983212,
+      "sha256": "d7a27ba48444fc9c4f36f50e942dc83732bd5d18b15d45fc9b59219f5fc7dcf5",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/40146460-9009-43ff-ab20-7e16b76d6f2d/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:20:51+09:00"
+    },
+    {
+      "filename": "Staphylococcus aureus-20230901T012237Z-001.zip",
+      "declared_size": 105418415,
+      "actual_size": 105418415,
+      "sha256": "4b539ebfd0c9074f5721d38d4d89b3c265175cb7d839271aa76fdc29ebe40820",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/6b93ba1a-68e6-4f8f-ac1d-85f41b412648/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:24:40+09:00"
+    },
+    {
+      "filename": "Staphylococcus epidermidis-20230901T012301Z-001.zip",
+      "declared_size": 108247898,
+      "actual_size": 108247898,
+      "sha256": "6568522e11d1a1895cdd43e913367f5e8d74e2e58c508598546324d8f796026a",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/c61734aa-72ad-4969-b56b-fcd28c4ae6af/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:27:16+09:00"
+    },
+    {
+      "filename": "Staphylococcus saprophyticus-20230901T010959Z-001.zip",
+      "declared_size": 97926839,
+      "actual_size": 97926839,
+      "sha256": "c64e5dd99288c0902fb0f8b0ded73fdae25074a20ccaac3bdc24f0e79cfbcb0c",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/60db1b07-2252-4945-8845-841b7eb15ab2/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:29:52+09:00"
+    },
+    {
+      "filename": "Streptococcus agalactiae-20230901T011824Z-001.zip",
+      "declared_size": 116867383,
+      "actual_size": 116867383,
+      "sha256": "6b348b4d95ef3fe4f5247ddbe4f38f42ed6bdf53b3b60fa310f485a54557f748",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/6672679a-0f8e-4fc5-8dc5-3f1d7d716a36/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:32:48+09:00"
+    },
+    {
+      "filename": "Veillonella-20230901T011913Z-001.zip",
+      "declared_size": 101967259,
+      "actual_size": 101967259,
+      "sha256": "81c7bfb0b3d3d127d554a71b1823720aa7a6608e9667e2981dba10647a3789c7",
+      "source_url": "https://data.mendeley.com/public-files/datasets/cvkgfzp7ck/files/dc0c14c4-c972-4f07-b5c5-c4dd3c342c50/file_downloaded",
+      "dataset_doi": "10.17632/cvkgfzp7ck.1",
+      "download_date": "2026-09-08T12:35:15+09:00"
+    }
+  ],
+  "duplicate_sha256_groups": {
+    "8fa79a9dfcd0f9ef2c47a794971f949b229d0f54f379d5907a3e35b2844d8aa3": [
+      "Lactobacillus rhamnosus-20230901T012255Z-001-5FKFIs.zip",
+      "Lactobacillus rhamnosus-20230901T012255Z-001.zip"
+    ]
+  },
+  "generated_at": "2026-09-08T12:35:15+09:00"
+}

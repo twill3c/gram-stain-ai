@@ -1,0 +1,2078 @@
+{
+  "generated_at": "2026-09-08T09:50:24+09:00",
+  "rules": {
+    "shape_normalisation": {
+      "coccus-shaped": "coccus",
+      "oval-shaped": "coccus",
+      "ovoid-shaped": "coccus",
+      "rod-shaped": "bacillus",
+      "curved-shaped": "bacillus"
+    },
+    "shape_min_agreement": 0.9,
+    "gram_rule": "権威記録 1 件以上・多数派が過半数で採用。一致率 100% を tier A、未満を tier B"
+  },
+  "authority": {
+    "primary": "BacDive (Leibniz Institute DSMZ)",
+    "primary_license": "CC BY 4.0",
+    "primary_citation": "Schober et al., BacDive in 2025: the core database for prokaryotic strain data, Nucleic Acids Research 53(D1):D748, https://doi.org/10.1093/nar/gkae959",
+    "accessed_at": "2026-09-08T09:45:26+09:00"
+  },
+  "summary": {
+    "taxa_total": 33,
+    "taxa_included": 32,
+    "gram_positive": 23,
+    "gram_negative": 9,
+    "gram_tier_b": [
+      "Bifidobacterium spp",
+      "Fusobacterium"
+    ],
+    "stage_b_taxa": 30,
+    "stage_b_excluded": [
+      "Acinetobacter baumannii",
+      "Porphyromonas gingivalis"
+    ],
+    "families": [
+      "Actinomycetaceae",
+      "Bacteroidaceae",
+      "Bifidobacteriaceae",
+      "Clostridiaceae",
+      "Enterobacteriaceae",
+      "Enterococcaceae",
+      "Fusobacteriaceae",
+      "Lactobacillaceae",
+      "Listeriaceae",
+      "Micrococcaceae",
+      "Moraxellaceae",
+      "Morganellaceae",
+      "Neisseriaceae",
+      "Porphyromonadaceae",
+      "Propionibacteriaceae",
+      "Pseudomonadaceae",
+      "Staphylococcaceae",
+      "Streptococcaceae",
+      "Veillonellaceae"
+    ],
+    "unmapped_shape_terms": []
+  },
+  "taxa": [
+    {
+      "folder": "Acinetobacter baumannii",
+      "included": true,
+      "resolved_name": "Acinetobacter baumannii",
+      "name_is_current": false,
+      "gram": "negative",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 66,
+        "gram_counts": {
+          "negative": 66
+        },
+        "evidence": [
+          {
+            "bacdive_id": 171146,
+            "species": "Acinetobacter baumannii",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive171146.20251217.10",
+            "url": "https://bacdive.dsmz.de/strain/171146"
+          },
+          {
+            "bacdive_id": 171145,
+            "species": "Acinetobacter baumannii",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive171145.20251217.10",
+            "url": "https://bacdive.dsmz.de/strain/171145"
+          },
+          {
+            "bacdive_id": 171144,
+            "species": "Acinetobacter baumannii",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive171144.20251217.10",
+            "url": "https://bacdive.dsmz.de/strain/171144"
+          }
+        ]
+      },
+      "shape": null,
+      "shape_agreement": 0.5882,
+      "shape_counts_raw": {
+        "rod-shaped": 40,
+        "oval-shaped": 28
+      },
+      "shape_counts_normalised": {
+        "bacillus": 40,
+        "coccus": 28
+      },
+      "stage_b": false,
+      "stage_b_excluded_reason": "正規化後の形態一致率 58.8% が閾値 90% 未満",
+      "lineage": {
+        "phylum": "Pseudomonadota",
+        "class": "Gammaproteobacteria",
+        "order": "Pseudomonadales",
+        "family": "Moraxellaceae",
+        "genus": "Acinetobacter"
+      },
+      "group_species": "Acinetobacter baumannii",
+      "group_genus": "Acinetobacter",
+      "group_family": "Moraxellaceae"
+    },
+    {
+      "folder": "Actinomyces israelii",
+      "included": true,
+      "resolved_name": "Actinomyces israelii",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 6,
+        "gram_counts": {
+          "positive": 6
+        },
+        "evidence": [
+          {
+            "bacdive_id": 138099,
+            "species": "Actinomyces israelii",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138099.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138099"
+          },
+          {
+            "bacdive_id": 138098,
+            "species": "Actinomyces israelii",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138098.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138098"
+          },
+          {
+            "bacdive_id": 137277,
+            "species": "Actinomyces israelii",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive137277.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/137277"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 6
+      },
+      "shape_counts_normalised": {
+        "bacillus": 6
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Actinomycetota",
+        "class": "Actinomycetes",
+        "order": "Actinomycetales",
+        "family": "Actinomycetaceae",
+        "genus": "Actinomyces"
+      },
+      "group_species": "Actinomyces israelii",
+      "group_genus": "Actinomyces",
+      "group_family": "Actinomycetaceae"
+    },
+    {
+      "folder": "Bacteroides fragilis",
+      "included": true,
+      "resolved_name": "Bacteroides fragilis",
+      "name_is_current": false,
+      "gram": "negative",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 6,
+        "gram_counts": {
+          "negative": 6
+        },
+        "evidence": [
+          {
+            "bacdive_id": 138259,
+            "species": "Bacteroides fragilis",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138259.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138259"
+          },
+          {
+            "bacdive_id": 138258,
+            "species": "Bacteroides fragilis",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138258.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138258"
+          },
+          {
+            "bacdive_id": 137572,
+            "species": "Bacteroides fragilis",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive137572.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/137572"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 6
+      },
+      "shape_counts_normalised": {
+        "bacillus": 6
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacteroidota",
+        "class": "Bacteroidia",
+        "order": "Bacteroidales",
+        "family": "Bacteroidaceae",
+        "genus": "Bacteroides"
+      },
+      "group_species": "Bacteroides fragilis",
+      "group_genus": "Bacteroides",
+      "group_family": "Bacteroidaceae"
+    },
+    {
+      "folder": "Bifidobacterium spp",
+      "included": true,
+      "resolved_name": "Bifidobacterium",
+      "name_is_current": true,
+      "gram": "positive",
+      "gram_agreement": 0.9706,
+      "gram_tier": "B",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 34,
+        "gram_counts": {
+          "positive": 33,
+          "negative": 1
+        },
+        "evidence": [
+          {
+            "bacdive_id": 138672,
+            "species": "Bifidobacterium breve",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138672.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138672"
+          },
+          {
+            "bacdive_id": 137496,
+            "species": "Bifidobacterium adolescentis",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive137496.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/137496"
+          },
+          {
+            "bacdive_id": 137143,
+            "species": "Bifidobacterium bifidum",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive137143.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/137143"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 33
+      },
+      "shape_counts_normalised": {
+        "bacillus": 33
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Actinomycetota",
+        "class": "Actinomycetes",
+        "order": "Bifidobacteriales",
+        "family": "Bifidobacteriaceae",
+        "genus": "Bifidobacterium"
+      },
+      "group_species": "Bifidobacterium",
+      "group_genus": "Bifidobacterium",
+      "group_family": "Bifidobacteriaceae"
+    },
+    {
+      "folder": "Candida albicans",
+      "included": false,
+      "reason": "細菌ではない(酵母・真菌)。Gram 陽性菌として扱うと、Gram 陽性クラスに真菌の見た目が混ざる",
+      "authority": "NCBI Taxonomy taxid 5476",
+      "authority_url": "https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=5476",
+      "evidence": "Lineage: cellular organisms; Eukaryota; Opisthokonta; Fungi; Dikarya; Ascomycota; saccharomyceta; Saccharomycotina; Pichiomycetes; Serinales; Debaryomycetaceae; Candida",
+      "accessed": "2026-09-08",
+      "note": "細菌の権威である BacDive に該当分類群が無かったことも、独立の傍証になっている"
+    },
+    {
+      "folder": "Clostridium perfringens",
+      "included": true,
+      "resolved_name": "Clostridium perfringens",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 44,
+        "gram_counts": {
+          "positive": 44
+        },
+        "evidence": [
+          {
+            "bacdive_id": 139525,
+            "species": "Clostridium perfringens",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139525.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139525"
+          },
+          {
+            "bacdive_id": 139291,
+            "species": "Clostridium perfringens",
+            "gram_stain": "positive",
+            "cell_shape": null,
+            "record_doi": "10.13145/bacdive139291.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139291"
+          },
+          {
+            "bacdive_id": 138597,
+            "species": "Clostridium perfringens",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138597.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138597"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 43
+      },
+      "shape_counts_normalised": {
+        "bacillus": 43
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Clostridia",
+        "order": "Eubacteriales",
+        "family": "Clostridiaceae",
+        "genus": "Clostridium"
+      },
+      "group_species": "Clostridium perfringens",
+      "group_genus": "Clostridium",
+      "group_family": "Clostridiaceae"
+    },
+    {
+      "folder": "Enterococcus faecalis",
+      "included": true,
+      "resolved_name": "Enterococcus faecalis",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 29,
+        "gram_counts": {
+          "positive": 29
+        },
+        "evidence": [
+          {
+            "bacdive_id": 139527,
+            "species": "Enterococcus faecalis",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive139527.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139527"
+          },
+          {
+            "bacdive_id": 139526,
+            "species": "Enterococcus faecalis",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive139526.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139526"
+          },
+          {
+            "bacdive_id": 139058,
+            "species": "Enterococcus faecalis",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive139058.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139058"
+          }
+        ]
+      },
+      "shape": "coccus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "coccus-shaped": 28,
+        "oval-shaped": 1
+      },
+      "shape_counts_normalised": {
+        "coccus": 29
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Enterococcaceae",
+        "genus": "Enterococcus"
+      },
+      "group_species": "Enterococcus faecalis",
+      "group_genus": "Enterococcus",
+      "group_family": "Enterococcaceae"
+    },
+    {
+      "folder": "Enterococcus faecium",
+      "included": true,
+      "resolved_name": "Enterococcus faecium",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 23,
+        "gram_counts": {
+          "positive": 23
+        },
+        "evidence": [
+          {
+            "bacdive_id": 139484,
+            "species": "Enterococcus faecium",
+            "gram_stain": "positive",
+            "cell_shape": "ovoid-shaped",
+            "record_doi": "10.13145/bacdive139484.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139484"
+          },
+          {
+            "bacdive_id": 139460,
+            "species": "Enterococcus faecium",
+            "gram_stain": "positive",
+            "cell_shape": "ovoid-shaped",
+            "record_doi": "10.13145/bacdive139460.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139460"
+          },
+          {
+            "bacdive_id": 138782,
+            "species": "Enterococcus faecium",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive138782.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138782"
+          }
+        ]
+      },
+      "shape": "coccus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "ovoid-shaped": 2,
+        "coccus-shaped": 21
+      },
+      "shape_counts_normalised": {
+        "coccus": 23
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Enterococcaceae",
+        "genus": "Enterococcus"
+      },
+      "group_species": "Enterococcus faecium",
+      "group_genus": "Enterococcus",
+      "group_family": "Enterococcaceae"
+    },
+    {
+      "folder": "Escherichia coli",
+      "included": true,
+      "resolved_name": "Escherichia coli",
+      "name_is_current": false,
+      "gram": "negative",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 12,
+        "gram_counts": {
+          "negative": 12
+        },
+        "evidence": [
+          {
+            "bacdive_id": 4507,
+            "species": "Escherichia coli",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive4507.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/4507"
+          },
+          {
+            "bacdive_id": 4484,
+            "species": "Escherichia coli",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive4484.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/4484"
+          },
+          {
+            "bacdive_id": 4435,
+            "species": "Escherichia coli",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive4435.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/4435"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 12
+      },
+      "shape_counts_normalised": {
+        "bacillus": 12
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Pseudomonadota",
+        "class": "Gammaproteobacteria",
+        "order": "Enterobacterales",
+        "family": "Enterobacteriaceae",
+        "genus": "Escherichia"
+      },
+      "group_species": "Escherichia coli",
+      "group_genus": "Escherichia",
+      "group_family": "Enterobacteriaceae"
+    },
+    {
+      "folder": "Fusobacterium",
+      "included": true,
+      "resolved_name": "Fusobacterium",
+      "name_is_current": false,
+      "gram": "negative",
+      "gram_agreement": 0.875,
+      "gram_tier": "B",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 8,
+        "gram_counts": {
+          "negative": 7,
+          "variable": 1
+        },
+        "evidence": [
+          {
+            "bacdive_id": 137492,
+            "species": "Fusobacterium vincentii",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive137492.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/137492"
+          },
+          {
+            "bacdive_id": 18081,
+            "species": "Flavonifractor plautii",
+            "gram_stain": "variable",
+            "cell_shape": "curved-shaped",
+            "record_doi": "10.13145/bacdive18081.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/18081"
+          },
+          {
+            "bacdive_id": 5775,
+            "species": "Fusobacterium nucleatum subsp. vincentii",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive5775.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/5775"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 7,
+        "curved-shaped": 1
+      },
+      "shape_counts_normalised": {
+        "bacillus": 8
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Fusobacteriota",
+        "class": "Fusobacteriia",
+        "order": "Fusobacteriales",
+        "family": "Fusobacteriaceae",
+        "genus": "Fusobacterium"
+      },
+      "group_species": "Fusobacterium",
+      "group_genus": "Fusobacterium",
+      "group_family": "Fusobacteriaceae"
+    },
+    {
+      "folder": "Lactobacillus casei",
+      "included": true,
+      "resolved_name": "Lacticaseibacillus casei",
+      "name_is_current": true,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 8,
+        "gram_counts": {
+          "positive": 8
+        },
+        "evidence": [
+          {
+            "bacdive_id": 139029,
+            "species": "Lactobacillus casei",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139029.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139029"
+          },
+          {
+            "bacdive_id": 138776,
+            "species": "Lactobacillus casei",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138776.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138776"
+          },
+          {
+            "bacdive_id": 138704,
+            "species": "Lactobacillus casei",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138704.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138704"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 8
+      },
+      "shape_counts_normalised": {
+        "bacillus": 8
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Lactobacillaceae",
+        "genus": "Lacticaseibacillus"
+      },
+      "group_species": "Lacticaseibacillus casei",
+      "group_genus": "Lacticaseibacillus",
+      "group_family": "Lactobacillaceae"
+    },
+    {
+      "folder": "Lactobacillus crispatus",
+      "included": true,
+      "resolved_name": "Lactobacillus crispatus",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 13,
+        "gram_counts": {
+          "positive": 13
+        },
+        "evidence": [
+          {
+            "bacdive_id": 172658,
+            "species": "Lactobacillus crispatus",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive172658.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/172658"
+          },
+          {
+            "bacdive_id": 139287,
+            "species": "Lactobacillus crispatus",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139287.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139287"
+          },
+          {
+            "bacdive_id": 139286,
+            "species": "Lactobacillus crispatus",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139286.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139286"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 13
+      },
+      "shape_counts_normalised": {
+        "bacillus": 13
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Lactobacillaceae",
+        "genus": "Lactobacillus"
+      },
+      "group_species": "Lactobacillus crispatus",
+      "group_genus": "Lactobacillus",
+      "group_family": "Lactobacillaceae"
+    },
+    {
+      "folder": "Lactobacillus delbrueckii",
+      "included": true,
+      "resolved_name": "Lactobacillus delbrueckii",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 24,
+        "gram_counts": {
+          "positive": 24
+        },
+        "evidence": [
+          {
+            "bacdive_id": 172663,
+            "species": "Lactobacillus delbrueckii",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive172663.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/172663"
+          },
+          {
+            "bacdive_id": 139036,
+            "species": "Lactobacillus delbrueckii subsp. lactis",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139036.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139036"
+          },
+          {
+            "bacdive_id": 139021,
+            "species": "Lactobacillus delbrueckii subsp. lactis",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139021.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139021"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 24
+      },
+      "shape_counts_normalised": {
+        "bacillus": 24
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Lactobacillaceae",
+        "genus": "Lactobacillus"
+      },
+      "group_species": "Lactobacillus delbrueckii",
+      "group_genus": "Lactobacillus",
+      "group_family": "Lactobacillaceae"
+    },
+    {
+      "folder": "Lactobacillus gasseri",
+      "included": true,
+      "resolved_name": "Lactobacillus gasseri",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 25,
+        "gram_counts": {
+          "positive": 25
+        },
+        "evidence": [
+          {
+            "bacdive_id": 139159,
+            "species": "Lactobacillus gasseri",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139159.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139159"
+          },
+          {
+            "bacdive_id": 138807,
+            "species": "Lactobacillus gasseri",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138807.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138807"
+          },
+          {
+            "bacdive_id": 138685,
+            "species": "Lactobacillus gasseri",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138685.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138685"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 0.96,
+      "shape_counts_raw": {
+        "rod-shaped": 24,
+        "oval-shaped": 1
+      },
+      "shape_counts_normalised": {
+        "bacillus": 24,
+        "coccus": 1
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Lactobacillaceae",
+        "genus": "Lactobacillus"
+      },
+      "group_species": "Lactobacillus gasseri",
+      "group_genus": "Lactobacillus",
+      "group_family": "Lactobacillaceae"
+    },
+    {
+      "folder": "Lactobacillus jensenii",
+      "included": true,
+      "resolved_name": "Lactobacillus jensenii",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 13,
+        "gram_counts": {
+          "positive": 13
+        },
+        "evidence": [
+          {
+            "bacdive_id": 173091,
+            "species": "Lactobacillus jensenii",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive173091.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/173091"
+          },
+          {
+            "bacdive_id": 173090,
+            "species": "Lactobacillus jensenii",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive173090.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/173090"
+          },
+          {
+            "bacdive_id": 173089,
+            "species": "Lactobacillus jensenii",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive173089.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/173089"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 0.9231,
+      "shape_counts_raw": {
+        "rod-shaped": 12,
+        "oval-shaped": 1
+      },
+      "shape_counts_normalised": {
+        "bacillus": 12,
+        "coccus": 1
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Lactobacillaceae",
+        "genus": "Lactobacillus"
+      },
+      "group_species": "Lactobacillus jensenii",
+      "group_genus": "Lactobacillus",
+      "group_family": "Lactobacillaceae"
+    },
+    {
+      "folder": "Lactobacillus johnsonii",
+      "included": true,
+      "resolved_name": "Lactobacillus johnsonii",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 6,
+        "gram_counts": {
+          "positive": 6
+        },
+        "evidence": [
+          {
+            "bacdive_id": 137649,
+            "species": "Lactobacillus johnsonii",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive137649.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/137649"
+          },
+          {
+            "bacdive_id": 136238,
+            "species": "Lactobacillus johnsonii",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive136238.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/136238"
+          },
+          {
+            "bacdive_id": 136237,
+            "species": "Lactobacillus johnsonii",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive136237.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/136237"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 6
+      },
+      "shape_counts_normalised": {
+        "bacillus": 6
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Lactobacillaceae",
+        "genus": "Lactobacillus"
+      },
+      "group_species": "Lactobacillus johnsonii",
+      "group_genus": "Lactobacillus",
+      "group_family": "Lactobacillaceae"
+    },
+    {
+      "folder": "Lactobacillus paracasei",
+      "included": true,
+      "resolved_name": "Lacticaseibacillus paracasei",
+      "name_is_current": true,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 11,
+        "gram_counts": {
+          "positive": 11
+        },
+        "evidence": [
+          {
+            "bacdive_id": 173359,
+            "species": "Lactobacillus paracaseï",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive173359.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/173359"
+          },
+          {
+            "bacdive_id": 173358,
+            "species": "Lactobacillus paracaseï",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive173358.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/173358"
+          },
+          {
+            "bacdive_id": 138824,
+            "species": "Lactobacillus paracasei",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138824.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138824"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 11
+      },
+      "shape_counts_normalised": {
+        "bacillus": 11
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Lactobacillaceae",
+        "genus": "Lacticaseibacillus"
+      },
+      "group_species": "Lacticaseibacillus paracasei",
+      "group_genus": "Lacticaseibacillus",
+      "group_family": "Lactobacillaceae"
+    },
+    {
+      "folder": "Lactobacillus plantarum",
+      "included": true,
+      "resolved_name": "Lactiplantibacillus plantarum",
+      "name_is_current": true,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 24,
+        "gram_counts": {
+          "positive": 24
+        },
+        "evidence": [
+          {
+            "bacdive_id": 173491,
+            "species": "Lactobacillus plantarum",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive173491.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/173491"
+          },
+          {
+            "bacdive_id": 173490,
+            "species": "Lactobacillus plantarum",
+            "gram_stain": "positive",
+            "cell_shape": "oval-shaped",
+            "record_doi": "10.13145/bacdive173490.20251217.10",
+            "url": "https://bacdive.dsmz.de/strain/173490"
+          },
+          {
+            "bacdive_id": 139249,
+            "species": "Lactobacillus plantarum",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139249.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139249"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 0.9583,
+      "shape_counts_raw": {
+        "rod-shaped": 23,
+        "oval-shaped": 1
+      },
+      "shape_counts_normalised": {
+        "bacillus": 23,
+        "coccus": 1
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Lactobacillaceae",
+        "genus": "Lactiplantibacillus"
+      },
+      "group_species": "Lactiplantibacillus plantarum",
+      "group_genus": "Lactiplantibacillus",
+      "group_family": "Lactobacillaceae"
+    },
+    {
+      "folder": "Lactobacillus reuteri",
+      "included": true,
+      "resolved_name": "Limosilactobacillus reuteri",
+      "name_is_current": true,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 11,
+        "gram_counts": {
+          "positive": 11
+        },
+        "evidence": [
+          {
+            "bacdive_id": 173534,
+            "species": "Limosilactobacillus reuteri",
+            "gram_stain": "positive",
+            "cell_shape": "oval-shaped",
+            "record_doi": "10.13145/bacdive173534.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/173534"
+          },
+          {
+            "bacdive_id": 173533,
+            "species": "Limosilactobacillus reuteri",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive173533.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/173533"
+          },
+          {
+            "bacdive_id": 173532,
+            "species": "Limosilactobacillus reuteri",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive173532.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/173532"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 0.9091,
+      "shape_counts_raw": {
+        "oval-shaped": 1,
+        "rod-shaped": 10
+      },
+      "shape_counts_normalised": {
+        "coccus": 1,
+        "bacillus": 10
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Lactobacillaceae",
+        "genus": "Limosilactobacillus"
+      },
+      "group_species": "Limosilactobacillus reuteri",
+      "group_genus": "Limosilactobacillus",
+      "group_family": "Lactobacillaceae"
+    },
+    {
+      "folder": "Lactobacillus rhamnosus",
+      "included": true,
+      "resolved_name": "Lacticaseibacillus rhamnosus",
+      "name_is_current": true,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 39,
+        "gram_counts": {
+          "positive": 39
+        },
+        "evidence": [
+          {
+            "bacdive_id": 139025,
+            "species": "Lactobacillus rhamnosus",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139025.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139025"
+          },
+          {
+            "bacdive_id": 139023,
+            "species": "Lactobacillus rhamnosus",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139023.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139023"
+          },
+          {
+            "bacdive_id": 139022,
+            "species": "Lactobacillus rhamnosus",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139022.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139022"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 39
+      },
+      "shape_counts_normalised": {
+        "bacillus": 39
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Lactobacillaceae",
+        "genus": "Lactobacillus"
+      },
+      "group_species": "Lacticaseibacillus rhamnosus",
+      "group_genus": "Lactobacillus",
+      "group_family": "Lactobacillaceae"
+    },
+    {
+      "folder": "Lactobacillus salivarius",
+      "included": true,
+      "resolved_name": "Ligilactobacillus salivarius",
+      "name_is_current": true,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 10,
+        "gram_counts": {
+          "positive": 10
+        },
+        "evidence": [
+          {
+            "bacdive_id": 138668,
+            "species": "Lactobacillus salivarius",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138668.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138668"
+          },
+          {
+            "bacdive_id": 138604,
+            "species": "Lactobacillus salivarius",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive138604.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138604"
+          },
+          {
+            "bacdive_id": 137159,
+            "species": "Lactobacillus salivarius",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive137159.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/137159"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 10
+      },
+      "shape_counts_normalised": {
+        "bacillus": 10
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Lactobacillaceae",
+        "genus": "Ligilactobacillus"
+      },
+      "group_species": "Ligilactobacillus salivarius",
+      "group_genus": "Ligilactobacillus",
+      "group_family": "Lactobacillaceae"
+    },
+    {
+      "folder": "Listeria monocytogenes",
+      "included": true,
+      "resolved_name": "Listeria monocytogenes",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 41,
+        "gram_counts": {
+          "positive": 41
+        },
+        "evidence": [
+          {
+            "bacdive_id": 139552,
+            "species": "Listeria monocytogenes",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139552.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139552"
+          },
+          {
+            "bacdive_id": 139500,
+            "species": "Listeria monocytogenes",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139500.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139500"
+          },
+          {
+            "bacdive_id": 139466,
+            "species": "Listeria monocytogenes",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139466.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139466"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 42
+      },
+      "shape_counts_normalised": {
+        "bacillus": 42
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Caryophanales",
+        "family": "Listeriaceae",
+        "genus": "Listeria"
+      },
+      "group_species": "Listeria monocytogenes",
+      "group_genus": "Listeria",
+      "group_family": "Listeriaceae"
+    },
+    {
+      "folder": "Micrococcus spp",
+      "included": true,
+      "resolved_name": "Micrococcus",
+      "name_is_current": true,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 10,
+        "gram_counts": {
+          "positive": 10
+        },
+        "evidence": [
+          {
+            "bacdive_id": 24203,
+            "species": "Micrococcus terreus",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive24203.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/24203"
+          },
+          {
+            "bacdive_id": 7761,
+            "species": "Micrococcus cohnii",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive7761.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/7761"
+          },
+          {
+            "bacdive_id": 7760,
+            "species": "Micrococcus yunnanensis",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive7760.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/7760"
+          }
+        ]
+      },
+      "shape": "coccus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "coccus-shaped": 9,
+        "oval-shaped": 1
+      },
+      "shape_counts_normalised": {
+        "coccus": 10
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Actinomycetota",
+        "class": "Actinomycetes",
+        "order": "Micrococcales",
+        "family": "Micrococcaceae",
+        "genus": "Micrococcus"
+      },
+      "group_species": "Micrococcus",
+      "group_genus": "Micrococcus",
+      "group_family": "Micrococcaceae"
+    },
+    {
+      "folder": "Neisseria gonorrhoeae",
+      "included": true,
+      "resolved_name": "Neisseria gonorrhoeae",
+      "name_is_current": false,
+      "gram": "negative",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 16,
+        "gram_counts": {
+          "negative": 16
+        },
+        "evidence": [
+          {
+            "bacdive_id": 138581,
+            "species": "Neisseria gonorrhoeae",
+            "gram_stain": "negative",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive138581.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138581"
+          },
+          {
+            "bacdive_id": 138169,
+            "species": "Neisseria gonorrhoeae",
+            "gram_stain": "negative",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive138169.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138169"
+          },
+          {
+            "bacdive_id": 138168,
+            "species": "Neisseria gonorrhoeae",
+            "gram_stain": "negative",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive138168.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138168"
+          }
+        ]
+      },
+      "shape": "coccus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "coccus-shaped": 14,
+        "oval-shaped": 2
+      },
+      "shape_counts_normalised": {
+        "coccus": 16
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Pseudomonadota",
+        "class": "Betaproteobacteria",
+        "order": "Neisseriales",
+        "family": "Neisseriaceae",
+        "genus": "Neisseria"
+      },
+      "group_species": "Neisseria gonorrhoeae",
+      "group_genus": "Neisseria",
+      "group_family": "Neisseriaceae"
+    },
+    {
+      "folder": "Porphyromonas gingivalis",
+      "included": true,
+      "resolved_name": "Porphyromonas gingivalis",
+      "name_is_current": false,
+      "gram": "negative",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "genus",
+        "authority": "BacDive — 属 Porphyromonas の株記録",
+        "authority_url": "https://api.bacdive.dsmz.de/v2/taxon/Porphyromonas",
+        "evidence": "属 43 株のうち細胞形態の記録がある 3 株はすべて gram=negative / rod-shaped (BacDive 133139 P. loveana / 12513 P. bennonis / 12505 P. asaccharolytica)",
+        "accessed": "2026-09-08",
+        "caveat": "P. gingivalis そのものには BacDive に Gram の記録が無い。属水準の合議で補っており、種水準の典拠ではない。形態は権威の記述が short rod / coccobacilli と揺れるため Stage B の対象外とする"
+      },
+      "shape": null,
+      "shape_agreement": 0.0,
+      "shape_counts_raw": {},
+      "shape_counts_normalised": {},
+      "stage_b": false,
+      "stage_b_excluded_reason": "P. gingivalis そのものには BacDive に Gram の記録が無い。属水準の合議で補っており、種水準の典拠ではない。形態は権威の記述が short rod / coccobacilli と揺れるため Stage B の対象外とする",
+      "lineage": {
+        "phylum": "Bacteroidota",
+        "class": "Bacteroidia",
+        "order": "Bacteroidales",
+        "family": "Porphyromonadaceae",
+        "genus": "Porphyromonas"
+      },
+      "group_species": "Porphyromonas gingivalis",
+      "group_genus": "Porphyromonas",
+      "group_family": "Porphyromonadaceae"
+    },
+    {
+      "folder": "Propionibacterium acnes",
+      "included": true,
+      "resolved_name": "Cutibacterium acnes",
+      "name_is_current": true,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 33,
+        "gram_counts": {
+          "positive": 33
+        },
+        "evidence": [
+          {
+            "bacdive_id": 139655,
+            "species": "Cutibacterium acnes",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139655.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139655"
+          },
+          {
+            "bacdive_id": 139654,
+            "species": "Cutibacterium acnes",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139654.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139654"
+          },
+          {
+            "bacdive_id": 139653,
+            "species": "Cutibacterium acnes",
+            "gram_stain": "positive",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive139653.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139653"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 0.9697,
+      "shape_counts_raw": {
+        "rod-shaped": 32,
+        "coccus-shaped": 1
+      },
+      "shape_counts_normalised": {
+        "bacillus": 32,
+        "coccus": 1
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Actinomycetota",
+        "class": "Actinomycetes",
+        "order": "Propionibacteriales",
+        "family": "Propionibacteriaceae",
+        "genus": "Cutibacterium"
+      },
+      "group_species": "Cutibacterium acnes",
+      "group_genus": "Cutibacterium",
+      "group_family": "Propionibacteriaceae"
+    },
+    {
+      "folder": "Proteus",
+      "included": true,
+      "resolved_name": "Proteus",
+      "name_is_current": false,
+      "gram": "negative",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 27,
+        "gram_counts": {
+          "negative": 27
+        },
+        "evidence": [
+          {
+            "bacdive_id": 148405,
+            "species": "Proteus vulgaris",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive148405.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/148405"
+          },
+          {
+            "bacdive_id": 148404,
+            "species": "Proteus vulgaris",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive148404.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/148404"
+          },
+          {
+            "bacdive_id": 148403,
+            "species": "Proteus vulgaris",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive148403.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/148403"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 27
+      },
+      "shape_counts_normalised": {
+        "bacillus": 27
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Pseudomonadota",
+        "class": "Gammaproteobacteria",
+        "order": "Enterobacterales",
+        "family": "Morganellaceae",
+        "genus": "Proteus"
+      },
+      "group_species": "Proteus",
+      "group_genus": "Proteus",
+      "group_family": "Morganellaceae"
+    },
+    {
+      "folder": "Pseudomonas aeruginosa",
+      "included": true,
+      "resolved_name": "Pseudomonas aeruginosa",
+      "name_is_current": false,
+      "gram": "negative",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 14,
+        "gram_counts": {
+          "negative": 14
+        },
+        "evidence": [
+          {
+            "bacdive_id": 134742,
+            "species": "Pseudomonas aeruginosa",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive134742.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/134742"
+          },
+          {
+            "bacdive_id": 134741,
+            "species": "Pseudomonas aeruginosa",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive134741.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/134741"
+          },
+          {
+            "bacdive_id": 134485,
+            "species": "Pseudomonas aeruginosa",
+            "gram_stain": "negative",
+            "cell_shape": "rod-shaped",
+            "record_doi": "10.13145/bacdive134485.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/134485"
+          }
+        ]
+      },
+      "shape": "bacillus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "rod-shaped": 14
+      },
+      "shape_counts_normalised": {
+        "bacillus": 14
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Pseudomonadota",
+        "class": "Gammaproteobacteria",
+        "order": "Pseudomonadales",
+        "family": "Pseudomonadaceae",
+        "genus": "Pseudomonas"
+      },
+      "group_species": "Pseudomonas aeruginosa",
+      "group_genus": "Pseudomonas",
+      "group_family": "Pseudomonadaceae"
+    },
+    {
+      "folder": "Staphylococcus aureus",
+      "included": true,
+      "resolved_name": "Staphylococcus aureus",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 26,
+        "gram_counts": {
+          "positive": 26
+        },
+        "evidence": [
+          {
+            "bacdive_id": 135493,
+            "species": "Staphylococcus aureus",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive135493.20251217.10",
+            "url": "https://bacdive.dsmz.de/strain/135493"
+          },
+          {
+            "bacdive_id": 135289,
+            "species": "Staphylococcus aureus",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive135289.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/135289"
+          },
+          {
+            "bacdive_id": 135248,
+            "species": "Staphylococcus aureus",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive135248.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/135248"
+          }
+        ]
+      },
+      "shape": "coccus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "coccus-shaped": 27
+      },
+      "shape_counts_normalised": {
+        "coccus": 27
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Caryophanales",
+        "family": "Staphylococcaceae",
+        "genus": "Staphylococcus"
+      },
+      "group_species": "Staphylococcus aureus",
+      "group_genus": "Staphylococcus",
+      "group_family": "Staphylococcaceae"
+    },
+    {
+      "folder": "Staphylococcus epidermidis",
+      "included": true,
+      "resolved_name": "Staphylococcus epidermidis",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 11,
+        "gram_counts": {
+          "positive": 11
+        },
+        "evidence": [
+          {
+            "bacdive_id": 139594,
+            "species": "Staphylococcus epidermidis",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive139594.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/139594"
+          },
+          {
+            "bacdive_id": 137002,
+            "species": "Staphylococcus epidermidis",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive137002.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/137002"
+          },
+          {
+            "bacdive_id": 137001,
+            "species": "Staphylococcus epidermidis",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive137001.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/137001"
+          }
+        ]
+      },
+      "shape": "coccus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "coccus-shaped": 11
+      },
+      "shape_counts_normalised": {
+        "coccus": 11
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Caryophanales",
+        "family": "Staphylococcaceae",
+        "genus": "Staphylococcus"
+      },
+      "group_species": "Staphylococcus epidermidis",
+      "group_genus": "Staphylococcus",
+      "group_family": "Staphylococcaceae"
+    },
+    {
+      "folder": "Staphylococcus saprophyticus",
+      "included": true,
+      "resolved_name": "Staphylococcus saprophyticus",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 8,
+        "gram_counts": {
+          "positive": 8
+        },
+        "evidence": [
+          {
+            "bacdive_id": 139238,
+            "species": "Staphylococcus saprophyticus",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive139238.20251217.10",
+            "url": "https://bacdive.dsmz.de/strain/139238"
+          },
+          {
+            "bacdive_id": 138194,
+            "species": "Staphylococcus saprophyticus subsp. bovis",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive138194.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138194"
+          },
+          {
+            "bacdive_id": 138193,
+            "species": "Staphylococcus saprophyticus subsp. bovis",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive138193.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/138193"
+          }
+        ]
+      },
+      "shape": "coccus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "coccus-shaped": 8
+      },
+      "shape_counts_normalised": {
+        "coccus": 8
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Caryophanales",
+        "family": "Staphylococcaceae",
+        "genus": "Staphylococcus"
+      },
+      "group_species": "Staphylococcus saprophyticus",
+      "group_genus": "Staphylococcus",
+      "group_family": "Staphylococcaceae"
+    },
+    {
+      "folder": "Streptococcus agalactiae",
+      "included": true,
+      "resolved_name": "Streptococcus agalactiae",
+      "name_is_current": false,
+      "gram": "positive",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 36,
+        "gram_counts": {
+          "positive": 36
+        },
+        "evidence": [
+          {
+            "bacdive_id": 171012,
+            "species": "Streptococcus agalactiae",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive171012.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/171012"
+          },
+          {
+            "bacdive_id": 171011,
+            "species": "Streptococcus agalactiae",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive171011.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/171011"
+          },
+          {
+            "bacdive_id": 171010,
+            "species": "Streptococcus agalactiae",
+            "gram_stain": "positive",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive171010.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/171010"
+          }
+        ]
+      },
+      "shape": "coccus",
+      "shape_agreement": 1.0,
+      "shape_counts_raw": {
+        "coccus-shaped": 35
+      },
+      "shape_counts_normalised": {
+        "coccus": 35
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Bacilli",
+        "order": "Lactobacillales",
+        "family": "Streptococcaceae",
+        "genus": "Streptococcus"
+      },
+      "group_species": "Streptococcus agalactiae",
+      "group_genus": "Streptococcus",
+      "group_family": "Streptococcaceae"
+    },
+    {
+      "folder": "Veillonella",
+      "included": true,
+      "resolved_name": "Veillonella",
+      "name_is_current": false,
+      "gram": "negative",
+      "gram_agreement": 1.0,
+      "gram_tier": "A",
+      "gram_source": {
+        "authority_level": "species",
+        "authority": "BacDive",
+        "strains_with_gram": 15,
+        "gram_counts": {
+          "negative": 15
+        },
+        "evidence": [
+          {
+            "bacdive_id": 158785,
+            "species": "Veillonella infantium",
+            "gram_stain": "negative",
+            "cell_shape": "coccus-shaped",
+            "record_doi": "10.13145/bacdive158785.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/158785"
+          },
+          {
+            "bacdive_id": 137490,
+            "species": "Veillonella parvula",
+            "gram_stain": "negative",
+            "cell_shape": "oval-shaped",
+            "record_doi": "10.13145/bacdive137490.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/137490"
+          },
+          {
+            "bacdive_id": 136920,
+            "species": "Veillonella montpellierensis",
+            "gram_stain": "negative",
+            "cell_shape": "oval-shaped",
+            "record_doi": "10.13145/bacdive136920.20260601.11",
+            "url": "https://bacdive.dsmz.de/strain/136920"
+          }
+        ]
+      },
+      "shape": "coccus",
+      "shape_agreement": 0.9333,
+      "shape_counts_raw": {
+        "coccus-shaped": 8,
+        "oval-shaped": 5,
+        "rod-shaped": 1,
+        "ovoid-shaped": 1
+      },
+      "shape_counts_normalised": {
+        "coccus": 14,
+        "bacillus": 1
+      },
+      "stage_b": true,
+      "stage_b_excluded_reason": null,
+      "lineage": {
+        "phylum": "Bacillota",
+        "class": "Negativicutes",
+        "order": "Veillonellales",
+        "family": "Veillonellaceae",
+        "genus": "Veillonella"
+      },
+      "group_species": "Veillonella",
+      "group_genus": "Veillonella",
+      "group_family": "Veillonellaceae"
+    }
+  ]
+}

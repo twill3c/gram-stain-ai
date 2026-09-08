@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-09-08T12:41:26+09:00",
+  "zips_scanned": 34,
+  "declared_images": 2722,
+  "measured_images": 2094,
+  "unique_images_by_sha256": 2028,
+  "duplicate_extra_copies": 66,
+  "duplicate_groups": 66,
+  "folders": 33,
+  "per_folder_counts": {
+    "Acinetobacter baumannii": 60,
+    "Actinomyces israelii": 67,
+    "Bacteroides fragilis": 65,
+    "Bifidobacterium spp": 64,
+    "Candida albicans": 62,
+    "Clostridium perfringens": 62,
+    "Enterococcus faecalis": 60,
+    "Enterococcus faecium": 58,
+    "Escherichia coli": 59,
+    "Fusobacterium": 62,
+    "Lactobacillus casei": 60,
+    "Lactobacillus crispatus": 57,
+    "Lactobacillus delbrueckii": 59,
+    "Lactobacillus gasseri": 61,
+    "Lactobacillus jensenii": 66,
+    "Lactobacillus johnsonii": 61,
+    "Lactobacillus paracasei": 60,
+    "Lactobacillus plantarum": 61,
+    "Lactobacillus reuteri": 60,
+    "Lactobacillus rhamnosus": 120,
+    "Lactobacillus salivarius": 60,
+    "Listeria monocytogenes": 63,
+    "Micrococcus spp": 63,
+    "Neisseria gonorrhoeae": 69,
+    "Porphyromonas gingivalis": 65,
+    "Propionibacterium acnes": 61,
+    "Proteus": 60,
+    "Pseudomonas aeruginosa": 63,
+    "Staphylococcus aureus": 64,
+    "Staphylococcus epidermidis": 59,
+    "Staphylococcus saprophyticus": 60,
+    "Streptococcus agalactiae": 65,
+    "Veillonella": 58
+  },
+  "all_square": true,
+  "modes": {
+    "RGBA": 2094
+  },
+  "distinct_widths": 100,
+  "width_min": 739,
+  "width_max": 1532,
+  "folders_with_single_canvas_size": [],
+  "canvas_sizes_unique_to_one_folder": 35,
+  "images_with_fingerprint_size": 88,
+  "non_png_entries": {},
+  "duplicate_examples": {
+    "1b30e955a77bd1a4ac86eb716cc18752633154a8aaeaad9c7c7c2c1bb270ed4e": [
+      "Acinetobacter baumannii-20230901T010945Z-001.zip::Acinetobacter baumannii/32.png",
+      "Acinetobacter baumannii-20230901T010945Z-001.zip::Acinetobacter baumannii/33.png"
+    ],
+    "0d7961bff67e78f578c0e2a21a49454a816c95bdab44fb4ba148920926835fc6": [
+      "Bifidobacterium spp-20230901T012201Z-001.zip::Bifidobacterium spp/44.png",
+      "Bifidobacterium spp-20230901T012201Z-001.zip::Bifidobacterium spp/55.png"
+    ],
+    "c7049568865bad4bceea35a0873d3a87c1c76ce7194483bcae94717bd97066ef": [
+      "Enterococcus faecium-20230901T011842Z-001.zip::Enterococcus faecium/40(1).png",
+      "Enterococcus faecium-20230901T011842Z-001.zip::Enterococcus faecium/40.png"
+    ],
+    "5e2e974a31129d382cf24876090e0540b01de1e37e78dfb191e7df8fdc95dab4": [
+      "Enterococcus faecium-20230901T011842Z-001.zip::Enterococcus faecium/24.png",
+      "Enterococcus faecium-20230901T011842Z-001.zip::Enterococcus faecium/25.png"
+    ],
+    "67832cd640f7aea719e885f1f61736a7f8f89d6bd67ada2baf18d483c8cff184": [
+      "Lactobacillus rhamnosus-20230901T012255Z-001-5FKFIs.zip::Lactobacillus rhamnosus/53.png",
+      "Lactobacillus rhamnosus-20230901T012255Z-001.zip::Lactobacillus rhamnosus/53.png"
+    ]
+  }
+}

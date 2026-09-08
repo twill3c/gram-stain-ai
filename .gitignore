@@ -1,0 +1,29 @@
+# --- データセット本体はコミットしない(N-03) ---
+dataset/raw/
+dataset/processed/
+dataset/extracted/
+
+# --- 学習の途中成果 ---
+ml/runs/
+ml/checkpoints/
+*.pth
+*.pt
+
+# --- Python ---
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# --- Node / Next.js ---
+node_modules/
+.next/
+out/
+*.tsbuildinfo
+
+# --- OS ---
+Thumbs.db
+.DS_Store
+
+# 権威取得の再開用キャッシュ。集約結果 authority_bacdive.json を追跡するので中間は要らない
+dataset/metadata/.authority_cache/

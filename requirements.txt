@@ -1,0 +1,37 @@
+# gram-stain-ai — Python 依存(SPEC N-05)
+#
+# 専用 venv を使う。このリポジトリの外の venv が有効なまま入れないこと。
+# 入れる前に必ず確かめる:
+#     python -c "import sys; print(sys.prefix)"
+#
+# 作り方:
+#     python -m venv .venv
+#     .venv/Scripts/python.exe -m pip install -r requirements.txt   # Windows
+#     .venv/bin/python -m pip install -r requirements.txt           # POSIX
+#
+# 版は開発完了時に固定する。固定するまでは、実際に入った版を
+# `.venv/Scripts/python.exe -m pip freeze` で確かめてから結果を報告すること。
+
+# --- 学習 ---
+torch
+torchvision
+
+# --- データ処理 ---
+numpy
+pandas
+Pillow
+scikit-learn
+
+# --- 図 ---
+matplotlib
+
+# --- 進捗 ---
+tqdm
+
+# --- ONNX 変換と二実装照合(較正ゲート G-01)---
+onnx
+onnxruntime
+onnxscript
+
+# --- 検査 ---
+pytest
