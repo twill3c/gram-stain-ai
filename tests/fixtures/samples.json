@@ -1,0 +1,44 @@
+{
+  "samples": [
+    {
+      "id": "012c474d093ee7d0",
+      "gram": "positive"
+    },
+    {
+      "id": "026e33874a360fd1",
+      "gram": "positive"
+    },
+    {
+      "id": "00696a351f1b4c43",
+      "gram": "positive"
+    },
+    {
+      "id": "06a29eb81c536dea",
+      "gram": "positive"
+    },
+    {
+      "id": "00b49b9c9008a579",
+      "gram": "negative"
+    },
+    {
+      "id": "17d65bd0e866cf27",
+      "gram": "negative"
+    },
+    {
+      "id": "00b6ba7999e9196f",
+      "gram": "negative"
+    },
+    {
+      "id": "010bba753fd12b76",
+      "gram": "negative"
+    },
+    {
+      "id": "03437678e9e59d2d",
+      "gram": "positive"
+    },
+    {
+      "id": "0410488ee11de491",
+      "gram": "negative"
+    }
+  ]
+}
