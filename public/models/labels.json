@@ -1,0 +1,15 @@
+{
+  "classes": [
+    "gram_positive",
+    "gram_negative"
+  ],
+  "display_ja": {
+    "gram_positive": "グラム陽性",
+    "gram_negative": "グラム陰性"
+  },
+  "index": {
+    "gram_positive": 0,
+    "gram_negative": 1
+  },
+  "note": "並びは Python 側の POSITIVE=0 / NEGATIVE=1 と一致させてある。食い違うと例外を出さずに結果が反転する"
+}

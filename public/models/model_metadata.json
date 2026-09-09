@@ -1,0 +1,99 @@
+{
+  "model_version": "1.0.0",
+  "architecture": "mobilenet_v3_small",
+  "input_size": [
+    224,
+    224
+  ],
+  "preprocessing": {
+    "field_crop": "視野円の内接正方形の中心 512x512 をリサイズなしで切り出したのち 224 へ縮小",
+    "normalise": {
+      "mean": [
+        0.485,
+        0.456,
+        0.406
+      ],
+      "std": [
+        0.229,
+        0.224,
+        0.225
+      ]
+    },
+    "note": "四隅の黒(視野外)を入れない。黒の量は撮影ごとに変わるので近道になる"
+  },
+  "task": "gram-stain-image-classification",
+  "classes": [
+    "gram_positive",
+    "gram_negative"
+  ],
+  "dataset": "Bacteria Data for Machine Vision and Digital Biology",
+  "dataset_doi": "10.17632/cvkgfzp7ck.1",
+  "dataset_license": "CC BY 4.0",
+  "attribution": "Jamshidi, Mohammad (Behdad); Sargolzaee, Saleh; Foorginezhad, Salimeh; Moztarzadeh, Omid (2023), Bacteria Data for Machine Vision and Digital Biology, Mendeley Data, V1, doi: 10.17632/cvkgfzp7ck.1. Licensed under CC BY 4.0.",
+  "label_authority": {
+    "source": "BacDive (Leibniz Institute DSMZ)",
+    "license": "CC BY 4.0",
+    "accessed_at": "2026-09-08T09:45:26+09:00"
+  },
+  "taxa_included": 32,
+  "trained_at": "2026-09-09T06:50:25+09:00",
+  "git_commit": "15932cd066e0ac49748b61559ea3e99eb08667b6",
+  "epochs": 3,
+  "onnx": {
+    "exporter": "torchscript",
+    "opset": 17,
+    "megabytes": 6.089,
+    "parity_argmax_agreement": 1.0,
+    "parity_max_prob_diff": 1.125037670135498e-05,
+    "parity_max_abs_diff_logits": 0.00010132789611816406
+  },
+  "metrics": {
+    "shipped_test": {
+      "macro_f1": 1.0,
+      "accuracy": 1.0,
+      "n_images": 286
+    },
+    "rulers": {
+      "a": {
+        "macro_f1": 0.9731,
+        "ci_low": 0.958,
+        "ci_high": 0.9858
+      },
+      "b": {
+        "macro_f1": 0.9276,
+        "ci_low": 0.9085,
+        "ci_high": 0.9443
+      },
+      "c": {
+        "macro_f1": 0.6942,
+        "ci_low": 0.6577,
+        "ci_high": 0.7329
+      }
+    },
+    "hue_baseline": {
+      "a": {
+        "macro_f1": 0.9714,
+        "ci_low": 0.9593,
+        "ci_high": 0.9824
+      },
+      "b": {
+        "macro_f1": 0.9524,
+        "ci_low": 0.9363,
+        "ci_high": 0.9673
+      },
+      "c": {
+        "macro_f1": 0.9601,
+        "ci_low": 0.9457,
+        "ci_high": 0.9736
+      }
+    },
+    "label_permutation_control": 0.4356,
+    "ruler_meaning": {
+      "a": "この 32 分類群のスライドを見分けられるか",
+      "b": "学習で見ていない種の Gram 反応を当てられるか",
+      "c": "学習で見ていない科の Gram 反応を当てられるか"
+    },
+    "caveat": "出荷モデルの test の数だけを示してはならない。同じ骨格・同じ手続きで科をまるごと抜くと macro F1 は 0.6942 まで落ちる"
+  },
+  "not_a_medical_device": "教育・研究目的のデモである。医療機器ではなく、出力は医学的診断を意味しない"
+}
