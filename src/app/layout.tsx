@@ -40,7 +40,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <span className="sep">・</span>
           <Link href="/model/">設計図</Link>
           <span className="sep">・</span>
-          <a href="https://app-menu.vercel.app/" target="_blank" rel="noreferrer">App Menu</a>
+          {/* app-menu の本番は app-menu-amber.vercel.app。
+              app-menu.vercel.app は他者の別サイトなので、そちらを指さない */}
+          <a href="https://app-menu-amber.vercel.app/" target="_blank" rel="noreferrer">App Menu</a>
         </footer>
       </body>
     </html>
