@@ -30,3 +30,5 @@ dataset/metadata/.authority_cache/
 
 # 学習の途中成果(fold ごとの予測キャッシュ)
 ml/checkpoints/
+
+.vercel

@@ -85,7 +85,9 @@ macro F1 と 95% 信頼区間。どの物差しでも全 1,966 枚を一度ず�
 
 ## 2. Demo
 
-未公開(ローカルで動作)。`npm run dev` で起動、`npx next build` で静的書き出し。
+**https://gram-stain-ai.vercel.app**
+
+`npm run dev` で起動、`npx next build` で静的書き出し。
 
 画面は 4 枚。
 
@@ -243,16 +245,23 @@ ONNX Runtime Web(wasm・CPU)を自オリジンから配る。CDN を見に行か
 
 ### 実ブラウザで測ったこと(2026-09-10)
 
-`npx next build && node scripts/verify-browser.mjs`。
 **利用者と同じ経路**を Playwright に歩かせる ——
 サンプルを押す → ブラウザが PNG を復号 → 移植した `resizePIL` → ORT Web → softmax → 画面の%。
 
-| 見るもの | 判定 | 実測 |
-|---|---|---|
-| 画面の%が Python の ONNX Runtime と一致(G-02) | 差 ≤ 0.05 ポイント | **10/10 通過**(最大 0.043 pt) |
-| 外部への通信 | 0 件 | **0 件** |
-| 1 枚目(モデル取得と初期化を含む) | ≤ 5000 ms | **1052 ms** |
-| 2 枚目以降 | ≤ 2000 ms | **最大 173 ms**(中央 149 ms) |
+```bash
+npx next build && node scripts/verify-browser.mjs                        # ローカルの out/
+node scripts/verify-browser.mjs https://gram-stain-ai.vercel.app         # 本番
+```
+
+**ローカルのビルドを検品しても、本番の検品にはならない。** 配信の設定・圧縮・ヘッダは
+本番にしか無く、そこで壊れることがある。だから本番に対する検品を別に持つ。
+
+| 見るもの | 判定 | ローカル | **本番** |
+|---|---|---|---|
+| 画面の%が Python の ONNX Runtime と一致(G-02) | 差 ≤ 0.05 pt | 10/10(最大 0.043) | **10/10**(最大 0.043) |
+| 外部への通信 | 0 件 | 0 件 | **0 件** |
+| 1 枚目(モデル取得と初期化を含む) | ≤ 5000 ms | 1052 ms | **1894 ms** |
+| 2 枚目以降 | ≤ 2000 ms | 最大 173 ms | **最大 193 ms**(中央 176) |
 
 **縮小は canvas にさせない。** `drawImage` の補間法は仕様で定められておらず、
 ブラウザによって画素が変わる。学習時は PIL で縮小しているので、
@@ -290,7 +299,11 @@ logits は有界でないので絶対差の閾値はモデルの確信度に比�
 
 ## 11. Deployment
 
-未実施。Vercel Hobby への静的書き出し。
+**https://gram-stain-ai.vercel.app**(Vercel Hobby・静的書き出し・サーバ関数ゼロ)。
+
+初回は素の `vercel deploy` がアップロードの上限で中断したので、`--archive=tgz` を使う。
+`.vercelignore` のパターンは**先頭を `/` で固定する** —— 無印のパターンは深い階層にも当たり、
+先行プロジェクトは `data` と書いたせいで `public/data` まで消えている。
 
 ## 12. Privacy
 

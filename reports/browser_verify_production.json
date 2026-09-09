@@ -1,0 +1,175 @@
+{
+  "generated_at": "2026-09-09T22:15:36.656Z",
+  "target": "https://gram-stain-ai.vercel.app",
+  "tolerance_points": 0.05,
+  "samples": [
+    {
+      "folder": "Staphylococcus aureus",
+      "want": [
+        "100.0",
+        "0.0"
+      ],
+      "got": [
+        100,
+        0
+      ],
+      "worst": 0.01900677740009371
+    },
+    {
+      "folder": "Streptococcus agalactiae",
+      "want": [
+        "100.0",
+        "0.0"
+      ],
+      "got": [
+        100,
+        0
+      ],
+      "worst": 0.0026159040301081404
+    },
+    {
+      "folder": "Lactobacillus delbrueckii",
+      "want": [
+        "99.9",
+        "0.1"
+      ],
+      "got": [
+        99.9,
+        0.1
+      ],
+      "worst": 0.0150798277137386
+    },
+    {
+      "folder": "Clostridium perfringens",
+      "want": [
+        "98.9",
+        "1.1"
+      ],
+      "got": [
+        98.9,
+        1.1
+      ],
+      "worst": 0.011157020503465676
+    },
+    {
+      "folder": "Escherichia coli",
+      "want": [
+        "0.3",
+        "99.7"
+      ],
+      "got": [
+        0.3,
+        99.7
+      ],
+      "worst": 0.04304503412622673
+    },
+    {
+      "folder": "Pseudomonas aeruginosa",
+      "want": [
+        "0.3",
+        "99.7"
+      ],
+      "got": [
+        0.3,
+        99.7
+      ],
+      "worst": 0.01632263441071302
+    },
+    {
+      "folder": "Neisseria gonorrhoeae",
+      "want": [
+        "0.1",
+        "99.9"
+      ],
+      "got": [
+        0.1,
+        99.9
+      ],
+      "worst": 0.030781132830771454
+    },
+    {
+      "folder": "Veillonella",
+      "want": [
+        "0.1",
+        "99.9"
+      ],
+      "got": [
+        0.1,
+        99.9
+      ],
+      "worst": 0.005112106184597565
+    },
+    {
+      "folder": "Listeria monocytogenes",
+      "want": [
+        "96.1",
+        "3.9"
+      ],
+      "got": [
+        96.1,
+        3.9
+      ],
+      "worst": 0.010626129106177107
+    },
+    {
+      "folder": "Porphyromonas gingivalis",
+      "want": [
+        "0.5",
+        "99.5"
+      ],
+      "got": [
+        0.5,
+        99.5
+      ],
+      "worst": 0.03605272668744419
+    }
+  ],
+  "timings": {
+    "first_ms": 1894,
+    "rest_max_ms": 193,
+    "per_sample": [
+      {
+        "folder": "Staphylococcus aureus",
+        "wall_ms": 1894
+      },
+      {
+        "folder": "Streptococcus agalactiae",
+        "wall_ms": 164
+      },
+      {
+        "folder": "Lactobacillus delbrueckii",
+        "wall_ms": 170
+      },
+      {
+        "folder": "Clostridium perfringens",
+        "wall_ms": 177
+      },
+      {
+        "folder": "Escherichia coli",
+        "wall_ms": 176
+      },
+      {
+        "folder": "Pseudomonas aeruginosa",
+        "wall_ms": 193
+      },
+      {
+        "folder": "Neisseria gonorrhoeae",
+        "wall_ms": 161
+      },
+      {
+        "folder": "Veillonella",
+        "wall_ms": 180
+      },
+      {
+        "folder": "Listeria monocytogenes",
+        "wall_ms": 151
+      },
+      {
+        "folder": "Porphyromonas gingivalis",
+        "wall_ms": 193
+      }
+    ]
+  },
+  "external_requests": [],
+  "passed": true
+}

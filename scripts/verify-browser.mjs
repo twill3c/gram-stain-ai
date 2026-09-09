@@ -21,6 +21,12 @@ import { chromium } from "playwright";
 const OUT = "out";
 const PORT = 4319;
 
+// 本番を検品するときは `node scripts/verify-browser.mjs https://gram-stain-ai.vercel.app`。
+// **ローカルのビルドを検品しても、本番の検品にはならない。**
+// 配信の設定・圧縮・ヘッダは本番にしか無く、そこで壊れることがある
+const TARGET = process.argv[2] ?? null;
+const BASE = TARGET ?? `http://localhost:${PORT}`;
+
 const MIME = {
   ".html": "text/html; charset=utf-8",
   ".js": "text/javascript",
@@ -68,7 +74,8 @@ function readLogits(id) {
 
 const TOLERANCE_POINTS = 0.05;
 
-const server = await serve();
+const server = TARGET ? null : await serve();
+console.log(`検品先: ${BASE}${TARGET ? "(本番)" : "(ローカルの out/)"}`);
 const browser = await chromium.launch();
 const page = await browser.newPage();
 
@@ -81,17 +88,19 @@ let externalRequests = [];
 // wasm を CDN から取りに行っていたら、ここで露見する
 page.on("request", (r) => {
   const u = r.url();
-  if (!u.startsWith(`http://localhost:${PORT}`) && !u.startsWith("data:") && !u.startsWith("blob:")) {
+  if (!u.startsWith(BASE) && !u.startsWith("data:") && !u.startsWith("blob:")) {
     externalRequests.push(u);
   }
 });
 
-const samples = JSON.parse(readFileSync(join(OUT, "samples", "index.json"), "utf-8")).samples;
+const samples = TARGET
+  ? (await (await fetch(`${BASE}/samples/index.json`)).json()).samples
+  : JSON.parse(readFileSync(join(OUT, "samples", "index.json"), "utf-8")).samples;
 
 let firstMs = null;
 
 try {
-  await page.goto(`http://localhost:${PORT}/`, { waitUntil: "networkidle" });
+  await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
 
   for (const s of samples) {
     const t0 = Date.now();
@@ -132,7 +141,7 @@ try {
   }
 } finally {
   await browser.close();
-  server.close();
+  if (server) server.close();
 }
 
 // N-01 の実測。**目標を書いておいて測らないのでは意味がない**
@@ -145,10 +154,11 @@ if (firstMs > 5000) failures.push(`1 枚目が ${firstMs} ms(目標 5000 ms)`);
 if (restMax > 2000) failures.push(`2 枚目以降の最大が ${restMax} ms(目標 2000 ms)`);
 
 writeFileSync(
-  "reports/browser_verify.json",
+  TARGET ? "reports/browser_verify_production.json" : "reports/browser_verify.json",
   JSON.stringify(
     {
       generated_at: new Date().toISOString(),
+      target: BASE,
       tolerance_points: TOLERANCE_POINTS,
       samples: results,
       timings: { first_ms: firstMs, rest_max_ms: restMax, per_sample: timings },

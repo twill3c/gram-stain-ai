@@ -1,0 +1,29 @@
+# Vercel へ送らないもの。
+#
+# **パターンの先頭は必ず / で固定する。** 無印のパターンは深い階層にも当たる ——
+# 先行プロジェクト folksound-atlas は `data` と書いたせいで `public/data` まで消え、
+# 本番だけがデータ無しで動くという故障を踏んでいる。
+#
+# 素の deploy はアップロードの上限で中断したので、`--archive=tgz` と併用する。
+
+# 学習の素材と中間生成物。合わせて 5 GB あり、配信物ではない
+/dataset/raw/
+/dataset/processed/
+/dataset/metadata/.authority_cache/
+
+# 学習の途中成果
+/ml/checkpoints/
+
+# Python の仮想環境
+/.venv/
+
+# 照合の期待値。検査でしか使わない
+/tests/fixtures/
+
+# ループの記録と報告書。出荷物ではない(リポジトリには残す)
+/logs/
+/reports/
+
+# ビルドの副産物
+/.next/
+/out/
