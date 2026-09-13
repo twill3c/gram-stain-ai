@@ -22,11 +22,18 @@ jobs:
         with:
           python-version: "3.12"
       - name: 依存を入れる
-        # 検査が実際に import するものだけ(実測)。学習系(torch)も
-        # onnxruntime も Pillow も、検査は読んでいない —— 検査が見るのは
-        # 追跡済みの JSON と生成物である。要らないものを入れると CI が遅くなるだけでなく、
-        # 「CI が通ったから動く」の範囲を実際より広く見せてしまう
-        run: python -m pip install --upgrade pip pytest numpy scikit-learn
+        # 検査が実行時に読み込むものだけを入れる。**一覧は手で決めない** ——
+        # 検査 T-260(tests/test_ci_deps.py)が、tests/ の構文木(関数の中の import を含む)と
+        # 検査が読み込む ml モジュールのモジュール水準の import から数え、ここと突き合わせる。
+        #
+        # loop_007 では grep で行頭の import だけを数えて torch / scipy / pillow を落とした。
+        # T-256(Grad-CAM の手計算オラクル)が関数の中で import torch していたためで、
+        # 手元の venv には torch があるので緑に見え、CI は一度も走っていなかった(HC-269)。
+        # torch は CPU 版で足りる(GPU 学習は CI の仕事ではない)
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install pytest numpy scikit-learn scipy pillow
       - name: 検査
         run: python -m pytest -q
       - name: 字種検査
