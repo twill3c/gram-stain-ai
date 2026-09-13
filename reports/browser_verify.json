@@ -1,5 +1,6 @@
 {
-  "generated_at": "2026-09-09T16:27:58.591Z",
+  "generated_at": "2026-09-13T21:24:21.208Z",
+  "target": "http://localhost:4319",
   "tolerance_points": 0.05,
   "samples": [
     {
@@ -124,48 +125,48 @@
     }
   ],
   "timings": {
-    "first_ms": 1052,
-    "rest_max_ms": 173,
+    "first_ms": 716,
+    "rest_max_ms": 135,
     "per_sample": [
       {
         "folder": "Staphylococcus aureus",
-        "wall_ms": 1052
+        "wall_ms": 716
       },
       {
         "folder": "Streptococcus agalactiae",
-        "wall_ms": 152
+        "wall_ms": 117
       },
       {
         "folder": "Lactobacillus delbrueckii",
-        "wall_ms": 139
+        "wall_ms": 116
       },
       {
         "folder": "Clostridium perfringens",
-        "wall_ms": 171
+        "wall_ms": 134
       },
       {
         "folder": "Escherichia coli",
-        "wall_ms": 153
+        "wall_ms": 126
       },
       {
         "folder": "Pseudomonas aeruginosa",
-        "wall_ms": 173
+        "wall_ms": 98
       },
       {
         "folder": "Neisseria gonorrhoeae",
-        "wall_ms": 128
+        "wall_ms": 100
       },
       {
         "folder": "Veillonella",
-        "wall_ms": 137
+        "wall_ms": 118
       },
       {
         "folder": "Listeria monocytogenes",
-        "wall_ms": 149
+        "wall_ms": 135
       },
       {
         "folder": "Porphyromonas gingivalis",
-        "wall_ms": 143
+        "wall_ms": 103
       }
     ]
   },

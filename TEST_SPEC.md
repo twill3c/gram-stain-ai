@@ -209,6 +209,33 @@ loop_008 の T-256 が関数の中で `import torch` しており網を抜けた
 リポジトリが GitHub に上がっていないので CI は一度も走っていなかった。clone した空のディレクトリで
 CI と同じ依存だけを入れて再現して露見した(56 通過 1 失敗・HC-269)。
 
+### スマホでの押しやすさ(loop_010・`scripts/verify-mobile.mjs`)
+
+**実装より先に書き、本番に当てて赤を確認した**(ファイル選択が 253x21px)。
+
+| 見るもの | 判定 |
+|---|---|
+| 操作の入口(サンプル・ファイル選択・見出しのナビ)のタップ領域 | 幅・高さとも 44px 以上(Apple Human Interface Guidelines の最小タップ領域 44pt) |
+| サンプルをタップすると**押したサンプルの**結果が出る | 押したサンプルの学名と得点の両方を待つ |
+| どのページも横にはみ出さない | 文書幅 ≤ 画面幅 |
+
+フリート共通の固定フッタのリンクは規約で決まった寸法なので、数えるが合否には入れない。
+
+**なぜ要るのか。** mobile:true の根拠を「横にはみ出さない」だけで測っていた。表示が崩れないことと指で操作できることは別の性質である(フリートの physics-puzzle-lab に前例がある)。さらに前版のタッチ検品は、二回目のタップで直前の結果を読んで通過と出していた —— loop_006 の VERIF-FLAKE と同じ型の競合を、書き直した検品にまた入れていた。
+
+### フッタの行き先(loop_010・`tests/footer.test.ts`)
+
+**実装より先に書き、赤 2 件を確認した**(GitHub が仮の `https://github.com/`、MIT License にリンクなし)。
+
+| 見るもの | 判定 |
+|---|---|
+| MIT License の行き先 | `https://github.com/twill3c/gram-stain-ai/blob/main/LICENSE` |
+| GitHub の行き先 | `https://github.com/twill3c/gram-stain-ai` |
+| App Menu の行き先 | `https://app-menu-amber.vercel.app/`(`app-menu.vercel.app` は他者のサイト) |
+| 5 項目の並び | MIT License → © → GitHub → 測り方 → 設計図 → App Menu の出現順 |
+
+**なぜ要るのか。** 「どれかのリンクが github.com を向いている」では、MIT License と GitHub のどちらかが化けても通る(HC-098)。スマホ検品はフッタの寸法を数えていたが行き先は見ておらず、GitHub 公開の後も仮のリンクが本番に残っていた。フッタの行き先を外したのは loop_007(App Menu)に続き 2 回目。
+
 ### 後続ループで置くケース(現時点では未実装)
 
 | ID | 対応要求 | ケース |

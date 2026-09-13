@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T22:15:36.656Z",
+  "generated_at": "2026-09-13T21:47:49.732Z",
   "target": "https://gram-stain-ai.vercel.app",
   "tolerance_points": 0.05,
   "samples": [
@@ -125,48 +125,48 @@
     }
   ],
   "timings": {
-    "first_ms": 1894,
-    "rest_max_ms": 193,
+    "first_ms": 2158,
+    "rest_max_ms": 165,
     "per_sample": [
       {
         "folder": "Staphylococcus aureus",
-        "wall_ms": 1894
+        "wall_ms": 2158
       },
       {
         "folder": "Streptococcus agalactiae",
-        "wall_ms": 164
+        "wall_ms": 108
       },
       {
         "folder": "Lactobacillus delbrueckii",
-        "wall_ms": 170
+        "wall_ms": 165
       },
       {
         "folder": "Clostridium perfringens",
-        "wall_ms": 177
+        "wall_ms": 128
       },
       {
         "folder": "Escherichia coli",
-        "wall_ms": 176
+        "wall_ms": 140
       },
       {
         "folder": "Pseudomonas aeruginosa",
-        "wall_ms": 193
+        "wall_ms": 148
       },
       {
         "folder": "Neisseria gonorrhoeae",
-        "wall_ms": 161
+        "wall_ms": 160
       },
       {
         "folder": "Veillonella",
-        "wall_ms": 180
+        "wall_ms": 135
       },
       {
         "folder": "Listeria monocytogenes",
-        "wall_ms": 151
+        "wall_ms": 153
       },
       {
         "folder": "Porphyromonas gingivalis",
-        "wall_ms": 193
+        "wall_ms": 131
       }
     ]
   },
