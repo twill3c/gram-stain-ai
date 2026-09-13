@@ -184,14 +184,21 @@ export default function Classifier() {
 
       <div className="card">
         <h2 style={{ marginTop: 0 }}>手元の画像を試す</h2>
-        <input
-          type="file"
-          accept={ACCEPT.join(",")}
-          onChange={(e) => {
-            const f = e.target.files?.[0];
-            if (f) void onFile(f);
-          }}
-        />
+        {/* 素の file input は高さ 21px しかなく、指で押す入口として小さすぎた(タッチの最小 44px・
+            scripts/verify-mobile.mjs)。押せる面はラベルに持たせ、input は見えなくしても
+            キーボードで届くよう残す */}
+        <label className="file-pick" htmlFor="upload">
+          <input
+            id="upload"
+            type="file"
+            accept={ACCEPT.join(",")}
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              if (f) void onFile(f);
+            }}
+          />
+          <span>画像を選ぶ</span>
+        </label>
         <p className="muted">
           JPEG / PNG / WebP・10 MB まで。<strong>画像はサーバへ送られません</strong> ——
           アップロードの経路そのものがありません。復号も推論もこのブラウザの中で終わります。

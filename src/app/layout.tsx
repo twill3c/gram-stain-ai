@@ -36,9 +36,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <span className="sep">・</span>
           <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
           <span className="sep">・</span>
-          <Link href="/monosashi/">Gram Stain AI の測り方</Link>
+          {/* 歩き方・設計図はフリート規約どおりアーティファクト(loop_010 で作成) */}
+          <a href="https://claude.ai/code/artifact/15456057-6554-490e-a1ae-d0e7a40674ae" target="_blank" rel="noreferrer">Gram Stain AI の測り方</a>
           <span className="sep">・</span>
-          <Link href="/model/">設計図</Link>
+          <a href="https://claude.ai/code/artifact/975607d2-0c20-4390-9b63-9c8deca7460b" target="_blank" rel="noreferrer">設計図</a>
           <span className="sep">・</span>
           {/* app-menu の本番は app-menu-amber.vercel.app。
               app-menu.vercel.app は他者の別サイトなので、そちらを指さない */}

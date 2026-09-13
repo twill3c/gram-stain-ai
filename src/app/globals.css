@@ -130,6 +130,16 @@ button.action {
 button.action:disabled { opacity: 0.5; cursor: default; }
 button.ghost { background: none; color: var(--violet); }
 
+/* ファイル選択の入口。押せる面をラベルに持たせて 44px 以上にする(タッチの最小) */
+.file-pick {
+  position: relative; display: inline-flex; align-items: center; gap: .5rem;
+  min-height: 48px; padding: .55rem 1.1rem; border: 1px solid var(--violet); border-radius: 8px;
+  background: var(--violet-soft); color: var(--violet); font-weight: 600; cursor: pointer;
+}
+.file-pick:hover { background: var(--card); }
+.file-pick:focus-within { outline: 2px solid var(--violet); outline-offset: 2px; }
+.file-pick input { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
 .muted { color: var(--muted); font-size: 0.85rem; }
 
 /* fleet: fixed footer */
