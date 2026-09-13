@@ -116,6 +116,12 @@ macro F1 と 95% 信頼区間。どの物差しでも全 1,966 枚を一度ず�
 
 **https://gram-stain-ai.vercel.app**
 
+ソース: https://github.com/twill3c/gram-stain-ai
+
+CI: GitHub Actions(python / web の 2 ジョブ)。公開後の初回実行(2026-09-14・run 34781644153)で両ジョブ success。
+**公開前に、clone した空のディレクトリで CI と同じ依存だけを入れて再現してから push した** ——
+手元の venv は依存の欠けを映さず、実際にこの再現で torch の欠けが見つかっている(TEST_SPEC の T-260)。
+
 `npm run dev` で起動、`npx next build` で静的書き出し。
 
 画面は 4 枚。
