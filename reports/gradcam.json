@@ -1,0 +1,199 @@
+{
+  "generated_at": "2026-09-14T05:04:13+09:00",
+  "n_images": 286,
+  "evaluated_on": "物差し A の test(出荷モデルが一度も学習していない 286 枚)",
+  "target_layer": "features[12](576x7x7)",
+  "target_class_rule": "学習済みモデルの予測クラス。乱数化モデルにも同じクラスを描かせる",
+  "stain_quantile": 0.9,
+  "stain_mask_resolution": 224,
+  "trained": {
+    "mean_ratio": 1.3787,
+    "ci_low": 1.3087,
+    "ci_high": 1.4588,
+    "median_ratio": 1.2538,
+    "n_used": 286,
+    "n_degenerate": 0
+  },
+  "randomized": {
+    "mean_ratio": 0.948,
+    "ci_low": 0.9112,
+    "ci_high": 0.989,
+    "median_ratio": 0.9268,
+    "n_used": 286,
+    "n_degenerate": 0
+  },
+  "sanity": {
+    "n_images": 286,
+    "n_pairs_used": 286,
+    "median_spearman_trained_vs_random": -0.0351,
+    "threshold": 0.5,
+    "source": "Adebayo et al., Sanity Checks for Saliency Maps, NeurIPS 2018"
+  },
+  "verdict": {
+    "sanity_passed": true,
+    "looks_at_stain_beyond_architecture": true,
+    "rule": "学習済みモデルの集中度比の 95% 区間の下限 > 乱数化モデルの区間の上限"
+  },
+  "per_taxon_trained": {
+    "Acinetobacter baumannii": {
+      "n": 8,
+      "mean_ratio": 1.0993,
+      "hard_for_hue": false
+    },
+    "Actinomyces israelii": {
+      "n": 9,
+      "mean_ratio": 1.7923,
+      "hard_for_hue": false
+    },
+    "Bacteroides fragilis": {
+      "n": 12,
+      "mean_ratio": 1.1128,
+      "hard_for_hue": false
+    },
+    "Bifidobacterium spp": {
+      "n": 11,
+      "mean_ratio": 1.4135,
+      "hard_for_hue": false
+    },
+    "Clostridium perfringens": {
+      "n": 10,
+      "mean_ratio": 1.6365,
+      "hard_for_hue": false
+    },
+    "Enterococcus faecalis": {
+      "n": 6,
+      "mean_ratio": 1.8238,
+      "hard_for_hue": false
+    },
+    "Enterococcus faecium": {
+      "n": 12,
+      "mean_ratio": 2.1797,
+      "hard_for_hue": false
+    },
+    "Escherichia coli": {
+      "n": 8,
+      "mean_ratio": 1.1849,
+      "hard_for_hue": false
+    },
+    "Fusobacterium": {
+      "n": 7,
+      "mean_ratio": 1.3488,
+      "hard_for_hue": false
+    },
+    "Lactobacillus casei": {
+      "n": 8,
+      "mean_ratio": 1.0886,
+      "hard_for_hue": false
+    },
+    "Lactobacillus crispatus": {
+      "n": 6,
+      "mean_ratio": 1.8504,
+      "hard_for_hue": false
+    },
+    "Lactobacillus delbrueckii": {
+      "n": 7,
+      "mean_ratio": 1.3786,
+      "hard_for_hue": false
+    },
+    "Lactobacillus gasseri": {
+      "n": 7,
+      "mean_ratio": 1.0505,
+      "hard_for_hue": false
+    },
+    "Lactobacillus jensenii": {
+      "n": 6,
+      "mean_ratio": 1.4148,
+      "hard_for_hue": false
+    },
+    "Lactobacillus johnsonii": {
+      "n": 7,
+      "mean_ratio": 1.2154,
+      "hard_for_hue": false
+    },
+    "Lactobacillus paracasei": {
+      "n": 9,
+      "mean_ratio": 1.231,
+      "hard_for_hue": false
+    },
+    "Lactobacillus plantarum": {
+      "n": 9,
+      "mean_ratio": 1.4369,
+      "hard_for_hue": false
+    },
+    "Lactobacillus reuteri": {
+      "n": 12,
+      "mean_ratio": 1.3754,
+      "hard_for_hue": false
+    },
+    "Lactobacillus rhamnosus": {
+      "n": 6,
+      "mean_ratio": 1.4126,
+      "hard_for_hue": false
+    },
+    "Lactobacillus salivarius": {
+      "n": 6,
+      "mean_ratio": 1.6232,
+      "hard_for_hue": false
+    },
+    "Listeria monocytogenes": {
+      "n": 9,
+      "mean_ratio": 0.9833,
+      "hard_for_hue": true
+    },
+    "Micrococcus spp": {
+      "n": 6,
+      "mean_ratio": 1.6615,
+      "hard_for_hue": false
+    },
+    "Neisseria gonorrhoeae": {
+      "n": 14,
+      "mean_ratio": 1.0527,
+      "hard_for_hue": false
+    },
+    "Porphyromonas gingivalis": {
+      "n": 15,
+      "mean_ratio": 1.188,
+      "hard_for_hue": true
+    },
+    "Propionibacterium acnes": {
+      "n": 10,
+      "mean_ratio": 1.3349,
+      "hard_for_hue": false
+    },
+    "Proteus": {
+      "n": 12,
+      "mean_ratio": 1.1172,
+      "hard_for_hue": false
+    },
+    "Pseudomonas aeruginosa": {
+      "n": 7,
+      "mean_ratio": 0.9956,
+      "hard_for_hue": false
+    },
+    "Staphylococcus aureus": {
+      "n": 11,
+      "mean_ratio": 1.8151,
+      "hard_for_hue": false
+    },
+    "Staphylococcus epidermidis": {
+      "n": 7,
+      "mean_ratio": 1.4779,
+      "hard_for_hue": true
+    },
+    "Staphylococcus saprophyticus": {
+      "n": 6,
+      "mean_ratio": 1.1728,
+      "hard_for_hue": false
+    },
+    "Streptococcus agalactiae": {
+      "n": 15,
+      "mean_ratio": 1.5525,
+      "hard_for_hue": false
+    },
+    "Veillonella": {
+      "n": 8,
+      "mean_ratio": 1.2281,
+      "hard_for_hue": false
+    }
+  }
+}
