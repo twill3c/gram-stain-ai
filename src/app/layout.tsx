@@ -32,9 +32,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {children}
         {/* fleet: fixed footer */}
         <footer className="site-footer">
-          <span>MIT License © 2026 坂田哲朗</span>
+          {/* 行き先は項目ごとに tests/footer.test.ts が見る(HC-098) */}
+          <span><a href="https://github.com/twill3c/gram-stain-ai/blob/main/LICENSE" target="_blank" rel="noreferrer">MIT License</a> © 2026 坂田哲朗</span>
           <span className="sep">・</span>
-          <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://github.com/twill3c/gram-stain-ai" target="_blank" rel="noreferrer">GitHub</a>
           <span className="sep">・</span>
           {/* 歩き方・設計図はフリート規約どおりアーティファクト(loop_010 で作成) */}
           <a href="https://claude.ai/code/artifact/15456057-6554-490e-a1ae-d0e7a40674ae" target="_blank" rel="noreferrer">Gram Stain AI の測り方</a>
