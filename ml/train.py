@@ -185,14 +185,32 @@ def predict(model: nn.Module, arr: np.ndarray, idx: np.ndarray) -> np.ndarray:
 # ------------------------------------------------------------------ 段
 
 
-def prepare() -> tuple:
+def prepare(target: str = "gram") -> tuple:
+    """target が shape なら Stage B(形)。対象外を抜き、fold も抜くだけにする(SPEC §3.7)。
+
+    形のラベルは 球菌 = 0 / 桿菌 = 1(ml/stage_b.py の対照と同じ向き)。
+    """
     rows = [json.loads(line) for line in (META / "prepared.jsonl").read_text(encoding="utf-8").splitlines()]
     splits = json.loads((META / "splits.json").read_text(encoding="utf-8"))
-    print(f"  画像 {len(rows)} 枚を常駐させる")
+    if target == "shape":
+        from ml.stage_b import BACILLUS, COCCUS, restrict_folds
+
+        rows = [r for r in rows if r["stage_b"]]
+        keep = {r["image_id"] for r in rows}
+        for key in ("ruler_a_cv", "ruler_b", "ruler_c"):
+            splits[key]["folds"] = restrict_folds(splits[key]["folds"], keep)
+        splits["ruler_a"] = {part: [i for i in ids if i in keep] for part, ids in splits["ruler_a"].items()}
+    print(f"  画像 {len(rows)} 枚を常駐させる(target={target})")
     arr, index = load_all(rows)
+
+    def label(r: dict) -> int:
+        if target == "shape":
+            return BACILLUS if r["shape"] == "bacillus" else COCCUS
+        return POSITIVE if r["gram"] == "positive" else NEGATIVE
+
     meta = {
         r["image_id"]: {
-            "y": POSITIVE if r["gram"] == "positive" else NEGATIVE,
+            "y": label(r),
             "group_id": r["group_id"],
             "folder": r["folder"],
         }
@@ -284,16 +302,23 @@ def main() -> int:
     # 得られないコア数を torch に渡すと、奪い合ってスレッド競合を起こし、
     # **速度低下は比例より悪くなる**。既定は控えめにして、空いているときだけ上げる
     ap.add_argument("--threads", type=int, default=3, help="torch のスレッド数")
+    ap.add_argument("--target", choices=("gram", "shape"), default="gram",
+                    help="gram は Stage A、shape は Stage B(形)。報告も fold のキャッシュも別にする")
     args = ap.parse_args()
 
     torch.set_num_threads(args.threads)
     print(f"  torch スレッド {args.threads}(論理コア {__import__('os').cpu_count()})")
     REPORTS.mkdir(exist_ok=True)
     CKPT.mkdir(parents=True, exist_ok=True)
-    out_path = REPORTS / "cnn.json"
+    shape = args.target == "shape"
+    out_path = REPORTS / ("cnn_shape.json" if shape else "cnn.json")
     doc = json.loads(out_path.read_text(encoding="utf-8")) if out_path.exists() else {}
+    # fold のキャッシュ名に target を入れる。Stage A の予測を Stage B が読むと、
+    # 形の成績として Gram の予測を採点してしまう
+    tag = "S" if shape else ""
 
-    rows, splits, arr, index, meta = prepare()
+    rows, splits, arr, index, meta = prepare(args.target)
+    doc["target"] = args.target
 
     n_params = sum(p.numel() for p in build_model().parameters())
     doc["model"] = {
@@ -324,14 +349,14 @@ def main() -> int:
         doc.setdefault("per_taxon", {})
         for ruler, key in (("a", "ruler_a_cv"), ("b", "ruler_b"), ("c", "ruler_c")):
             print(f"  物差し {ruler.upper()}({epochs} エポック)")
-            preds = run_folds(splits[key]["folds"], arr, index, meta, epochs, False, ruler.upper())
+            preds = run_folds(splits[key]["folds"], arr, index, meta, epochs, False, tag + ruler.upper())
             doc["rulers"][ruler] = score(preds, meta)
             doc["per_taxon"][ruler] = per_taxon(preds, meta)
             print(f"    → macro F1 {doc['rulers'][ruler]['macro_f1']}")
             out_path.write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
 
         print(f"  ラベル置換の対照(物差し A・{epochs} エポック)")
-        preds = run_folds(splits["ruler_a_cv"]["folds"], arr, index, meta, epochs, True, "PERM")
+        preds = run_folds(splits["ruler_a_cv"]["folds"], arr, index, meta, epochs, True, tag + "PERM")
         doc["permutation_control"] = {"a": score(preds, meta)}
         print(f"    → macro F1 {doc['permutation_control']['a']['macro_f1']}")
         out_path.write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
@@ -344,7 +369,8 @@ def main() -> int:
         print(f"  出荷モデル: train {len(idx_tr)} で学習し val {len(idx_va)} で確認、"
               f"test {len(idx_te)} は最後に一度だけ")
         model, curve = train_model(arr, idx_tr, y_tr, epochs, SEED, idx_va, y_va, log_every=2)
-        torch.save(model.state_dict(), CKPT / "best_model.pth")
+        ckpt_name = "best_model_shape.pth" if shape else "best_model.pth"
+        torch.save(model.state_dict(), CKPT / ckpt_name)
         p_te = predict(model, arr, idx_te)
         doc["shipped_model"] = {
             "trained_on": ["train"],
@@ -355,14 +381,14 @@ def main() -> int:
             "test": {"macro_f1": round(macro_f1(y_te, p_te), 4),
                      "accuracy": round(float((y_te == p_te).mean()), 4),
                      "n_images": len(idx_te)},
-            "checkpoint": "ml/checkpoints/best_model.pth",
+            "checkpoint": f"ml/checkpoints/{ckpt_name}",
         }
         out_path.write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
 
     # 集計は材料が揃っているときだけ。段を分けて走らせられるようにした以上、
     # 末尾で無条件に集計すると、材料の無い段が落ちる(loop_004 で踏んだ)
     if "rulers" in doc and all(r in doc["rulers"] for r in ("a", "b", "c")):
-        finalise(doc, out_path)
+        (finalise_shape if shape else finalise)(doc, out_path)
     else:
         print("  (三つの物差しが揃っていないので判定は保留)")
     return 0
@@ -549,6 +575,139 @@ def write_markdown(doc: dict, controls: dict) -> None:
     add("")
     add(doc["model"]["why_not_resnet18"])
     (REPORTS / "cnn.md").write_text("\n".join(L) + "\n", encoding="utf-8")
+
+
+def finalise_shape(doc: dict, out_path: Path) -> None:
+    """SPEC §3.8 の二条件へ機械的に当てはめる(Stage B)。
+
+    「強いほうの対照」は物差しごとに、形の規則と「色の規則を形に当てたもの」の
+    macro F1 が高いほう。**どちらを強いとみなすかも数を見る前に決めてある。**
+    """
+    controls = json.loads((REPORTS / "controls_shape.json").read_text(encoding="utf-8"))
+    base = controls["baselines"]
+    strong: dict[str, dict] = {}
+    strong_name: dict[str, str] = {}
+    for r in ("a", "b", "c"):
+        s, h = base["shape"][r], base["hue_on_shape"][r]
+        strong_name[r] = "shape" if s["macro_f1"] >= h["macro_f1"] else "hue_on_shape"
+        strong[r] = s if strong_name[r] == "shape" else h
+    doc["majority_reference"] = {r: base["majority"][r] for r in ("a", "b", "c")}
+    doc["control_reference"] = {name: {r: base[name][r] for r in ("a", "b", "c")}
+                                for name in ("shape", "hue_on_shape", "canvas_size")}
+
+    cond1 = all(doc["rulers"][r]["ci_low"] > strong[r]["ci_high"] for r in ("a", "b", "c"))
+
+    # 条件 2 の対象 — 物差し B で形の規則の誤り率が 10% 以上だった分類群
+    rule_err = base["shape"]["b"]["per_taxon_errors"]
+    hard = sorted(k for k, v in rule_err.items() if v["error_rate"] >= 0.10)
+    cnn_b = doc["per_taxon"]["b"]
+    detail: dict[str, dict] = {}
+    wins = 0
+    for t in hard:
+        cnn_err = cnn_b.get(t, {}).get("error_rate")
+        detail[t] = {"shape_rule_error_rate": rule_err[t]["error_rate"], "cnn_error_rate": cnn_err}
+        if cnn_err is not None and cnn_err < rule_err[t]["error_rate"]:
+            wins += 1
+    rule_total = sum(rule_err[t]["wrong"] for t in hard)
+    cnn_total = sum(cnn_b.get(t, {}).get("wrong", 0) for t in hard)
+    cond2 = bool(hard) and wins > len(hard) / 2 and cnn_total < rule_total
+    detail["_totals"] = {"shape_rule_wrong": rule_total, "cnn_wrong": cnn_total,
+                         "taxa_improved": wins, "taxa_considered": len(hard)}
+
+    doc["verdict"] = {
+        "condition_1_beats_strong_control_on_all_rulers": cond1,
+        "condition_2_beats_on_hard_taxa": bool(cond2),
+        "strong_control": strong_name,
+        "hard_taxa": hard,
+        "hard_taxa_selection": "物差し B で形の規則の誤り率が 10% 以上だった分類群",
+        "hard_taxa_detail": detail,
+        "adds_nothing": (not cond1) and (not bool(cond2)),
+        # 成否ではなく読み方(§3.8): 色の規則が形の規則より高い物差しでは、形のラベルが色で推せる
+        "colour_explains_shape": {r: base["hue_on_shape"][r]["macro_f1"] > base["shape"][r]["macro_f1"]
+                                  for r in ("a", "b", "c")},
+    }
+    out_path.write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
+    write_markdown_shape(doc, controls)
+
+    v = doc["verdict"]
+    print()
+    print(f"  条件 1(三物差しすべてで強いほうの対照を区間の重なりなく上回る): {v['condition_1_beats_strong_control_on_all_rulers']}")
+    print(f"  条件 2(形の規則が落ちる分類群で明確に上回る): {v['condition_2_beats_on_hard_taxa']}")
+    if v["adds_nothing"]:
+        print("  → このデータで CNN は形について非学習の規則に何も足していない")
+
+
+def write_markdown_shape(doc: dict, controls: dict) -> None:
+    """Stage B の結果を読める形にする。数と判定はすべて doc と controls から取る。"""
+    base = controls["baselines"]
+    v = doc["verdict"]
+    L: list[str] = []
+    add = L.append
+    add("# Stage B — 形(球菌 / 桿菌)を三つの物差しで測る")
+    add("")
+    add(f"<!-- ml/train.py --target shape が生成。手で編集しない。生成日時 {doc['generated_at']} -->")
+    add("")
+    add(f"対象は Stage B の {controls['n_taxa']} 分類群・{controls['n_images_total']:,} 枚。"
+        f"骨格・前処理は Stage A と同じ。エポック予算 {doc['epoch_budget']['chosen']}(物差し A の val で決めた)。")
+    add("対照は CNN より先に測った(G-12)。")
+    add("")
+    add("## 結果")
+    add("")
+    add("| | A 画像単位 | B 分類群ホールドアウト | C 科ホールドアウト |")
+    add("|---|---|---|---|")
+    rows = (("**CNN**", doc["rulers"]),
+            ("形の規則(非学習・色を見ない)", base["shape"]),
+            ("色の規則を形に当てたもの", base["hue_on_shape"]),
+            ("キャンバス寸法(画素を見ない)", base["canvas_size"]),
+            ("多数派クラス", base["majority"]))
+    for label, src in rows:
+        cells = [f"{src[r]['macro_f1']:.4f} [{src[r]['ci_low']:.4f}, {src[r]['ci_high']:.4f}]" for r in ("a", "b", "c")]
+        add(f"| {label} | {' | '.join(cells)} |")
+    add("")
+    add(f"macro F1 と 95% 信頼区間(group 単位のブートストラップ {doc['n_boot']:,} 回)。"
+        f"形の規則で特徴量が取れなかった画像は {base['shape']['n_missing_feature']} 枚(train の多数派を答えた)。")
+    add("")
+    p = doc["permutation_control"]["a"]
+    add(f"ラベル置換の対照(G-09): {p['macro_f1']:.4f} [{p['ci_low']:.4f}, {p['ci_high']:.4f}]"
+        f"(多数派 {base['majority']['a']['macro_f1']:.4f})。")
+    add("")
+    add("## 判定")
+    add("")
+    add("合否条件は [SPEC.md](../SPEC.md) の 3.8 節に**対照を測る前に**書いた。当てはめは機械(検査 T-270)。")
+    add("")
+    names = {"shape": "形の規則", "hue_on_shape": "色の規則を形に当てたもの"}
+    add("- 条件 1(三つの物差しすべてで、強いほうの対照を信頼区間の重なりなく上回る): "
+        f"**{'成立' if v['condition_1_beats_strong_control_on_all_rulers'] else '不成立'}**"
+        f"(強いほう: A {names[v['strong_control']['a']]} / B {names[v['strong_control']['b']]} / C {names[v['strong_control']['c']]})")
+    add("- 条件 2(形の規則が落ちる分類群で明確に上回る): "
+        f"**{'成立' if v['condition_2_beats_on_hard_taxa'] else '不成立'}**")
+    add("")
+    if v["adds_nothing"]:
+        add("**どちらも成立しなかった。このデータで CNN は形について、非学習の規則に何も足していない。**")
+        add("")
+    add("### 条件 2 の内訳")
+    add("")
+    add(f"対象の選び方: {v['hard_taxa_selection']}")
+    add("")
+    add("| 分類群 | 形の規則の誤り率 | CNN の誤り率 |")
+    add("|---|---|---|")
+    for t in v["hard_taxa"]:
+        d = v["hard_taxa_detail"][t]
+        shown = f"{d['cnn_error_rate']:.0%}" if d["cnn_error_rate"] is not None else "—"
+        add(f"| {t} | {d['shape_rule_error_rate']:.0%} | {shown} |")
+    tot = v["hard_taxa_detail"]["_totals"]
+    add("")
+    add(f"対象 {tot['taxa_considered']} 分類群のうち CNN が改善したのは {tot['taxa_improved']}、"
+        f"誤り総数は形の規則 {tot['shape_rule_wrong']} 対 CNN {tot['cnn_wrong']}。")
+    add("")
+    add("## 形のラベルは色で推せるか(読み方・§3.8)")
+    add("")
+    for r, label in (("a", "A"), ("b", "B"), ("c", "C")):
+        s, h = base["shape"][r]["macro_f1"], base["hue_on_shape"][r]["macro_f1"]
+        verdict = "色の規則のほうが高い —— 形のラベルが色で推せてしまう" if v["colour_explains_shape"][r] \
+            else "形の規則のほうが高い —— 色では推せない分を形の規則が拾っている"
+        add(f"- 物差し {label}: 形の規則 {s:.4f} / 色の規則 {h:.4f} → {verdict}")
+    (REPORTS / "cnn_shape.md").write_text("\n".join(L) + "\n", encoding="utf-8")
 
 
 # 起動ブロックはファイルの最終行に置く。関数定義より前にあると、
