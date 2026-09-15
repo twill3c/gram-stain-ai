@@ -167,6 +167,32 @@ def test_t267_every_stage_b_fold_trains_on_both_classes(prepared: list[dict]) ->
             assert classes == {"coccus", "bacillus"}, f"{key} fold {i} の train が {classes}"
 
 
+@pytest.mark.unit
+def test_t272_gram_by_shape_cells_are_tallied_from_predictions() -> None:
+    """T-272 — Gram × 形の 4 セルの誤りを、fold の予測から数える(事後の分析・合否ではない)。
+
+    期待値は手で数えられる小さな合成データから取る。
+    """
+    from ml.stage_b import tally_cells
+
+    rows = {
+        "p1": {"gram": "positive", "shape": "coccus", "folder": "S.aureus"},
+        "p2": {"gram": "positive", "shape": "coccus", "folder": "S.aureus"},
+        "p3": {"gram": "positive", "shape": "bacillus", "folder": "L.casei"},
+        "n1": {"gram": "negative", "shape": "coccus", "folder": "Neisseria"},
+        "n2": {"gram": "negative", "shape": "coccus", "folder": "Veillonella"},
+        "n3": {"gram": "negative", "shape": "bacillus", "folder": "E.coli"},
+    }
+    # 球菌 = 0 / 桿菌 = 1。陰性球菌を 2 枚とも桿菌と答え、陽性球菌を 1 枚だけ外す
+    preds = {"p1": 0, "p2": 1, "p3": 1, "n1": 1, "n2": 1, "n3": 1}
+    got = tally_cells(preds, rows)
+    assert got["negative x coccus"] == {"n": 2, "wrong": 2, "error_rate": 1.0, "n_taxa": 2}
+    assert got["positive x coccus"] == {"n": 2, "wrong": 1, "error_rate": 0.5, "n_taxa": 1}
+    assert got["positive x bacillus"] == {"n": 1, "wrong": 0, "error_rate": 0.0, "n_taxa": 1}
+    assert got["negative x bacillus"] == {"n": 1, "wrong": 0, "error_rate": 0.0, "n_taxa": 1}
+    assert sum(v["n"] for v in got.values()) == len(preds)
+
+
 # ---------------------------------------------------------------- 対照の報告
 
 

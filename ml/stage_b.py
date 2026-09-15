@@ -292,12 +292,77 @@ def controls() -> int:
     return 0
 
 
+# ------------------------------------------------------------------ Gram × 形の集計(事後の分析)
+
+
+def tally_cells(preds: dict[str, int], rows: dict[str, dict]) -> dict[str, dict]:
+    """予測を Gram × 形の 4 セルに分けて誤りを数える(T-272)。
+
+    **合否ではない。** SPEC §3.8 の判定は測る前に決めた二条件だけで出す。
+    これは判定の後で「どこで外したか」を読むための集計である。
+    """
+    acc: dict[str, dict] = {}
+    for image_id, p in preds.items():
+        r = rows[image_id]
+        y = BACILLUS if r["shape"] == "bacillus" else COCCUS
+        d = acc.setdefault(f"{r['gram']} x {r['shape']}", {"n": 0, "wrong": 0, "taxa": set()})
+        d["n"] += 1
+        d["wrong"] += int(p != y)
+        d["taxa"].add(r["folder"])
+    return {
+        k: {"n": v["n"], "wrong": v["wrong"], "error_rate": round(v["wrong"] / v["n"], 4), "n_taxa": len(v["taxa"])}
+        for k, v in sorted(acc.items())
+    }
+
+
+def cells() -> int:
+    """三物差しの CNN と形の規則を、Gram × 形の 4 セルで並べる。"""
+    rows = {r["image_id"]: r for r in (json.loads(line) for line in
+            (META / "prepared.jsonl").read_text(encoding="utf-8").splitlines()) if r["stage_b"]}
+    cnn = json.loads((REPORTS / "cnn_shape.json").read_text(encoding="utf-8"))
+    ctrl = json.loads((REPORTS / "controls_shape.json").read_text(encoding="utf-8"))["baselines"]["shape"]
+    epochs = cnn["epoch_budget"]["chosen"]
+    fold_dir = ROOT / "ml" / "checkpoints" / "fold_preds"
+    by_taxon = {r["folder"]: f"{r['gram']} x {r['shape']}" for r in rows.values()}
+
+    out: dict[str, dict] = {}
+    for ruler in ("a", "b", "c"):
+        preds: dict[str, int] = {}
+        for f in sorted(fold_dir.glob(f"S{ruler.upper()}_{epochs}ep_*.json")):
+            preds.update(json.loads(f.read_text(encoding="utf-8")))
+        if len(preds) != len(rows):
+            raise SystemExit(f"物差し {ruler.upper()} の予測が {len(preds)} 枚で、Stage B の {len(rows)} 枚に足りない")
+        cnn_cells = tally_cells(preds, rows)
+        rule_cells = {k: {"wrong": 0} for k in cnn_cells}
+        for taxon, v in ctrl[ruler]["per_taxon_errors"].items():
+            rule_cells[by_taxon[taxon]]["wrong"] += v["wrong"]
+        for k in rule_cells:
+            rule_cells[k]["error_rate"] = round(rule_cells[k]["wrong"] / cnn_cells[k]["n"], 4)
+        out[ruler] = {"cnn": cnn_cells, "shape_rule": rule_cells}
+
+    doc = {
+        "generated_at": datetime.now(JST).isoformat(timespec="seconds"),
+        "note": "事後の分析。SPEC §3.8 の判定には入れない。fold の予測(ml/checkpoints/fold_preds)から数えた",
+        "epochs": epochs,
+        "rulers": out,
+    }
+    (REPORTS / "cnn_shape_cells.json").write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
+    for ruler in ("a", "b", "c"):
+        print(f"  物差し {ruler.upper()}: " + " / ".join(
+            f"{k} CNN {v['error_rate']:.0%}・規則 {out[ruler]['shape_rule'][k]['error_rate']:.0%}"
+            for k, v in out[ruler]["cnn"].items()))
+    print(f"→ {(REPORTS / 'cnn_shape_cells.json').relative_to(ROOT)}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=("controls",))
+    ap.add_argument("command", choices=("controls", "cells"))
     args = ap.parse_args()
     if args.command == "controls":
         return controls()
+    if args.command == "cells":
+        return cells()
     return 1
 
 
