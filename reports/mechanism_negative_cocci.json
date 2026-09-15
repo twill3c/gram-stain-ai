@@ -1,0 +1,175 @@
+{
+  "generated_at": "2026-09-16T07:06:28+09:00",
+  "rule": "SPEC §3.12(測る前に書いた)。M1〜M3 が通ってから、下がり幅 ≥ 50 ポイントかつ紫の誤り ≤ 40% で色が主因、下がり幅 < 20 ポイントで見た目が主因、それ以外は混合",
+  "targets": {
+    "violet_hue_deg": 289.5359784347218,
+    "pink_hue_deg": 6.369287132153697
+  },
+  "models": [
+    {
+      "name": "B0",
+      "splits_key": "ruler_b",
+      "fold": 0,
+      "held_out_negative_cocci": [
+        "Neisseria gonorrhoeae"
+      ],
+      "checkpoint": "ml/checkpoints/mechanism/B0.pth",
+      "ids_file": "reports/mechanism/B0_ids.json",
+      "n_held_out": 68,
+      "error_original": 0.8529411764705882,
+      "error_sham": 0.8529411764705882,
+      "error_violet": 0.8823529411764706,
+      "sham_error_change": 0.0,
+      "sweep_prediction_agreement": 1.0
+    },
+    {
+      "name": "B2",
+      "splits_key": "ruler_b",
+      "fold": 2,
+      "held_out_negative_cocci": [
+        "Veillonella"
+      ],
+      "checkpoint": "ml/checkpoints/mechanism/B2.pth",
+      "ids_file": "reports/mechanism/B2_ids.json",
+      "n_held_out": 58,
+      "error_original": 1.0,
+      "error_sham": 1.0,
+      "error_violet": 1.0,
+      "sham_error_change": 0.0,
+      "sweep_prediction_agreement": 1.0
+    },
+    {
+      "name": "C0",
+      "splits_key": "ruler_c",
+      "fold": 0,
+      "held_out_negative_cocci": [
+        "Neisseria gonorrhoeae"
+      ],
+      "checkpoint": "ml/checkpoints/mechanism/C0.pth",
+      "ids_file": "reports/mechanism/C0_ids.json",
+      "n_held_out": 68,
+      "error_original": 0.9558823529411765,
+      "error_sham": 0.9558823529411765,
+      "error_violet": 0.9264705882352942,
+      "sham_error_change": 0.0,
+      "sweep_prediction_agreement": 1.0
+    },
+    {
+      "name": "C3",
+      "splits_key": "ruler_c",
+      "fold": 3,
+      "held_out_negative_cocci": [
+        "Veillonella"
+      ],
+      "checkpoint": "ml/checkpoints/mechanism/C3.pth",
+      "ids_file": "reports/mechanism/C3_ids.json",
+      "n_held_out": 58,
+      "error_original": 1.0,
+      "error_sham": 1.0,
+      "error_violet": 1.0,
+      "sham_error_change": 0.0,
+      "sweep_prediction_agreement": 1.0
+    }
+  ],
+  "checks": {
+    "m1_hue_rule_positive_rate": 1.0,
+    "m1_hue_threshold": 1.1999,
+    "m1_rb_reimplementation_max_diff": 0.0,
+    "m2_shape_features_identical": true,
+    "m3_sham_error_change": {
+      "B0": 0.0,
+      "B2": 0.0,
+      "C0": 0.0,
+      "C3": 0.0
+    }
+  },
+  "checks_passed": true,
+  "primary": {
+    "b": {
+      "models": [
+        "B0",
+        "B2"
+      ],
+      "n": 126,
+      "error_original": 0.9206349206349206,
+      "error_sham": 0.9206349206349206,
+      "error_violet": 0.9365079365079365,
+      "drop": {
+        "point": -0.015873015873015928,
+        "ci_low": -0.09184344790547798,
+        "ci_high": 0.05797101449275355
+      },
+      "verdict": "見た目が主因",
+      "per_taxon": {
+        "Neisseria gonorrhoeae": {
+          "n": 68,
+          "error_original": 0.8529411764705882,
+          "error_violet": 0.8823529411764706
+        },
+        "Veillonella": {
+          "n": 58,
+          "error_original": 1.0,
+          "error_violet": 1.0
+        }
+      }
+    },
+    "c": {
+      "models": [
+        "C0",
+        "C3"
+      ],
+      "n": 126,
+      "error_original": 0.9761904761904762,
+      "error_sham": 0.9761904761904762,
+      "error_violet": 0.9603174603174603,
+      "drop": {
+        "point": 0.015873015873015817,
+        "ci_low": -0.02479855371900829,
+        "ci_high": 0.06201550387596899
+      },
+      "verdict": "見た目が主因",
+      "per_taxon": {
+        "Neisseria gonorrhoeae": {
+          "n": 68,
+          "error_original": 0.9558823529411765,
+          "error_violet": 0.9264705882352942
+        },
+        "Veillonella": {
+          "n": 58,
+          "error_original": 1.0,
+          "error_violet": 1.0
+        }
+      }
+    }
+  },
+  "secondary": {
+    "s1_unseen_negative_bacilli_to_violet": {
+      "model": "C3",
+      "taxa": [
+        "Pseudomonas aeruginosa"
+      ],
+      "n": 63,
+      "error_original": 0.0,
+      "error_violet": 0.0
+    },
+    "s2_positive_cocci_to_pink": {
+      "B0": {
+        "taxa": [
+          "Enterococcus faecium"
+        ],
+        "n": 56,
+        "error_original": 0.0,
+        "error_pink": 0.0
+      },
+      "B2": {
+        "taxa": [
+          "Streptococcus agalactiae"
+        ],
+        "n": 65,
+        "error_original": 0.015384615384615385,
+        "error_pink": 0.0
+      }
+    }
+  },
+  "n_boot": 2000
+}

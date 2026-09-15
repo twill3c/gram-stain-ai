@@ -93,7 +93,8 @@ PyTorch と ONNX Runtime に同じ重みを別実装で走らせた結果。
 
 - **学習で見ていない分類群・科の Gram 陰性球菌を、ほぼ全部桿菌と答える。**
   誤り率は分類群を抜いて 92%・科を抜いて 98%(学習しない形の規則は 27%)。
-  このデータの Gram 陰性球菌は `Neisseria gonorrhoeae` と `Veillonella` の 2 分類群しかない。理由は測っていない
+  このデータの Gram 陰性球菌は `Neisseria gonorrhoeae` と `Veillonella` の 2 分類群しかない。
+  **色相は原因ではない**(loop_013: 形はそのままに色相だけ紫へ回しても誤りは変わらなかった)。どの手がかりで桿菌と答えているかは特定していない
 - 形の典拠が一つに決まらない分類群(`Acinetobacter baumannii`・`Porphyromonas gingivalis`)は学習にも評価にも入っていない
 
 ---

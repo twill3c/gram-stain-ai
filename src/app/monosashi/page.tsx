@@ -190,7 +190,10 @@ export default function MonosashiPage() {
         <strong>学習で見ていない分類群・科の Gram 陰性球菌を、形のモデルはほぼ全部桿菌と答えます。</strong>
         分類群を抜くと誤り {pct(nc.error_rate.b)}、科を抜くと {pct(nc.error_rate.c)}(学習しない形の規則は分類群を抜いても{" "}
         {pct(nc.shape_rule_error_rate_b)})。このデータの Gram 陰性球菌は {nc.taxa.length} 分類群しかありません。
-        理由は測っていません。この崩れは判定の後で数え直して見つけたもので、合否の条件には入れていません。
+        この崩れは判定の後で数え直して見つけたもので、合否の条件には入れていません。
+        理由を一つ確かめました ——
+        <strong>形はそのままに色相だけを紫へ回しても、誤りは変わりませんでした</strong>(形のモデルは色相で形を決めていません)。
+        ただし染まりの濃さ・大きさ・並び方は変えていないので、何を手がかりに桿菌と答えているかは特定していません。
       </div>
       <p className="muted">
         形のラベル置換の対照は {sm.label_permutation_control.observed.toFixed(4)} で、同じ予測を入れ替えた偶然水準

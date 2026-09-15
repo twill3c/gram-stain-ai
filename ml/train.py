@@ -741,10 +741,21 @@ def write_markdown_shape(doc: dict, controls: dict) -> None:
         add("数字は誤り率。**学習で見ていない分類群・科の Gram 陰性球菌を、CNN はほぼ全部外す**。"
             "同じ分類群を見ていれば(物差し A)ほぼ当てる。")
         add("")
-        add("**機構は測っていない。** 候補は二つあり、どちらとも決めていない —— "
-            "(a) 陰性球菌は 2 分類群しかなく、片方を抜くと学習に残るのは 1 分類群だけになる。"
-            "(b) `Neisseria` の双球菌の対や `Veillonella` の小ささが、見た目として桿菌に近い。"
-            "切り分けは陰性球菌の画像を紫に塗り替えて予測が変わるかで測れる(SPEC §3.10)。")
+        mech_path = REPORTS / "mechanism_negative_cocci.json"
+        if mech_path.exists():
+            mech = json.loads(mech_path.read_text(encoding="utf-8"))["primary"]
+            add("**理由を一つ測った**(`python -m ml.mechanism measure`・SPEC §3.13)。陰性球菌を学習で見ていない fold のモデルで、"
+                "形はそのままに色相だけを紫へ回すと、誤り率は "
+                f"B {mech['b']['error_original']:.1%}→{mech['b']['error_violet']:.1%}・"
+                f"C {mech['c']['error_original']:.1%}→{mech['c']['error_violet']:.1%}"
+                f"(判定 B「{mech['b']['verdict']}」・C「{mech['c']['verdict']}」)。"
+                "**色相は原因ではない。** 回したのは色相だけで、染まりの濃さ・大きさ・並び方は変えていないので、"
+                "どの手がかりで桿菌と答えているかは特定していない。")
+        else:
+            add("**機構は測っていない。** 候補は二つあり、どちらとも決めていない —— "
+                "(a) 陰性球菌は 2 分類群しかなく、片方を抜くと学習に残るのは 1 分類群だけになる。"
+                "(b) `Neisseria` の双球菌の対や `Veillonella` の小ささが、見た目として桿菌に近い。"
+                "切り分けは陰性球菌の画像を紫に塗り替えて予測が変わるかで測れる(SPEC §3.10)。")
     (REPORTS / "cnn_shape.md").write_text("\n".join(L) + "\n", encoding="utf-8")
 
 

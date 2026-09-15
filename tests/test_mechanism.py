@@ -136,6 +136,9 @@ def test_t283_recolour_keeps_shape_rule_features_on_negative_cocci() -> None:
     from ml.stage_b import shape_feature
 
     prepared = _require(META / "prepared.jsonl", "python -m ml.prepare_dataset")
+    # prepared.jsonl はリポジトリに入っているが、画像(dataset/processed)は入っていない。
+    # CI では画像が無いので、画像のディレクトリも同じ規則で確かめる(loop_013 で踏みかけた)
+    _require(ROOT / "dataset" / "processed", "python -m ml.prepare_dataset")
     rows = [json.loads(line) for line in prepared.read_text(encoding="utf-8").splitlines()]
     nc = [r for r in rows if r["stage_b"] and r["gram"] == "negative" and r["shape"] == "coccus"]
     assert len(nc) == 126
