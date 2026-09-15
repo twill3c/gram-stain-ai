@@ -46,11 +46,18 @@ export function loadOrt(): Promise<typeof OrtNS> {
   return ortPromise;
 }
 
-let sessionPromise: Promise<OrtNS.InferenceSession> | null = null;
+/**
+ * 配るモデルは二つ(loop_012)。gram は Stage A、shape は Stage B(形)。
+ * ファイルを分けてあるので、形を足しても Gram の配信物と照合結果は変わらない
+ */
+export type ModelName = "gram" | "shape";
+const MODEL_FILE: Record<ModelName, string> = { gram: "model.onnx", shape: "model_shape.onnx" };
+
+const sessionPromises: Partial<Record<ModelName, Promise<OrtNS.InferenceSession>>> = {};
 
 /** モデルを取る。5.95 MB を無言で待たせない */
-async function fetchModel(onProgress?: (frac: number) => void): Promise<ArrayBuffer> {
-  const res = await fetch(`${BASE}/model.onnx`);
+async function fetchModel(model: ModelName, onProgress?: (frac: number) => void): Promise<ArrayBuffer> {
+  const res = await fetch(`${BASE}/${MODEL_FILE[model]}`);
   if (!res.ok) throw new Error(`モデルを取得できない (${res.status})`);
   const total = Number(res.headers.get("content-length") ?? 0);
   if (!res.body || !total || !onProgress) return res.arrayBuffer();
@@ -74,27 +81,29 @@ async function fetchModel(onProgress?: (frac: number) => void): Promise<ArrayBuf
   return out.buffer;
 }
 
-export function getSession(onProgress?: (frac: number) => void): Promise<OrtNS.InferenceSession> {
-  if (!sessionPromise) {
-    sessionPromise = (async () => {
+export function getSession(model: ModelName = "gram", onProgress?: (frac: number) => void): Promise<OrtNS.InferenceSession> {
+  let p = sessionPromises[model];
+  if (!p) {
+    p = (async () => {
       const ort = await loadOrt();
-      const buf = await fetchModel(onProgress);
+      const buf = await fetchModel(model, onProgress);
       return ort.InferenceSession.create(buf, {
         executionProviders: ["wasm"],
         graphOptimizationLevel: "all",
       });
     })();
-    sessionPromise.catch(() => {
-      sessionPromise = null;
+    sessionPromises[model] = p;
+    p.catch(() => {
+      delete sessionPromises[model];
     });
   }
-  return sessionPromise;
+  return p;
 }
 
-/** 1 枚推論する。入力は前処理済みの CHW float32 */
-export async function infer(tensor: Float32Array): Promise<Float32Array> {
+/** 1 枚推論する。入力は前処理済みの CHW float32。前処理は二つのモデルで共通 */
+export async function infer(tensor: Float32Array, model: ModelName = "gram"): Promise<Float32Array> {
   const ort = await loadOrt();
-  const session = await getSession();
+  const session = await getSession(model);
   const input = new ort.Tensor("float32", tensor, [1, 3, 224, 224]);
   const out = await session.run({ input });
   const logits = out.logits.data as Float32Array;

@@ -10,6 +10,9 @@
     うまくいく例だけを並べない
   - 同じ group から二枚選ばない(同じスライドの別視野を別の例として見せない)
   - 各分類群の中では image_id の辞書順で先頭。**予測の当たり外れで選ばない**
+  - **物差し A の test からだけ選ぶ**(loop_012 で足した・T-280)。Gram と形の出荷モデルは
+    どちらも train で学習し val で確認している。以前は分割を見ておらず、10 枚のうち 5 枚が
+    train・1 枚が val だった —— 画面の答えが、モデルが学習で見た画像への答えになっていた
 
 ## 期待値
 
@@ -79,14 +82,24 @@ def main() -> int:
         return 1
     sess = ort.InferenceSession(str(onnx), providers=["CPUExecutionProvider"])
     in_name = sess.get_inputs()[0].name
+    # 形のモデル(loop_012)。**サンプルの選び方は変えない** —— 形の当たり外れで選び直すと、
+    # 画面が形の実力より良く見える。期待値だけを足す
+    onnx_shape = ROOT / "public" / "models" / "model_shape.onnx"
+    if not onnx_shape.exists():
+        print("public/models/model_shape.onnx が無い。先に python -m ml.export_onnx --target shape を実行する")
+        return 1
+    sess_shape = ort.InferenceSession(str(onnx_shape), providers=["CPUExecutionProvider"])
 
     PUBLIC_SAMPLES.mkdir(parents=True, exist_ok=True)
     FIXTURES.mkdir(parents=True, exist_ok=True)
     (FIXTURES / "expect").mkdir(exist_ok=True)
 
+    # 出荷モデルが学習にも選定にも使っていない画像だけを候補にする(T-280)
+    test_ids = set(json.loads((META / "splits.json").read_text(encoding="utf-8"))["ruler_a"]["test"])
     by_folder: dict[str, list[dict]] = {}
     for r in rows:
-        by_folder.setdefault(r["folder"], []).append(r)
+        if r["image_id"] in test_ids:
+            by_folder.setdefault(r["folder"], []).append(r)
 
     used_groups: set[str] = set()
     samples = []
@@ -94,8 +107,9 @@ def main() -> int:
         cands = sorted(by_folder.get(folder, []), key=lambda r: r["image_id"])
         pick = next((r for r in cands if r["group_id"] not in used_groups), None)
         if pick is None:
-            print(f"  !! {folder}: 使える画像が無い")
-            continue
+            # 黙って train から補わない。補えば、画面の答えがまたモデルの見覚えになる
+            print(f"  !! {folder}: 物差し A の test に、使える画像が無い")
+            return 1
         used_groups.add(pick["group_id"])
 
         src = PROC / pick["path"]
@@ -109,6 +123,9 @@ def main() -> int:
         (FIXTURES / "expect" / f"{pick['image_id']}.input.f32").write_bytes(x.astype("<f4").tobytes())
         (FIXTURES / "expect" / f"{pick['image_id']}.logits.f32").write_bytes(
             logits.astype("<f4").tobytes())
+        shape_logits = sess_shape.run(None, {sess_shape.get_inputs()[0].name: x[None].astype(np.float32)})[0][0]
+        (FIXTURES / "expect" / f"{pick['image_id']}.shape_logits.f32").write_bytes(
+            shape_logits.astype("<f4").tobytes())
         # 生の RGBA は書かない。同じ中身の PNG を配布物として既に追跡しており、
         # 期待値にも置くと 10.5 MB が二重にリポジトリへ残る。
         # TS 側は tests/helpers/png.ts で復号する(その復号器の正しさは、
@@ -122,15 +139,18 @@ def main() -> int:
             "scientific_name": lab["resolved_name"],
             "gram": lab["gram"],
             "shape": lab["shape"],
+            # 形の典拠が一つに決まらず、形の学習・評価に入っていない分類群では false(SPEC §3.11)
+            "in_stage_b": bool(lab["stage_b"]),
             "family": lab["group_family"],
             "why": why,
             "source_member": pick["source_member"],
         })
-        print(f"  {folder:32s} {pick['image_id']}  logits {logits.round(3).tolist()}")
+        print(f"  {folder:32s} {pick['image_id']}  logits {logits.round(3).tolist()}  形 {shape_logits.round(3).tolist()}")
 
     doc = {
         "generated_at": datetime.now(JST).isoformat(timespec="seconds"),
         "selection_rule": "Gram 陽性/陰性・球菌/桿菌の両方を含め、色の規則が破れる分類群を必ず入れる。"
+                          "出荷モデルが学習にも選定にも使っていない物差し A の test からだけ選ぶ。"
                           "同じ group から二枚選ばない。各分類群では image_id の辞書順で先頭。"
                           "**予測の当たり外れで選ばない**",
         "crop": "配布元の画像から視野円の内接正方形の中心 512x512 を切り出したもの(リサイズなし)",
@@ -143,6 +163,16 @@ def main() -> int:
     }
     (PUBLIC_SAMPLES / "index.json").write_text(
         json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
+    # 選ばれなくなった画像と期待値を残さない。残すと、配信物に使われない画像が載り続け、
+    # 検査の期待値にも古い画像の分が混ざる
+    keep = {s["id"] for s in samples}
+    for p in PUBLIC_SAMPLES.glob("*.png"):
+        if p.stem not in keep:
+            p.unlink()
+            print(f"  削除: public/samples/{p.name}")
+    for p in (FIXTURES / "expect").glob("*.f32"):
+        if p.name.split(".")[0] not in keep:
+            p.unlink()
     (FIXTURES / "samples.json").write_text(
         json.dumps({"samples": [{"id": s["id"], "gram": s["gram"]} for s in samples]},
                    ensure_ascii=False, indent=2), encoding="utf-8")

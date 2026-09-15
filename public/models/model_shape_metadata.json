@@ -1,0 +1,106 @@
+{
+  "model_version": "1.0.0",
+  "architecture": "mobilenet_v3_small",
+  "input_size": [
+    224,
+    224
+  ],
+  "task": "gram-stain-shape-classification",
+  "classes": [
+    "coccus",
+    "bacillus"
+  ],
+  "dataset": "Bacteria Data for Machine Vision and Digital Biology",
+  "dataset_doi": "10.17632/cvkgfzp7ck.1",
+  "dataset_license": "CC BY 4.0",
+  "attribution": "Jamshidi, Mohammad (Behdad); Sargolzaee, Saleh; Foorginezhad, Salimeh; Moztarzadeh, Omid (2023), Bacteria Data for Machine Vision and Digital Biology, Mendeley Data, V1, doi: 10.17632/cvkgfzp7ck.1. Licensed under CC BY 4.0.",
+  "stage_b": {
+    "taxa": 30,
+    "images": 1842,
+    "rule": "形の典拠(BacDive)で形が一つに決まる分類群だけを対象にした"
+  },
+  "trained_at": "2026-09-16T00:23:38+09:00",
+  "git_commit": "00a8086caa0416f857b8049edbb60a11f76c22e6",
+  "epochs": 14,
+  "onnx": {
+    "exporter": "torchscript",
+    "opset": 17,
+    "megabytes": 6.089,
+    "parity_argmax_agreement": 1.0,
+    "parity_max_prob_diff": 1.895427703857422e-05,
+    "parity_max_abs_diff_logits": 0.00014090538024902344
+  },
+  "metrics": {
+    "shipped_test": {
+      "macro_f1": 0.9956,
+      "accuracy": 0.9962,
+      "n_images": 263
+    },
+    "rulers": {
+      "a": {
+        "macro_f1": 0.9981,
+        "ci_low": 0.9956,
+        "ci_high": 1.0
+      },
+      "b": {
+        "macro_f1": 0.8525,
+        "ci_low": 0.8221,
+        "ci_high": 0.8816
+      },
+      "c": {
+        "macro_f1": 0.829,
+        "ci_low": 0.7963,
+        "ci_high": 0.8613
+      }
+    },
+    "shape_rule_baseline": {
+      "a": {
+        "macro_f1": 0.7797,
+        "ci_low": 0.7538,
+        "ci_high": 0.8049
+      },
+      "b": {
+        "macro_f1": 0.752,
+        "ci_low": 0.7256,
+        "ci_high": 0.7785
+      },
+      "c": {
+        "macro_f1": 0.7646,
+        "ci_low": 0.7379,
+        "ci_high": 0.7903
+      }
+    },
+    "label_permutation_control": {
+      "observed": 0.4963,
+      "null_median": 0.4963,
+      "null_q975": 0.5196,
+      "p_upper": 0.544
+    },
+    "verdict": {
+      "condition_1": true,
+      "condition_2": true,
+      "source": "SPEC §3.8 の二条件を機械が当てはめた"
+    },
+    "ruler_meaning": {
+      "a": "この 30 分類群のスライドの形を見分けられるか",
+      "b": "学習で見ていない種の形を当てられるか",
+      "c": "学習で見ていない科の形を当てられるか"
+    }
+  },
+  "negative_cocci": {
+    "taxa": [
+      "Neisseria gonorrhoeae",
+      "Veillonella"
+    ],
+    "n_images": 126,
+    "error_rate": {
+      "a": 0.0079,
+      "b": 0.9206,
+      "c": 0.9762
+    },
+    "shape_rule_error_rate_b": 0.2698,
+    "caveat": "学習で見ていない分類群・科の Gram 陰性球菌を、このモデルはほぼ全部桿菌と答えます。分類群を抜いた評価で誤り 92%、科を抜いた評価で誤り 98%(同じ分類群を学習で見ていれば 1%)。このデータの Gram 陰性球菌は 2 分類群しかありません。",
+    "source": "事後の分析(ml.stage_b cells)。判定には入れていない"
+  },
+  "not_a_medical_device": "教育・研究目的のデモである。医療機器ではなく、出力は医学的診断を意味しない"
+}

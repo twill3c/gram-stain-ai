@@ -97,4 +97,26 @@ describe.skipIf(!has)("出荷物", () => {
       expect(html.includes(v), `物差し ${r} の ${v} が画面に無い`).toBe(true);
     }
   });
+
+  it("T-277 形の配信物があり、二つの ONNX の合計が 30 MB 以内", () => {
+    for (const f of ["models/model_shape.onnx", "models/labels_shape.json", "models/model_shape_metadata.json"]) {
+      expect(existsSync(join(OUT, f)), `${f} が無い`).toBe(true);
+    }
+    const total = ["models/model.onnx", "models/model_shape.onnx"]
+      .map((f) => statSync(join(OUT, f)).size / 1e6)
+      .reduce((a, b) => a + b, 0);
+    expect(total, `二つの ONNX の合計が ${total.toFixed(2)} MB`).toBeLessThanOrEqual(30);
+  });
+
+  it("T-278 三つの物差しのページの Stage B の数が、形の配信メタデータから来ている", () => {
+    // 陰性球菌の崩れは、数だけ README に書いて画面に出さない、ということをしない
+    const meta = JSON.parse(readFileSync(join(OUT, "models/model_shape_metadata.json"), "utf-8"));
+    const html = readFileSync(join(OUT, "monosashi/index.html"), "utf-8");
+    for (const r of ["a", "b", "c"] as const) {
+      const v = meta.metrics.rulers[r].macro_f1.toFixed(4);
+      expect(html.includes(v), `形の物差し ${r} の ${v} が画面に無い`).toBe(true);
+    }
+    const pct = `${Math.round(meta.negative_cocci.error_rate.c * 100)}%`;
+    expect(html.includes(pct), `陰性球菌の C の誤り率 ${pct} が画面に無い`).toBe(true);
+  });
 });

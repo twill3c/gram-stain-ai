@@ -1,8 +1,9 @@
 # MODEL.md — 配布する学習済みモデル
 
-`public/models/model.onnx` の素性と配布条件。
+配布するモデルは二つある。§1〜§4 は `public/models/model.onnx`(Gram 反応)、
+§3b は `public/models/model_shape.onnx`(形: 球菌 / 桿菌・loop_012 から)。配布条件(§6)と禁止用途(§7)は両方に当てはまる。
 
-数はすべて `public/models/model_metadata.json`(配信物そのもの)から転記している。
+数はすべて配信物そのもの(`public/models/model_metadata.json` / `model_shape_metadata.json`)から転記している。
 食い違いがあればメタデータが正しい。
 
 ---
@@ -69,6 +70,34 @@ PyTorch と ONNX Runtime に同じ重みを別実装で走らせた結果。
 
 ---
 
+## 3b. 形のモデル(`model_shape.onnx`)
+
+| 項目 | 値 |
+|---|---|
+| 骨格・入力・前処理 | Gram のモデルと同じ(§1・§4) |
+| 出力 | logits 2 個(`coccus`, `bacillus` の順) |
+| 対象 | 形の典拠(BacDive)で形が一つに決まる 30 分類群・1,842 枚 |
+| ファイル | ONNX opset 17・torchscript exporter・**6.09 MB** |
+| 学習 | 14 エポック(予算は物差し A の検証用データで決定)・物差し A の train のみ |
+| 試験成績 | macro F1 0.9956(263 枚・一度だけ)—— **この数だけを引用してはならない** |
+| 二実装照合 | argmax 一致率 1.000000(全 1,842 枚)・確率の最大差 1.895e-05 |
+
+| | A 画像単位 | B 分類群ホールドアウト | C 科ホールドアウト |
+|---|---|---|---|
+| **形のモデル** | 0.9981 [0.9956, 1.0000] | 0.8525 [0.8221, 0.8816] | 0.8290 [0.7963, 0.8613] |
+| 形の規則(**学習なし**・色を見ない対照) | 0.7797 [0.7538, 0.8049] | 0.7520 [0.7256, 0.7785] | 0.7646 [0.7379, 0.7903] |
+
+測る前に決めた二条件(SPEC §3.8)はどちらも成立した。Gram のモデルと違い、科を抜いても崩れない。
+
+**このモデルを使う人が知っておくべきこと。**
+
+- **学習で見ていない分類群・科の Gram 陰性球菌を、ほぼ全部桿菌と答える。**
+  誤り率は分類群を抜いて 92%・科を抜いて 98%(学習しない形の規則は 27%)。
+  このデータの Gram 陰性球菌は `Neisseria gonorrhoeae` と `Veillonella` の 2 分類群しかない。理由は測っていない
+- 形の典拠が一つに決まらない分類群(`Acinetobacter baumannii`・`Porphyromonas gingivalis`)は学習にも評価にも入っていない
+
+---
+
 ## 4. 前処理(モデルを使う側が揃えるもの)
 
 揃えないと、モデルは正しくても答えが変わる。**しかも例外は出ない。**
@@ -120,7 +149,7 @@ PyTorch と ONNX Runtime に同じ重みを別実装で走らせた結果。
 > (2023), Mendeley Data, V1, doi: 10.17632/cvkgfzp7ck.1, licensed under CC BY 4.0.
 > Labels were derived from BacDive (Leibniz Institute DSMZ), licensed under CC BY 4.0.
 > The images were modified (cropped to the inscribed square of the microscope field,
-> deduplicated, and relabelled by Gram reaction).
+> deduplicated, and relabelled by Gram reaction and, for the shape model, by cell shape).
 
 ---
 
@@ -129,4 +158,5 @@ PyTorch と ONNX Runtime に同じ重みを別実装で走らせた結果。
 - **医学的診断。** 本モデルは医療機器ではなく、出力は診断を意味しない
 - 感度・特異度を臨床診断指標として提示すること
 - 学習で見ていない科の菌に対する判定を、根拠として用いること(§2 のとおり大きく劣る)
+- 形のモデルの「桿菌」という答えを、Gram 陰性球菌でないことの根拠として用いること(§3b のとおり、見ていない陰性球菌をほぼ全部桿菌と答える)
 - 100 倍対物の視野以外(倍率・染色手順の異なる画像)への適用。前処理の前提が崩れる

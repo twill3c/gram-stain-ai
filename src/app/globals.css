@@ -95,6 +95,14 @@ h3 { font-size: 1rem; margin: 22px 0 6px; }
 .score-fill { height: 100%; border-radius: 6px; }
 .score-fill.positive { background: var(--violet); }
 .score-fill.negative { background: var(--pink); }
+/* 形の塊(loop_012)。Gram の紫/桃と取り違えないよう、染色の色を使わない */
+.score-fill.shape { background: var(--muted); }
+.result-head { font-size: 0.95rem; margin: 18px 0 6px; }
+.shape-caveat {
+  margin-top: 8px; padding: 10px 12px; border-radius: 8px;
+  border: 1px solid var(--pink); background: var(--pink-soft);
+  font-size: 0.85rem; line-height: 1.6;
+}
 .score-num { text-align: right; font-variant-numeric: tabular-nums; font-size: 0.9rem; }
 .score-label { font-size: 0.9rem; }
 

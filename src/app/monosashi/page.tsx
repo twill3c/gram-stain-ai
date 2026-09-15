@@ -1,11 +1,14 @@
 import Disclaimer from "@/components/Disclaimer";
-import { RULER_TITLE, fmt, loadMetadata } from "@/lib/metrics-data";
+import { RULER_TITLE, fmt, loadMetadata, loadShapeMetadata, pct } from "@/lib/metrics-data";
 
 export const metadata = { title: "三つの物差し — Gram Stain AI" };
 
 export default function MonosashiPage() {
   const meta = loadMetadata();
   const m = meta.metrics;
+  const shape = loadShapeMetadata();
+  const sm = shape.metrics;
+  const nc = shape.negative_cocci;
   const rulers = ["a", "b", "c"] as const;
 
   return (
@@ -134,6 +137,67 @@ export default function MonosashiPage() {
         <strong>それでも、この数だけを見てはいけません。</strong>
         {m.caveat}
       </div>
+
+      <h2>形(球菌 / 桿菌)にも同じ物差しを当てる</h2>
+      <p>
+        形の典拠が一つに決まる {shape.stage_b.taxa} 分類群・{shape.stage_b.images.toLocaleString()} 枚で、
+        同じ三つの物差しを当てました。対照は<strong>色を見ずに、染まった塊の細長さに閾値を一本引くだけ</strong>の規則で、
+        CNN を回す前に測っています。
+      </p>
+      <div className="wrap-x">
+        <table>
+          <thead>
+            <tr>
+              <th />
+              {rulers.map((r) => <th key={r}>{RULER_TITLE[r]}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>CNN</strong>(形)</td>
+              {rulers.map((r) => <td className="num" key={r}>{fmt(sm.rulers[r])}</td>)}
+            </tr>
+            <tr>
+              <td>形の規則(細長さ・<strong>学習なし</strong>)</td>
+              {rulers.map((r) => <td className="num" key={r}>{fmt(sm.shape_rule_baseline[r])}</td>)}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p>
+        測る前に決めた二条件(三つの物差しすべてで対照を区間の重なりなく上回る / 対照が外す分類群で誤りを減らす)は、
+        <strong>{sm.verdict.condition_1 && sm.verdict.condition_2 ? "どちらも成立" : "成立していない"}</strong>しました。
+        Gram の CNN と違い、科を抜いても崩れません。
+      </p>
+      <h3>それでも、ここでは外す</h3>
+      <div className="wrap-x">
+        <table>
+          <thead>
+            <tr>
+              <th>Gram 陰性の球菌({nc.taxa.join("・")}・{nc.n_images} 枚)</th>
+              {rulers.map((r) => <th key={r}>{RULER_TITLE[r]}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>CNN の誤り率</td>
+              {rulers.map((r) => <td className="num" key={r}>{pct(nc.error_rate[r])}</td>)}
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div className="disclaimer">
+        <strong>学習で見ていない分類群・科の Gram 陰性球菌を、形のモデルはほぼ全部桿菌と答えます。</strong>
+        分類群を抜くと誤り {pct(nc.error_rate.b)}、科を抜くと {pct(nc.error_rate.c)}(学習しない形の規則は分類群を抜いても{" "}
+        {pct(nc.shape_rule_error_rate_b)})。このデータの Gram 陰性球菌は {nc.taxa.length} 分類群しかありません。
+        理由は測っていません。この崩れは判定の後で数え直して見つけたもので、合否の条件には入れていません。
+      </div>
+      <p className="muted">
+        形のラベル置換の対照は {sm.label_permutation_control.observed.toFixed(4)} で、同じ予測を入れ替えた偶然水準
+        (中央 {sm.label_permutation_control.null_median.toFixed(4)}・上側 {sm.label_permutation_control.null_q975.toFixed(4)})
+        を上に外れていません。この対照は当初「多数派クラスと重なるか」で見ていましたが、
+        多数派は全部を同じ答えにする予測の値で偶然水準ではないため、結果を見てから基準を引き直しました。
+      </p>
     </main>
   );
 }

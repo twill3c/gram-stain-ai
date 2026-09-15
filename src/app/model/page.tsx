@@ -1,13 +1,14 @@
 import Link from "next/link";
 
 import Disclaimer from "@/components/Disclaimer";
-import { RULER_TITLE, fmt, loadMetadata } from "@/lib/metrics-data";
+import { RULER_TITLE, fmt, loadMetadata, loadShapeMetadata } from "@/lib/metrics-data";
 
 export const metadata = { title: "モデルとデータ — Gram Stain AI" };
 
 export default function ModelPage() {
   const meta = loadMetadata();
   const m = meta.metrics;
+  const shape = loadShapeMetadata();
   const rulers = ["a", "b", "c"] as const;
 
   return (
@@ -31,6 +32,12 @@ export default function ModelPage() {
           </tbody>
         </table>
       </div>
+      <p className="muted">
+        形(球菌 / 桿菌)のモデルは別ファイルで、骨格は同じ {shape.architecture}・{shape.epochs} エポック・
+        ONNX {shape.onnx.megabytes} MB。二実装照合は argmax 一致率 {shape.onnx.parity_argmax_agreement.toFixed(6)}・
+        スコアの最大差 {shape.onnx.parity_max_prob_diff.toExponential(3)}。
+        成績と弱点は <Link href="/monosashi/">三つの物差し</Link>にあります。
+      </p>
       <p className="muted">
         当初は ResNet18 を標準候補にしていましたが、fp32 で 46.8 MB あり、
         量子化する前から配信の目標 30 MB を超えていました。目標を動かさず骨格を変えています。

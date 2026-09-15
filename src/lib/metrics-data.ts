@@ -55,6 +55,43 @@ export function loadMetadata(): ModelMetadata {
   return JSON.parse(readFileSync(p, "utf-8")) as ModelMetadata;
 }
 
+/** Stage B(形)の配信メタデータ(loop_012)。Gram のものとは別ファイル */
+export interface ShapeMetadata {
+  architecture: string;
+  epochs: number;
+  stage_b: { taxa: number; images: number; rule: string };
+  onnx: {
+    megabytes: number;
+    parity_argmax_agreement: number;
+    parity_max_prob_diff: number;
+  };
+  metrics: {
+    shipped_test: { macro_f1: number; accuracy: number; n_images: number };
+    rulers: Record<"a" | "b" | "c", RulerScore>;
+    shape_rule_baseline: Record<"a" | "b" | "c", RulerScore>;
+    label_permutation_control: { observed: number; null_median: number; null_q975: number; p_upper: number };
+    verdict: { condition_1: boolean; condition_2: boolean; source: string };
+    ruler_meaning: Record<"a" | "b" | "c", string>;
+  };
+  negative_cocci: {
+    taxa: string[];
+    n_images: number;
+    error_rate: Record<"a" | "b" | "c", number>;
+    shape_rule_error_rate_b: number;
+    caveat: string;
+  };
+}
+
+export function loadShapeMetadata(): ShapeMetadata {
+  const p = join(process.cwd(), "public", "models", "model_shape_metadata.json");
+  return JSON.parse(readFileSync(p, "utf-8")) as ShapeMetadata;
+}
+
+/** 誤り率を整数 % に。配信メタデータの注意書きと同じ丸め方にする(T-276 / T-278) */
+export function pct(x: number): string {
+  return `${Math.round(x * 100)}%`;
+}
+
 export const RULER_TITLE: Record<"a" | "b" | "c", string> = {
   a: "A 画像単位",
   b: "B 分類群ホールドアウト",

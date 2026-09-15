@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-09-16T00:29:42+09:00",
+  "exporter": "torchscript",
+  "opset": 17,
+  "onnx_megabytes": 6.089,
+  "n_images": 1842,
+  "argmax_agreement": 1.0,
+  "argmax_mismatches": 0,
+  "max_prob_diff": 1.895427703857422e-05,
+  "max_abs_diff_logits": 0.00014090538024902344,
+  "signature": {
+    "input_names": [
+      "input"
+    ],
+    "output_names": [
+      "logits"
+    ],
+    "input_shape": [
+      -1,
+      3,
+      224,
+      224
+    ],
+    "output_shape": [
+      -1,
+      2
+    ],
+    "dynamic_batch": true,
+    "opset": 17
+  },
+  "shipped_test": {
+    "n_images": 263,
+    "argmax_agreement": 1.0,
+    "mismatches": 0,
+    "onnx_macro_f1": 0.9956,
+    "torch_macro_f1": 0.9956
+  },
+  "candidates": {
+    "torchscript": {
+      "megabytes": 6.089,
+      "sample_max_abs_diff": 5.14984130859375e-05
+    }
+  },
+  "gate": {
+    "current": {
+      "argmax_agreement": 1.0,
+      "max_prob_diff": 0.001,
+      "source": "SPEC 較正ゲート G-01(loop_005 で引き直し)"
+    },
+    "superseded": {
+      "rule": "生 logits の max abs 差 < 1e-4",
+      "measured": 0.00014090538024902344,
+      "passed": false,
+      "why_replaced": "logits は有界でないため、絶対差の閾値がモデルの確信度に比例する。また製品が表示するのは確率であって logits ではない。**引き直した事実と、旧い書き方での結果を隠さない**(SPEC 5.1)"
+    }
+  }
+}

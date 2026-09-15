@@ -115,21 +115,111 @@ def signature(path: Path) -> dict:
     }
 
 
-def main() -> int:
+SHAPE_CLASSES = ["coccus", "bacillus"]
+
+
+def write_shape_metadata(parity: dict, chosen_tag: str) -> None:
+    """Stage B(形)の配信メタデータ。**§3.10 の崩れを、配るものに付けて配る**(SPEC §3.11・T-276)。
+
+    Gram の配信物(model.onnx / labels.json / model_metadata.json)には触らない。
+    """
+    cnn = json.loads((REPORTS / "cnn_shape.json").read_text(encoding="utf-8"))
+    controls = json.loads((REPORTS / "controls_shape.json").read_text(encoding="utf-8"))
+    cells = json.loads((REPORTS / "cnn_shape_cells.json").read_text(encoding="utf-8"))["rulers"]
+    null = json.loads((REPORTS / "permutation_null.json").read_text(encoding="utf-8"))["shape"]
+    labels_doc = json.loads((META / "labels.json").read_text(encoding="utf-8"))
+
+    neg_cocci = sorted(t["folder"] for t in labels_doc["taxa"]
+                       if t["included"] and t["stage_b"] and t["gram"] == "negative" and t["shape"] == "coccus")
+    key = "negative x coccus"
+    err = {r: cells[r]["cnn"][key]["error_rate"] for r in ("a", "b", "c")}
+    pct = {r: round(err[r] * 100) for r in err}
+    caveat = (f"学習で見ていない分類群・科の Gram 陰性球菌を、このモデルはほぼ全部桿菌と答えます。"
+              f"分類群を抜いた評価で誤り {pct['b']}%、科を抜いた評価で誤り {pct['c']}%"
+              f"(同じ分類群を学習で見ていれば {pct['a']}%)。"
+              f"このデータの Gram 陰性球菌は {len(neg_cocci)} 分類群しかありません。")
+
+    (PUBLIC / "labels_shape.json").write_text(json.dumps({
+        "classes": SHAPE_CLASSES,
+        "display_ja": {"coccus": "球菌", "bacillus": "桿菌"},
+        "index": {c: i for i, c in enumerate(SHAPE_CLASSES)},
+        "note": "並びは Python 側の 球菌 = 0 / 桿菌 = 1(ml/stage_b.py)と一致させてある。"
+                "食い違うと例外を出さずに結果が反転する",
+    }, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    v = cnn["verdict"]
+    metadata = {
+        "model_version": MODEL_VERSION,
+        "architecture": cnn["model"]["architecture"],
+        "input_size": cnn["model"]["input_size"],
+        "task": "gram-stain-shape-classification",
+        "classes": SHAPE_CLASSES,
+        "dataset": "Bacteria Data for Machine Vision and Digital Biology",
+        "dataset_doi": "10.17632/cvkgfzp7ck.1",
+        "dataset_license": "CC BY 4.0",
+        "attribution": "Jamshidi, Mohammad (Behdad); Sargolzaee, Saleh; Foorginezhad, Salimeh; "
+                       "Moztarzadeh, Omid (2023), Bacteria Data for Machine Vision and Digital "
+                       "Biology, Mendeley Data, V1, doi: 10.17632/cvkgfzp7ck.1. "
+                       "Licensed under CC BY 4.0.",
+        "stage_b": {"taxa": controls["n_taxa"], "images": controls["n_images_total"],
+                    "rule": "形の典拠(BacDive)で形が一つに決まる分類群だけを対象にした"},
+        "trained_at": cnn["generated_at"],
+        "git_commit": git_commit(),
+        "epochs": cnn["epoch_budget"]["chosen"],
+        "onnx": {"exporter": chosen_tag, "opset": OPSET, "megabytes": parity["onnx_megabytes"],
+                 "parity_argmax_agreement": parity["argmax_agreement"],
+                 "parity_max_prob_diff": parity["max_prob_diff"],
+                 "parity_max_abs_diff_logits": parity["max_abs_diff_logits"]},
+        "metrics": {
+            "shipped_test": cnn["shipped_model"]["test"],
+            "rulers": {r: {k: cnn["rulers"][r][k] for k in ("macro_f1", "ci_low", "ci_high")}
+                       for r in ("a", "b", "c")},
+            "shape_rule_baseline": {r: {k: controls["baselines"]["shape"][r][k]
+                                        for k in ("macro_f1", "ci_low", "ci_high")}
+                                    for r in ("a", "b", "c")},
+            "label_permutation_control": {"observed": null["observed"], "null_median": null["median"],
+                                          "null_q975": null["q975"], "p_upper": null["p_upper"]},
+            "verdict": {"condition_1": v["condition_1_beats_strong_control_on_all_rulers"],
+                        "condition_2": v["condition_2_beats_on_hard_taxa"],
+                        "source": "SPEC §3.8 の二条件を機械が当てはめた"},
+            "ruler_meaning": {
+                "a": "この 30 分類群のスライドの形を見分けられるか",
+                "b": "学習で見ていない種の形を当てられるか",
+                "c": "学習で見ていない科の形を当てられるか",
+            },
+        },
+        "negative_cocci": {
+            "taxa": neg_cocci,
+            "n_images": cells["a"]["cnn"][key]["n"],
+            "error_rate": err,
+            "shape_rule_error_rate_b": cells["b"]["shape_rule"][key]["error_rate"],
+            "caveat": caveat,
+            "source": "事後の分析(ml.stage_b cells)。判定には入れていない",
+        },
+        "not_a_medical_device": "教育・研究目的のデモである。医療機器ではなく、"
+                                "出力は医学的診断を意味しない",
+    }
+    (PUBLIC / "model_shape_metadata.json").write_text(
+        json.dumps(metadata, ensure_ascii=False, indent=2), encoding="utf-8")
+
+
+def main(target: str = "gram") -> int:
+    shape = target == "shape"
+    stem = "model_shape" if shape else "model"
     torch.set_num_threads(3)
     PUBLIC.mkdir(parents=True, exist_ok=True)
     REPORTS.mkdir(exist_ok=True)
 
-    ckpt = CKPT / "best_model.pth"
+    ckpt = CKPT / ("best_model_shape.pth" if shape else "best_model.pth")
     if not ckpt.exists():
-        print(f"{ckpt} が無い。先に python -m ml.train --stage ship を実行する")
+        print(f"{ckpt} が無い。先に python -m ml.train{' --target shape' if shape else ''} --stage ship を実行する")
         return 1
 
     model = build_model()
     model.load_state_dict(torch.load(ckpt, map_location="cpu"))
     model.eval()
 
-    rows, splits, arr, index, meta = prepare()
+    rows, splits, arr, index, meta = prepare(target)
 
     # 照合は**全画像**で行う。test だけで照合すると、
     # test に無い入力の並びで壊れていても気づけない
@@ -141,7 +231,7 @@ def main() -> int:
     candidates = {}
     for dynamo in (False, True):
         tag = "dynamo" if dynamo else "torchscript"
-        path = PUBLIC / f"model.{tag}.onnx"
+        path = PUBLIC / f"{stem}.{tag}.onnx"
         try:
             export(model, path, dynamo)
         except Exception as exc:  # noqa: BLE001 — どちらかが通ればよい
@@ -168,7 +258,7 @@ def main() -> int:
     chosen = candidates[chosen_tag]
     print(f"  → {chosen_tag} を採用({chosen['megabytes']} MB)")
 
-    final = PUBLIC / "model.onnx"
+    final = PUBLIC / f"{stem}.onnx"
     final.write_bytes(chosen["path"].read_bytes())
     for c in candidates.values():
         c["path"].unlink(missing_ok=True)
@@ -209,8 +299,8 @@ def main() -> int:
     print(f"  出荷モデルの test を ONNX で測り直し: macro F1 {shipped['onnx_macro_f1']} "
           f"(PyTorch {shipped['torch_macro_f1']})")
 
-    cnn = json.loads((REPORTS / "cnn.json").read_text(encoding="utf-8"))
-    controls = json.loads((REPORTS / "controls.json").read_text(encoding="utf-8"))
+    cnn = json.loads((REPORTS / ("cnn_shape.json" if shape else "cnn.json")).read_text(encoding="utf-8"))
+    controls = json.loads((REPORTS / ("controls_shape.json" if shape else "controls.json")).read_text(encoding="utf-8"))
 
     parity = {
         "generated_at": datetime.now(JST).isoformat(timespec="seconds"),
@@ -240,8 +330,14 @@ def main() -> int:
             },
         },
     }
-    (REPORTS / "onnx_parity.json").write_text(
+    (REPORTS / ("onnx_parity_shape.json" if shape else "onnx_parity.json")).write_text(
         json.dumps(parity, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    if shape:
+        write_shape_metadata(parity, chosen_tag)
+        print(f"\n→ {final.relative_to(ROOT)} ({parity['onnx_megabytes']} MB)")
+        print(f"→ {(REPORTS / 'onnx_parity_shape.json').relative_to(ROOT)} / public/models/model_shape_metadata.json")
+        return 0
 
     (PUBLIC / "labels.json").write_text(json.dumps({
         "classes": CLASSES,
@@ -314,4 +410,8 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    import argparse
+
+    _ap = argparse.ArgumentParser()
+    _ap.add_argument("--target", choices=("gram", "shape"), default="gram")
+    raise SystemExit(main(_ap.parse_args().target))

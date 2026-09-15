@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-13T21:24:21.208Z",
+  "generated_at": "2026-09-15T16:53:53.656Z",
   "target": "http://localhost:4319",
   "tolerance_points": 0.05,
   "samples": [
@@ -13,31 +13,61 @@
         100,
         0
       ],
-      "worst": 0.01900677740009371
+      "worst": 0.0036076230099034183,
+      "want_shape": [
+        "100.0",
+        "0.0"
+      ],
+      "got_shape": [
+        100,
+        0
+      ],
+      "worst_shape": 0.00012137354133301415,
+      "caveat_shown": true
     },
     {
       "folder": "Streptococcus agalactiae",
       "want": [
+        "99.4",
+        "0.6"
+      ],
+      "got": [
+        99.4,
+        0.6
+      ],
+      "worst": 0.007057306059749635,
+      "want_shape": [
         "100.0",
         "0.0"
       ],
-      "got": [
+      "got_shape": [
         100,
         0
       ],
-      "worst": 0.0026159040301081404
+      "worst_shape": 0.000008178020312064614,
+      "caveat_shown": true
     },
     {
       "folder": "Lactobacillus delbrueckii",
       "want": [
-        "99.9",
-        "0.1"
+        "95.5",
+        "4.5"
       ],
       "got": [
-        99.9,
-        0.1
+        95.5,
+        4.5
       ],
-      "worst": 0.0150798277137386
+      "worst": 0.03856233633830186,
+      "want_shape": [
+        "0.0",
+        "100.0"
+      ],
+      "got_shape": [
+        0,
+        100
+      ],
+      "worst_shape": 0.0035763896696281616,
+      "caveat_shown": true
     },
     {
       "folder": "Clostridium perfringens",
@@ -49,34 +79,20 @@
         98.9,
         1.1
       ],
-      "worst": 0.011157020503465676
+      "worst": 0.011157020503465676,
+      "want_shape": [
+        "0.0",
+        "100.0"
+      ],
+      "got_shape": [
+        0,
+        100
+      ],
+      "worst_shape": 0.0001658536730374069,
+      "caveat_shown": true
     },
     {
       "folder": "Escherichia coli",
-      "want": [
-        "0.3",
-        "99.7"
-      ],
-      "got": [
-        0.3,
-        99.7
-      ],
-      "worst": 0.04304503412622673
-    },
-    {
-      "folder": "Pseudomonas aeruginosa",
-      "want": [
-        "0.3",
-        "99.7"
-      ],
-      "got": [
-        0.3,
-        99.7
-      ],
-      "worst": 0.01632263441071302
-    },
-    {
-      "folder": "Neisseria gonorrhoeae",
       "want": [
         "0.1",
         "99.9"
@@ -85,7 +101,61 @@
         0.1,
         99.9
       ],
-      "worst": 0.030781132830771454
+      "worst": 0.04272525617570254,
+      "want_shape": [
+        "0.0",
+        "100.0"
+      ],
+      "got_shape": [
+        0,
+        100
+      ],
+      "worst_shape": 0.0018549775653298184,
+      "caveat_shown": true
+    },
+    {
+      "folder": "Pseudomonas aeruginosa",
+      "want": [
+        "0.5",
+        "99.5"
+      ],
+      "got": [
+        0.5,
+        99.5
+      ],
+      "worst": 0.03974936638155668,
+      "want_shape": [
+        "0.0",
+        "100.0"
+      ],
+      "got_shape": [
+        0,
+        100
+      ],
+      "worst_shape": 0.0000043958612678807185,
+      "caveat_shown": true
+    },
+    {
+      "folder": "Neisseria gonorrhoeae",
+      "want": [
+        "3.0",
+        "97.0"
+      ],
+      "got": [
+        3,
+        97
+      ],
+      "worst": 0.006987578884159351,
+      "want_shape": [
+        "100.0",
+        "0.0"
+      ],
+      "got_shape": [
+        100,
+        0
+      ],
+      "worst_shape": 0.009157477997845831,
+      "caveat_shown": true
     },
     {
       "folder": "Veillonella",
@@ -97,7 +167,17 @@
         0.1,
         99.9
       ],
-      "worst": 0.005112106184597565
+      "worst": 0.005112106184597565,
+      "want_shape": [
+        "100.0",
+        "0.0"
+      ],
+      "got_shape": [
+        100,
+        0
+      ],
+      "worst_shape": 0.00039055470568904576,
+      "caveat_shown": true
     },
     {
       "folder": "Listeria monocytogenes",
@@ -109,7 +189,17 @@
         96.1,
         3.9
       ],
-      "worst": 0.010626129106177107
+      "worst": 0.010626129106177107,
+      "want_shape": [
+        "0.0",
+        "100.0"
+      ],
+      "got_shape": [
+        0,
+        100
+      ],
+      "worst_shape": 0.00018323814371967728,
+      "caveat_shown": true
     },
     {
       "folder": "Porphyromonas gingivalis",
@@ -121,52 +211,62 @@
         0.5,
         99.5
       ],
-      "worst": 0.03605272668744419
+      "worst": 0.03605272668744419,
+      "want_shape": [
+        "0.0",
+        "100.0"
+      ],
+      "got_shape": [
+        0,
+        100
+      ],
+      "worst_shape": 0.000022854869726529614,
+      "caveat_shown": true
     }
   ],
   "timings": {
-    "first_ms": 716,
-    "rest_max_ms": 135,
+    "first_ms": 1875,
+    "rest_max_ms": 366,
     "per_sample": [
       {
         "folder": "Staphylococcus aureus",
-        "wall_ms": 716
+        "wall_ms": 1875
       },
       {
         "folder": "Streptococcus agalactiae",
-        "wall_ms": 117
+        "wall_ms": 261
       },
       {
         "folder": "Lactobacillus delbrueckii",
-        "wall_ms": 116
+        "wall_ms": 192
       },
       {
         "folder": "Clostridium perfringens",
-        "wall_ms": 134
+        "wall_ms": 206
       },
       {
         "folder": "Escherichia coli",
-        "wall_ms": 126
+        "wall_ms": 366
       },
       {
         "folder": "Pseudomonas aeruginosa",
-        "wall_ms": 98
+        "wall_ms": 200
       },
       {
         "folder": "Neisseria gonorrhoeae",
-        "wall_ms": 100
+        "wall_ms": 213
       },
       {
         "folder": "Veillonella",
-        "wall_ms": 118
+        "wall_ms": 191
       },
       {
         "folder": "Listeria monocytogenes",
-        "wall_ms": 135
+        "wall_ms": 188
       },
       {
         "folder": "Porphyromonas gingivalis",
-        "wall_ms": 103
+        "wall_ms": 200
       }
     ]
   },

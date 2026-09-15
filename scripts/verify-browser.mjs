@@ -67,8 +67,9 @@ function softmax(a) {
   return e.map((x) => x / s);
 }
 
-function readLogits(id) {
-  const buf = readFileSync(join("tests", "fixtures", "expect", `${id}.logits.f32`));
+function readLogits(id, kind = "logits") {
+  // kind: "logits"(Gram)/ "shape_logits"(形・loop_012)
+  const buf = readFileSync(join("tests", "fixtures", "expect", `${id}.${kind}.f32`));
   return Array.from(new Float32Array(buf.buffer, buf.byteOffset, buf.length / 4));
 }
 
@@ -99,22 +100,32 @@ const samples = TARGET
 
 let firstMs = null;
 
+// 形の注意書きに入っているはずの数(T-279)。**画面に直接書かれていないことを、配信物から確かめる**
+const shapeMeta = TARGET
+  ? await (await fetch(`${BASE}/models/model_shape_metadata.json`)).json()
+  : JSON.parse(readFileSync(join(OUT, "models", "model_shape_metadata.json"), "utf-8"));
+const caveatPct = `${Math.round(shapeMeta.negative_cocci.error_rate.c * 100)}%`;
+
 try {
   await page.goto(`${BASE}/`, { waitUntil: "networkidle" });
 
   for (const s of samples) {
     const t0 = Date.now();
     const want = softmax(readLogits(s.id)).map((v) => v * 100);
+    const wantShape = softmax(readLogits(s.id, "shape_logits")).map((v) => v * 100);
 
     await page.locator(`button.sample-btn:has(img[alt="${s.folder}"])`).click();
     // **押した直後は、直前のサンプルの得点がまだ DOM に残っている。**
     // 得点の出現だけを待つと、待ちが即座に成立して古い値を読む(loop_006 で踏んだ VERIF-FLAKE)。
-    // 押したサンプルの学名が出ていることと、得点が揃っていることの両方を待つ。
-    // この二つは React が同じ更新でまとめるので、片方だけ新しいという状態にならない
+    // 押したサンプルの学名が出ていることと、Gram と形の両方の得点が揃っていることを待つ。
+    // loop_012 で形の塊が増えた。**Gram の得点だけで待つと、形の得点が前のサンプルのまま読まれる**
     await page.waitForFunction(
       (name) => {
         const shown = document.querySelector("i[data-taxon]")?.textContent?.trim();
-        return shown === name && document.querySelectorAll(".score-num").length >= 2;
+        return shown === name
+          && document.querySelectorAll('[data-model="gram"] .score-num').length >= 2
+          && document.querySelectorAll('[data-model="shape"] .score-num').length >= 2
+          && document.querySelector('[data-model="shape"]')?.getAttribute("data-for") === name;
       },
       s.scientific_name,
       { timeout: 120_000, polling: 50 },
@@ -125,18 +136,29 @@ try {
     const wall = Date.now() - t0;
     if (firstMs === null) firstMs = wall;
 
-    const shown = await page.locator(".score-num").allTextContents();
-    const got = shown.map((t) => Number.parseFloat(t.replace("%", "")));
+    const read = async (sel) => (await page.locator(sel).allTextContents())
+      .map((t) => Number.parseFloat(t.replace("%", "")));
+    const got = await read('[data-model="gram"] .score-num');
+    const gotShape = await read('[data-model="shape"] .score-num');
     timings.push({ folder: s.folder, wall_ms: wall });
 
-    const diffs = got.map((g, i) => Math.abs(g - want[i]));
-    const worst = Math.max(...diffs);
-    const ok = worst <= TOLERANCE_POINTS;
-    results.push({ folder: s.folder, want: want.map((v) => v.toFixed(1)), got, worst });
-    if (!ok) failures.push(`${s.folder}: 画面 ${got.join("/")} 対 Python ${want.map((v) => v.toFixed(1)).join("/")}`);
+    const worst = Math.max(...got.map((g, i) => Math.abs(g - want[i])));
+    const worstShape = Math.max(...gotShape.map((g, i) => Math.abs(g - wantShape[i])));
+    const caveat = (await page.locator('[data-caveat="negative-cocci"]').allTextContents()).join(" ");
+    const caveatOk = caveat.includes(caveatPct);
+    const ok = worst <= TOLERANCE_POINTS && worstShape <= TOLERANCE_POINTS && caveatOk;
+    results.push({
+      folder: s.folder,
+      want: want.map((v) => v.toFixed(1)), got, worst,
+      want_shape: wantShape.map((v) => v.toFixed(1)), got_shape: gotShape, worst_shape: worstShape,
+      caveat_shown: caveatOk,
+    });
+    if (worst > TOLERANCE_POINTS) failures.push(`${s.folder}: Gram 画面 ${got.join("/")} 対 Python ${want.map((v) => v.toFixed(1)).join("/")}`);
+    if (worstShape > TOLERANCE_POINTS) failures.push(`${s.folder}: 形 画面 ${gotShape.join("/")} 対 Python ${wantShape.map((v) => v.toFixed(1)).join("/")}`);
+    if (!caveatOk) failures.push(`${s.folder}: 陰性球菌の注意書き(${caveatPct} を含む)が出ていない`);
     console.log(
-      `  ${ok ? "✓" : "✗"} ${s.folder.padEnd(30)} 画面 ${got.map((v) => v.toFixed(1)).join(" / ")}  `
-      + `Python ${want.map((v) => v.toFixed(1)).join(" / ")}  差 ${worst.toFixed(3)} pt`,
+      `  ${ok ? "✓" : "✗"} ${s.folder.padEnd(30)} Gram ${got.map((v) => v.toFixed(1)).join(" / ")}(差 ${worst.toFixed(3)})  `
+      + `形 ${gotShape.map((v) => v.toFixed(1)).join(" / ")}(差 ${worstShape.toFixed(3)})  注意書き ${caveatOk ? "有" : "無"}`,
     );
   }
 } finally {

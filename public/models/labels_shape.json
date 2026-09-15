@@ -1,0 +1,15 @@
+{
+  "classes": [
+    "coccus",
+    "bacillus"
+  ],
+  "display_ja": {
+    "coccus": "球菌",
+    "bacillus": "桿菌"
+  },
+  "index": {
+    "coccus": 0,
+    "bacillus": 1
+  },
+  "note": "並びは Python 側の 球菌 = 0 / 桿菌 = 1(ml/stage_b.py)と一致させてある。食い違うと例外を出さずに結果が反転する"
+}

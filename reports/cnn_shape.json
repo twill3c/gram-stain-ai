@@ -11,7 +11,7 @@
     "fp32_megabytes": 6.08,
     "why_not_resnet18": "ResNet18 は fp32 で 46.8MB あり、量子化する前から N-01 の配信目標 30MB を超える。目標を動かすのではなく骨格を変えた"
   },
-  "generated_at": "2026-09-14T19:51:24+09:00",
+  "generated_at": "2026-09-16T00:23:38+09:00",
   "n_boot": 2000,
   "seed": 20260908,
   "epoch_budget": {
@@ -1575,5 +1575,20 @@
       "c": false
     }
   },
-  "finalised_at": "2026-09-15T22:03:00+09:00"
+  "finalised_at": "2026-09-16T00:27:26+09:00",
+  "shipped_model": {
+    "trained_on": [
+      "train"
+    ],
+    "selected_on": "val",
+    "test_evaluations": 1,
+    "epochs": 14,
+    "val_macro_f1": 1.0,
+    "test": {
+      "macro_f1": 0.9956,
+      "accuracy": 0.9962,
+      "n_images": 263
+    },
+    "checkpoint": "ml/checkpoints/best_model_shape.pth"
+  }
 }

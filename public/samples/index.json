@@ -1,42 +1,45 @@
 {
-  "generated_at": "2026-09-10T01:08:06+09:00",
-  "selection_rule": "Gram 陽性/陰性・球菌/桿菌の両方を含め、色の規則が破れる分類群を必ず入れる。同じ group から二枚選ばない。各分類群では image_id の辞書順で先頭。**予測の当たり外れで選ばない**",
+  "generated_at": "2026-09-16T01:47:25+09:00",
+  "selection_rule": "Gram 陽性/陰性・球菌/桿菌の両方を含め、色の規則が破れる分類群を必ず入れる。出荷モデルが学習にも選定にも使っていない物差し A の test からだけ選ぶ。同じ group から二枚選ばない。各分類群では image_id の辞書順で先頭。**予測の当たり外れで選ばない**",
   "crop": "配布元の画像から視野円の内接正方形の中心 512x512 を切り出したもの(リサイズなし)",
   "license": "CC BY 4.0",
   "attribution": "Jamshidi, Mohammad (Behdad); Sargolzaee, Saleh; Foorginezhad, Salimeh; Moztarzadeh, Omid (2023), Bacteria Data for Machine Vision and Digital Biology, Mendeley Data, V1, doi: 10.17632/cvkgfzp7ck.1. Licensed under CC BY 4.0. 視野円の内接正方形を切り出す加工を行っている。",
   "samples": [
     {
-      "id": "012c474d093ee7d0",
-      "file": "012c474d093ee7d0.png",
+      "id": "0efd12a7bd9a599b",
+      "file": "0efd12a7bd9a599b.png",
       "folder": "Staphylococcus aureus",
       "scientific_name": "Staphylococcus aureus",
       "gram": "positive",
       "shape": "coccus",
+      "in_stage_b": true,
       "family": "Staphylococcaceae",
       "why": "Gram 陽性・球菌。教科書どおりの紫のぶどう状",
-      "source_member": "Staphylococcus aureus/59.png"
+      "source_member": "Staphylococcus aureus/42.png"
     },
     {
-      "id": "026e33874a360fd1",
-      "file": "026e33874a360fd1.png",
+      "id": "11fab919b7424fa2",
+      "file": "11fab919b7424fa2.png",
       "folder": "Streptococcus agalactiae",
       "scientific_name": "Streptococcus agalactiae",
       "gram": "positive",
       "shape": "coccus",
+      "in_stage_b": true,
       "family": "Streptococcaceae",
       "why": "Gram 陽性・球菌。連鎖状に並ぶ",
-      "source_member": "Streptococcus agalactiae/43.png"
+      "source_member": "Streptococcus agalactiae/30.png"
     },
     {
-      "id": "00696a351f1b4c43",
-      "file": "00696a351f1b4c43.png",
+      "id": "3059e004a318064f",
+      "file": "3059e004a318064f.png",
       "folder": "Lactobacillus delbrueckii",
       "scientific_name": "Lactobacillus delbrueckii",
       "gram": "positive",
       "shape": "bacillus",
+      "in_stage_b": true,
       "family": "Lactobacillaceae",
       "why": "Gram 陽性・桿菌。細長い",
-      "source_member": "Lactobacillus delbrueckii/30.png"
+      "source_member": "Lactobacillus delbrueckii/55.png"
     },
     {
       "id": "06a29eb81c536dea",
@@ -45,42 +48,46 @@
       "scientific_name": "Clostridium perfringens",
       "gram": "positive",
       "shape": "bacillus",
+      "in_stage_b": true,
       "family": "Clostridiaceae",
       "why": "Gram 陽性・桿菌。太い",
       "source_member": "Clostridium perfringens/42.png"
     },
     {
-      "id": "00b49b9c9008a579",
-      "file": "00b49b9c9008a579.png",
+      "id": "278a06a80b558677",
+      "file": "278a06a80b558677.png",
       "folder": "Escherichia coli",
       "scientific_name": "Escherichia coli",
       "gram": "negative",
       "shape": "bacillus",
+      "in_stage_b": true,
       "family": "Enterobacteriaceae",
       "why": "Gram 陰性・桿菌。桃色に染まる",
-      "source_member": "Escherichia coli/04.png"
+      "source_member": "Escherichia coli/49.png"
     },
     {
-      "id": "17d65bd0e866cf27",
-      "file": "17d65bd0e866cf27.png",
+      "id": "251b3af59e68539e",
+      "file": "251b3af59e68539e.png",
       "folder": "Pseudomonas aeruginosa",
       "scientific_name": "Pseudomonas aeruginosa",
       "gram": "negative",
       "shape": "bacillus",
+      "in_stage_b": true,
       "family": "Pseudomonadaceae",
       "why": "Gram 陰性・桿菌",
-      "source_member": "Pseudomonas aeruginosa/38.png"
+      "source_member": "Pseudomonas aeruginosa/07.png"
     },
     {
-      "id": "00b6ba7999e9196f",
-      "file": "00b6ba7999e9196f.png",
+      "id": "1803d301d6ece0b3",
+      "file": "1803d301d6ece0b3.png",
       "folder": "Neisseria gonorrhoeae",
       "scientific_name": "Neisseria gonorrhoeae",
       "gram": "negative",
       "shape": "coccus",
+      "in_stage_b": true,
       "family": "Neisseriaceae",
       "why": "Gram 陰性・球菌。双球菌",
-      "source_member": "Neisseria gonorrhoeae/03.png"
+      "source_member": "Neisseria gonorrhoeae/17.png"
     },
     {
       "id": "010bba753fd12b76",
@@ -89,6 +96,7 @@
       "scientific_name": "Veillonella",
       "gram": "negative",
       "shape": "coccus",
+      "in_stage_b": true,
       "family": "Veillonellaceae",
       "why": "Gram 陰性・球菌。Bacillota 門なのに Gram 陰性という反例",
       "source_member": "Veillonella/53.png"
@@ -100,6 +108,7 @@
       "scientific_name": "Listeria monocytogenes",
       "gram": "positive",
       "shape": "bacillus",
+      "in_stage_b": true,
       "family": "Listeriaceae",
       "why": "Gram 陽性だが脱色されやすい。**色の規則が最もよく破れる**分類群",
       "source_member": "Listeria monocytogenes/54.png"
@@ -111,6 +120,7 @@
       "scientific_name": "Porphyromonas gingivalis",
       "gram": "negative",
       "shape": null,
+      "in_stage_b": false,
       "family": "Porphyromonadaceae",
       "why": "Gram 陰性だが染まり方が揺れる。種水準の典拠が無く属で補っている",
       "source_member": "Porphyromonas gingivalis/53.png"
