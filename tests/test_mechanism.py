@@ -109,16 +109,19 @@ def test_t287_drop_interval_is_over_groups() -> None:
     """T-287 / §3.12 — 下がり幅の区間は group 単位で、点推定を含む。"""
     from ml.mechanism import bootstrap_drop
 
-    rng = np.random.default_rng(7)
-    n = 120
+    # **group の中で正誤が揃っている**合成データにする(同じスライドは似た間違え方をする)。
+    # 画像ごとに独立な正誤を束ねても区間は広がらない —— loop_013 でその前提の無いデータで書いて落とした
+    n, size = 120, 20
     wrong_before = np.ones(n, dtype=int)
-    wrong_after = (rng.random(n) < 0.5).astype(int)
-    fine = np.arange(n)            # 独立単位 120
-    coarse = np.arange(n) // 20    # 独立単位 6
+    coarse = np.arange(n) // size                       # 独立単位 6
+    wrong_after = (coarse % 2 == 0).astype(int)         # group ごとに全部正解か全部誤り(平均 0.5)
+    fine = np.arange(n)                                 # 画像ごとに別 group と扱う(独立単位 120)
     p, lo, hi = bootstrap_drop(wrong_before, wrong_after, fine, n_boot=500, seed=1)
     assert lo <= p <= hi
     _, lo2, hi2 = bootstrap_drop(wrong_before, wrong_after, coarse, n_boot=500, seed=1)
-    assert (hi2 - lo2) >= (hi - lo)
+    assert (hi2 - lo2) > (hi - lo), (
+        f"group の中で揃った誤りなのに、group 単位の区間 {hi2 - lo2:.3f} が画像単位 {hi - lo:.3f} より広くない"
+    )
 
 
 # ---------------------------------------------------------------- 素材がある環境
