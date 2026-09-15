@@ -50,6 +50,8 @@ def test_t288_zoom_keeps_elongation_and_scales_area() -> None:
     from ml.stage_b import otsu_threshold
 
     def area_and_elongation(img: np.ndarray) -> tuple[float, float]:
+        """**縁に接する成分は数えない。** 拡大は中心を切り出すので、縁の塊は欠ける
+        (loop_014 で、欠けた塊を混ぜたまま『細長さは不変』を確かめて落とした)。"""
         from scipy import ndimage
 
         from ml.stage_b import EIGHT, LAMBDA_FLOOR
@@ -58,8 +60,12 @@ def test_t288_zoom_keeps_elongation_and_scales_area() -> None:
         mx, mn = a.max(2), a.min(2)
         sat = np.where(mx > 0, (mx - mn) / np.maximum(mx, 1e-6), 0.0)
         labels, n = ndimage.label(sat > otsu_threshold(sat), structure=EIGHT)
+        edge = set(labels[0, :]) | set(labels[-1, :]) | set(labels[:, 0]) | set(labels[:, -1])
+        for lab in edge:
+            if lab:
+                labels[labels == lab] = 0
         flat = labels.ravel()
-        area = np.bincount(flat)[1:]
+        area = np.bincount(flat, minlength=n + 1)[1:]
         yy, xx = np.indices(labels.shape)
         y, x = yy.ravel().astype(float), xx.ravel().astype(float)
         size = n + 1
@@ -76,12 +82,17 @@ def test_t288_zoom_keeps_elongation_and_scales_area() -> None:
         elong = np.sqrt((half + disc) / np.maximum(half - disc, LAMBDA_FLOOR))
         return float(np.median(ar)), float(np.median(elong))
 
+    # 許容差は**相対**で置く。小さい塊を画素に落とすと細長さは真の軸比より大きめに出て、
+    # 拡大するとその偏りが減る(loop_014 で絶対 0.05 で縛り、偏りが減ったことを不合格と読んで落とした)
     for shape_kw in ({"a": 8, "b": 8}, {"a": 18, "b": 6}):
+        truth = shape_kw["a"] / shape_kw["b"]
         base = _field(**shape_kw)
         a0, e0 = area_and_elongation(base)
+        assert abs(e0 - truth) / truth < 0.10, f"元の細長さ {e0:.3f} が真の軸比 {truth:.2f} から離れている"
         for s in (1.5, 2.0):
             a1, e1 = area_and_elongation(zoom(base, s))
-            assert abs(e1 - e0) < 0.05, f"s={s} で細長さが変わった({e0:.3f} → {e1:.3f})"
+            assert abs(e1 - e0) / e0 < 0.05, f"s={s} で細長さが変わった({e0:.3f} → {e1:.3f})"
+            assert abs(e1 - truth) / truth < 0.10, f"s={s} の細長さ {e1:.3f} が真の軸比 {truth:.2f} から離れている"
             assert 0.85 * s ** 2 <= a1 / a0 <= 1.15 * s ** 2, f"s={s} で面積比が {a1/a0:.2f}(期待 {s**2:.2f})"
 
 
