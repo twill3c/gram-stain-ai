@@ -1,0 +1,57 @@
+{
+  "generated_at": "2026-09-15T21:58:13+09:00",
+  "criterion": "ラベル置換の macro F1 が、同じ予測を fold 内で test 画像どうし入れ替えた分布の上側 97.5% を超えない(片側)",
+  "why_re_specified": "旧基準『多数派クラスの区間と重なる』は、多数派が全部を同じ答えにする予測の値で、ばらけて答える予測の偶然水準ではないため、漏れの無い Stage B を落とした(loop_011)",
+  "shape": {
+    "observed": 0.4963,
+    "median": 0.4963,
+    "q025": 0.4743,
+    "q975": 0.5196,
+    "p_upper": 0.544,
+    "n": 2000,
+    "predicted_one_rate": 0.6341,
+    "true_one_rate": 0.7003,
+    "folds": 8,
+    "epochs": 14,
+    "passes": true,
+    "superseded_majority_criterion": {
+      "permutation": {
+        "macro_f1": 0.4963,
+        "ci_low": 0.4702,
+        "ci_high": 0.5212
+      },
+      "majority": {
+        "macro_f1": 0.4119,
+        "ci_low": 0.3979,
+        "ci_high": 0.425
+      },
+      "passes": false
+    }
+  },
+  "gram": {
+    "observed": 0.4356,
+    "median": 0.4885,
+    "q025": 0.4676,
+    "q975": 0.5095,
+    "p_upper": 1.0,
+    "n": 2000,
+    "predicted_one_rate": 0.4379,
+    "true_one_rate": 0.2843,
+    "folds": 8,
+    "epochs": 3,
+    "passes": true,
+    "superseded_majority_criterion": {
+      "permutation": {
+        "macro_f1": 0.4356,
+        "ci_low": 0.4074,
+        "ci_high": 0.4625
+      },
+      "majority": {
+        "macro_f1": 0.4171,
+        "ci_low": 0.4039,
+        "ci_high": 0.4292
+      },
+      "passes": true
+    }
+  }
+}

@@ -267,14 +267,55 @@ def test_t270_stage_b_verdict_is_mechanical(cnn_shape: dict, controls_shape: dic
     assert v["adds_nothing"] == ((not cond1) and (not cond2))
 
 
+@pytest.mark.unit
+def test_t273_shuffle_null_separates_leak_from_chance() -> None:
+    """T-273 / G-09 — 同じ予測を fold 内で入れ替えた分布が、漏れを見分ける。
+
+    多数派クラス(全部を同じ答え)の macro F1 は、ばらけて答える予測の偶然水準ではない。
+    入れ替えは予測の割合を保ったまま画像との対応だけを壊すので、前提を置かずに偶然水準が作れる。
+    """
+    from ml.stage_b import shuffle_null
+
+    # **一回の抽選で断定しない**(loop_011 で踏んだ)。ラベルと無関係な予測でも、
+    # 上側 97.5% を超える事象は 2.5% の確率で起きる。確かめるべきは一回の合否ではなく、
+    # 超える割合が名目の水準に収まること(較正)と、漏れを毎回見分けること(検出力)である
+    rng = np.random.default_rng(20260915)
+    trials, false_alarms, missed_leaks = 200, 0, 0
+    for t in range(trials):
+        y = rng.integers(0, 2, 400)
+        blind = rng.integers(0, 2, 400)                                              # ラベルと無関係
+        leak = np.where(rng.random(400) < 0.8, y, 1 - y)                             # 8 割がラベルを写す漏れ
+        folds_blind = [(y[i:i + 100], blind[i:i + 100]) for i in range(0, 400, 100)]
+        folds_leak = [(y[i:i + 100], leak[i:i + 100]) for i in range(0, 400, 100)]
+        got_blind = shuffle_null(folds_blind, n=200, seed=t)
+        got_leak = shuffle_null(folds_leak, n=200, seed=t)
+        false_alarms += int(got_blind["observed"] > got_blind["q975"])
+        missed_leaks += int(got_leak["observed"] <= got_leak["q975"])
+        assert got_blind["q025"] <= got_blind["median"] <= got_blind["q975"]
+    rate = false_alarms / trials
+    assert rate <= 0.06, f"ラベルと無関係な予測を漏れと判定した割合が {rate:.1%}(名目 2.5%)"
+    assert missed_leaks == 0, f"漏れのある予測を {missed_leaks}/{trials} 回見逃した"
+
+
+@pytest.fixture(scope="module")
+def permutation_null() -> dict:
+    path = _require(REPORTS / "permutation_null.json", "python -m ml.stage_b perm-null")
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 @pytest.mark.integration
-def test_t271_stage_b_cnn_learning_controls(cnn_shape: dict, controls_shape: dict) -> None:
-    """T-271 / G-09 / G-08 — ラベル置換は多数派の水準へ落ち、予算は val で決めている。"""
-    perm = cnn_shape["permutation_control"]["a"]
-    maj = controls_shape["baselines"]["majority"]["a"]
-    assert perm["ci_low"] <= maj["ci_high"], (
-        f"ラベル置換 {perm['macro_f1']:.4f} [{perm['ci_low']:.4f}, {perm['ci_high']:.4f}] が "
-        f"多数派 {maj['macro_f1']:.4f} [{maj['ci_low']:.4f}, {maj['ci_high']:.4f}] を上回る —— 学習系に漏れがある"
-    )
+def test_t271_stage_b_cnn_learning_controls(cnn_shape: dict, permutation_null: dict) -> None:
+    """T-271 / G-09 / G-08 — ラベル置換が偶然水準を上に外れず、予算は val で決めている。
+
+    **loop_011 で引き直した。** 旧基準「多数派クラスの区間と重なる」は、多数派が
+    偶然水準ではないので、漏れの無い Stage B を落とした(0.4963 対 0.4119)。
+    偶然水準は同じ予測の fold 内入れ替えで作る。漏れは上に外れる形で出るので片側で見る。
+    """
+    for stage in ("shape", "gram"):
+        s = permutation_null[stage]
+        assert s["observed"] <= s["q975"], (
+            f"{stage}: ラベル置換 {s['observed']:.4f} が入れ替え分布の上側 97.5% {s['q975']:.4f} を超える —— 学習系に漏れがある"
+        )
+    assert abs(permutation_null["shape"]["observed"] - cnn_shape["permutation_control"]["a"]["macro_f1"]) < 1e-3
     assert cnn_shape["epoch_budget"]["chosen_on"] == "ruler_a_val"
     assert cnn_shape["epoch_budget"]["curve"], "予算を選んだ曲線が残っていない"

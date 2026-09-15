@@ -614,6 +614,7 @@ def finalise_shape(doc: dict, out_path: Path) -> None:
     detail["_totals"] = {"shape_rule_wrong": rule_total, "cnn_wrong": cnn_total,
                          "taxa_improved": wins, "taxa_considered": len(hard)}
 
+    doc["finalised_at"] = datetime.now(JST).isoformat(timespec="seconds")
     doc["verdict"] = {
         "condition_1_beats_strong_control_on_all_rulers": cond1,
         "condition_2_beats_on_hard_taxa": bool(cond2),
@@ -645,7 +646,7 @@ def write_markdown_shape(doc: dict, controls: dict) -> None:
     add = L.append
     add("# Stage B — 形(球菌 / 桿菌)を三つの物差しで測る")
     add("")
-    add(f"<!-- ml/train.py --target shape が生成。手で編集しない。生成日時 {doc['generated_at']} -->")
+    add(f"<!-- ml/train.py --target shape が生成。手で編集しない。学習開始 {doc['generated_at']} / 判定 {doc.get('finalised_at', '—')} -->")
     add("")
     add(f"対象は Stage B の {controls['n_taxa']} 分類群・{controls['n_images_total']:,} 枚。"
         f"骨格・前処理は Stage A と同じ。エポック予算 {doc['epoch_budget']['chosen']}(物差し A の val で決めた)。")
@@ -668,8 +669,19 @@ def write_markdown_shape(doc: dict, controls: dict) -> None:
         f"形の規則で特徴量が取れなかった画像は {base['shape']['n_missing_feature']} 枚(train の多数派を答えた)。")
     add("")
     p = doc["permutation_control"]["a"]
-    add(f"ラベル置換の対照(G-09): {p['macro_f1']:.4f} [{p['ci_low']:.4f}, {p['ci_high']:.4f}]"
-        f"(多数派 {base['majority']['a']['macro_f1']:.4f})。")
+    null_path = REPORTS / "permutation_null.json"
+    if null_path.exists():
+        s = json.loads(null_path.read_text(encoding="utf-8"))["shape"]
+        add(f"ラベル置換の対照(G-09): {p['macro_f1']:.4f} [{p['ci_low']:.4f}, {p['ci_high']:.4f}]。"
+            f"同じ予測を fold 内で入れ替えた偶然水準は中央 {s['median']:.4f} [{s['q025']:.4f}, {s['q975']:.4f}]"
+            f"(観測以上の割合 p={s['p_upper']:.4f})で、**上に外れていない —— 学習系に漏れは無い**。")
+        add("")
+        add(f"G-09 は loop_011 で引き直した。旧基準「多数派クラス {base['majority']['a']['macro_f1']:.4f} の区間と重なる」では"
+            "この結果が落ちる。多数派は全部を同じ答えにする予測の値で、ばらけて答える予測の偶然水準ではないからである"
+            "(記録は TEST_SPEC の T-271)。")
+    else:
+        add(f"ラベル置換の対照(G-09): {p['macro_f1']:.4f} [{p['ci_low']:.4f}, {p['ci_high']:.4f}]"
+            "(偶然水準は `python -m ml.stage_b perm-null` で出す)。")
     add("")
     add("## 判定")
     add("")
@@ -707,6 +719,32 @@ def write_markdown_shape(doc: dict, controls: dict) -> None:
         verdict = "色の規則のほうが高い —— 形のラベルが色で推せてしまう" if v["colour_explains_shape"][r] \
             else "形の規則のほうが高い —— 色では推せない分を形の規則が拾っている"
         add(f"- 物差し {label}: 形の規則 {s:.4f} / 色の規則 {h:.4f} → {verdict}")
+    add("")
+    cells_path = REPORTS / "cnn_shape_cells.json"
+    if cells_path.exists():
+        cells_doc = json.loads(cells_path.read_text(encoding="utf-8"))["rulers"]
+        add("## どこで外したか —— Gram × 形の 4 セル(事後の分析・判定には入れない)")
+        add("")
+        add("判定が二条件とも成立しても、**誤りは一様ではない**。判定の後で、fold の予測を Gram × 形で数え直した"
+            "(`python -m ml.stage_b cells`・検査 T-272)。")
+        add("")
+        add("| Gram × 形 | 分類群 | 枚数 | CNN A | CNN B | CNN C | 形の規則 B |")
+        add("|---|---|---|---|---|---|---|")
+        names_cell = {"negative x bacillus": "陰性 × 桿菌", "negative x coccus": "**陰性 × 球菌**",
+                      "positive x bacillus": "陽性 × 桿菌", "positive x coccus": "陽性 × 球菌"}
+        for k, label in names_cell.items():
+            a = cells_doc["a"]["cnn"][k]
+            add(f"| {label} | {a['n_taxa']} | {a['n']:,} | {a['error_rate']:.0%} | "
+                f"{cells_doc['b']['cnn'][k]['error_rate']:.0%} | {cells_doc['c']['cnn'][k]['error_rate']:.0%} | "
+                f"{cells_doc['b']['shape_rule'][k]['error_rate']:.0%} |")
+        add("")
+        add("数字は誤り率。**学習で見ていない分類群・科の Gram 陰性球菌を、CNN はほぼ全部外す**。"
+            "同じ分類群を見ていれば(物差し A)ほぼ当てる。")
+        add("")
+        add("**機構は測っていない。** 候補は二つあり、どちらとも決めていない —— "
+            "(a) 陰性球菌は 2 分類群しかなく、片方を抜くと学習に残るのは 1 分類群だけになる。"
+            "(b) `Neisseria` の双球菌の対や `Veillonella` の小ささが、見た目として桿菌に近い。"
+            "切り分けは陰性球菌の画像を紫に塗り替えて予測が変わるかで測れる(SPEC §3.10)。")
     (REPORTS / "cnn_shape.md").write_text("\n".join(L) + "\n", encoding="utf-8")
 
 

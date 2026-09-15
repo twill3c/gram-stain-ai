@@ -355,14 +355,115 @@ def cells() -> int:
     return 0
 
 
+# ------------------------------------------------------------------ ラベル置換の偶然水準(G-09 の引き直し)
+
+
+def shuffle_null(folds: list[tuple[np.ndarray, np.ndarray]], n: int = 2000, seed: int = 20260915) -> dict:
+    """同じ予測を fold の中で test 画像どうし入れ替えた macro F1 の分布(T-273)。
+
+    多数派クラス(全部を同じ答え)の macro F1 は、ばらけて答える予測の偶然水準ではない。
+    入れ替えは予測の割合を保ったまま画像との対応だけを壊すので、前提を置かずに偶然水準が作れる。
+    漏れは上に外れる形で出るので、判定は上側 97.5% を超えるかどうか(片側)で見る。
+
+    folds: [(正解, 予測), ...](fold ごと)
+    """
+    rng = np.random.default_rng(seed)
+    y = np.concatenate([f[0] for f in folds])
+    p = np.concatenate([f[1] for f in folds])
+    observed = macro_f1(y, p)
+    null = np.array([
+        macro_f1(y, np.concatenate([rng.permutation(f[1]) for f in folds])) for _ in range(n)
+    ])
+    return {
+        "observed": round(float(observed), 4),
+        "median": round(float(np.median(null)), 4),
+        "q025": round(float(np.quantile(null, 0.025)), 4),
+        "q975": round(float(np.quantile(null, 0.975)), 4),
+        "p_upper": round(float((null >= observed).mean()), 4),
+        "n": n,
+        "predicted_one_rate": round(float(p.mean()), 4),
+        "true_one_rate": round(float(y.mean()), 4),
+    }
+
+
+def perm_null() -> int:
+    """Stage A・B のラベル置換を、入れ替え分布の偶然水準に照らす。"""
+    from ml.metrics import NEGATIVE, POSITIVE
+
+    rows = {r["image_id"]: r for r in (json.loads(line) for line in
+            (META / "prepared.jsonl").read_text(encoding="utf-8").splitlines())}
+    fold_dir = ROOT / "ml" / "checkpoints" / "fold_preds"
+    stages = {
+        "shape": ("cnn_shape.json", "SPERM", lambda r: BACILLUS if r["shape"] == "bacillus" else COCCUS),
+        "gram": ("cnn.json", "PERM", lambda r: POSITIVE if r["gram"] == "positive" else NEGATIVE),
+    }
+    doc: dict[str, dict] = {
+        "generated_at": datetime.now(JST).isoformat(timespec="seconds"),
+        "criterion": "ラベル置換の macro F1 が、同じ予測を fold 内で test 画像どうし入れ替えた分布の上側 97.5% を超えない(片側)",
+        "why_re_specified": "旧基準『多数派クラスの区間と重なる』は、多数派が全部を同じ答えにする予測の値で、"
+                            "ばらけて答える予測の偶然水準ではないため、漏れの無い Stage B を落とした(loop_011)",
+    }
+    for stage, (report, prefix, label) in stages.items():
+        cnn = json.loads((REPORTS / report).read_text(encoding="utf-8"))
+        epochs = cnn["epoch_budget"]["chosen"]
+        files = sorted(fold_dir.glob(f"{prefix}_{epochs}ep_*.json"))
+        folds = []
+        for f in files:
+            preds = json.loads(f.read_text(encoding="utf-8"))
+            ids = list(preds)
+            folds.append((np.array([label(rows[i]) for i in ids]), np.array([preds[i] for i in ids])))
+        res = shuffle_null(folds)
+        res["folds"] = len(files)
+        res["epochs"] = epochs
+        res["passes"] = res["observed"] <= res["q975"]
+        # 旧基準での結果も残す(基準を後から変えたことを隠さない)
+        perm = cnn["permutation_control"]["a"]
+        ctrl_path = REPORTS / ("controls_shape.json" if stage == "shape" else "controls.json")
+        maj = json.loads(ctrl_path.read_text(encoding="utf-8"))["baselines"]["majority"]["a"]
+        res["superseded_majority_criterion"] = {
+            "permutation": {k: perm[k] for k in ("macro_f1", "ci_low", "ci_high")},
+            "majority": {k: maj[k] for k in ("macro_f1", "ci_low", "ci_high")},
+            "passes": perm["ci_low"] <= maj["ci_high"],
+        }
+        doc[stage] = res
+        print(f"  {stage}: 観測 {res['observed']:.4f} / 入れ替え 中央 {res['median']:.4f} "
+              f"[{res['q025']:.4f}, {res['q975']:.4f}] p={res['p_upper']:.4f} → "
+              f"{'通過' if res['passes'] else '不通過'}(旧基準: {'通過' if res['superseded_majority_criterion']['passes'] else '不通過'})")
+    (REPORTS / "permutation_null.json").write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"→ {(REPORTS / 'permutation_null.json').relative_to(ROOT)}")
+    return 0
+
+
+def report() -> int:
+    """学習し直さずに、Stage B の判定と cnn_shape.md だけを作り直す。
+
+    判定は ml/train.py の finalise_shape をそのまま呼ぶ(同じ二条件・同じ当てはめ)。
+    fold の予測も対照も変えないので、判定の値は学習直後に出たものと一致するはず —— T-270 がそれを見る。
+    """
+    from ml.train import finalise_shape
+
+    out_path = REPORTS / "cnn_shape.json"
+    doc = json.loads(out_path.read_text(encoding="utf-8"))
+    missing = [k for k in ("rulers", "per_taxon", "permutation_control", "epoch_budget") if k not in doc]
+    if missing:
+        raise SystemExit(f"cnn_shape.json に {missing} が無い。先に python -m ml.train --target shape を回す")
+    finalise_shape(doc, out_path)
+    print(f"→ {out_path.relative_to(ROOT)} / {(REPORTS / 'cnn_shape.md').relative_to(ROOT)}")
+    return 0
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("command", choices=("controls", "cells"))
+    ap.add_argument("command", choices=("controls", "cells", "perm-null", "report"))
     args = ap.parse_args()
     if args.command == "controls":
         return controls()
     if args.command == "cells":
         return cells()
+    if args.command == "perm-null":
+        return perm_null()
+    if args.command == "report":
+        return report()
     return 1
 
 
