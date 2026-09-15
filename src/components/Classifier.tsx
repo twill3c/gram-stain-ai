@@ -15,7 +15,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { preprocess } from "@/lib/pipeline";
 import { softmax } from "@/lib/preprocess";
 import type { Image8 } from "@/lib/resize";
-import { infer } from "@/lib/session";
+import { getSession, infer } from "@/lib/session";
 
 const MAX_BYTES = 10 * 1024 * 1024;
 const ACCEPT = ["image/jpeg", "image/png", "image/webp"];
@@ -142,6 +142,9 @@ export default function Classifier() {
       const { tensor } = preprocess(img);
       setStatus("running");
       const t0 = performance.now();
+      // 二つのモデルの取得と初期化を**並行に**始めてから推論する。
+      // 順に取ると 1 枚目が約 6 MB x 2 の直列待ちになり、本番で N-01 の 5 秒を超えた(loop_012・5,097 ms)
+      await Promise.all([getSession("gram"), getSession("shape")]);
       // 前処理は共通なので一度だけ。二つのモデルに同じテンソルを渡す
       const logits = await infer(tensor, "gram");
       const shapeLogits = await infer(tensor, "shape");
