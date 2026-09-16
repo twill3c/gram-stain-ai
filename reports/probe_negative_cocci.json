@@ -1,0 +1,345 @@
+{
+  "generated_at": "2026-09-16T08:22:53+09:00",
+  "rule": "SPEC §3.14(測る前に書いた)",
+  "zooms": [
+    1.0,
+    1.25,
+    1.5,
+    2.0,
+    3.0
+  ],
+  "checks": {
+    "sham_zoom_error_change": {
+      "B0": 0.0,
+      "B2": 0.0,
+      "C0": 0.0,
+      "C3": 0.0
+    },
+    "saturation_target_median": 0.389937106918239
+  },
+  "checks_passed": true,
+  "primary": {
+    "b": {
+      "models": [
+        "B0",
+        "B2"
+      ],
+      "n": 126,
+      "error_original": 0.9206349206349206,
+      "zoom": {
+        "1.0": {
+          "error": 0.9206349206349206,
+          "side_effect": {
+            "positive_cocci_error_increase": 0.0,
+            "positive_cocci_n": 121,
+            "negative_bacilli_error_increase": 0.0,
+            "negative_bacilli_n": 0
+          }
+        },
+        "1.25": {
+          "error": 0.9603174603174603,
+          "side_effect": {
+            "positive_cocci_error_increase": 0.0,
+            "positive_cocci_n": 121,
+            "negative_bacilli_error_increase": 0.0,
+            "negative_bacilli_n": 0
+          }
+        },
+        "1.5": {
+          "error": 0.9444444444444444,
+          "side_effect": {
+            "positive_cocci_error_increase": 0.008264462809917356,
+            "positive_cocci_n": 121,
+            "negative_bacilli_error_increase": 0.0,
+            "negative_bacilli_n": 0
+          }
+        },
+        "2.0": {
+          "error": 0.8492063492063492,
+          "side_effect": {
+            "positive_cocci_error_increase": -0.008264462809917356,
+            "positive_cocci_n": 121,
+            "negative_bacilli_error_increase": 0.0,
+            "negative_bacilli_n": 0
+          }
+        },
+        "3.0": {
+          "error": 0.6587301587301587,
+          "side_effect": {
+            "positive_cocci_error_increase": 0.0,
+            "positive_cocci_n": 121,
+            "negative_bacilli_error_increase": 0.0,
+            "negative_bacilli_n": 0
+          }
+        }
+      },
+      "saturation": {
+        "error": 0.753968253968254,
+        "side_effect": {
+          "positive_cocci_error_increase": 0.0,
+          "positive_cocci_n": 121,
+          "negative_bacilli_error_increase": 0.0,
+          "negative_bacilli_n": 0
+        }
+      },
+      "best_variant": "3.0",
+      "drop": {
+        "point": 0.26190476190476186,
+        "ci_low": 0.1650171576832943,
+        "ci_high": 0.36363636363636365
+      },
+      "verdict": "混合"
+    },
+    "c": {
+      "models": [
+        "C0",
+        "C3"
+      ],
+      "n": 126,
+      "error_original": 0.9761904761904762,
+      "zoom": {
+        "1.0": {
+          "error": 0.9761904761904762,
+          "side_effect": {
+            "positive_cocci_error_increase": 0.0,
+            "positive_cocci_n": 0,
+            "negative_bacilli_error_increase": 0.0,
+            "negative_bacilli_n": 63
+          }
+        },
+        "1.25": {
+          "error": 0.9841269841269841,
+          "side_effect": {
+            "positive_cocci_error_increase": 0.0,
+            "positive_cocci_n": 0,
+            "negative_bacilli_error_increase": 0.0,
+            "negative_bacilli_n": 63
+          }
+        },
+        "1.5": {
+          "error": 0.8650793650793651,
+          "side_effect": {
+            "positive_cocci_error_increase": 0.0,
+            "positive_cocci_n": 0,
+            "negative_bacilli_error_increase": 0.0,
+            "negative_bacilli_n": 63
+          }
+        },
+        "2.0": {
+          "error": 0.7063492063492064,
+          "side_effect": {
+            "positive_cocci_error_increase": 0.0,
+            "positive_cocci_n": 0,
+            "negative_bacilli_error_increase": 0.0,
+            "negative_bacilli_n": 63
+          }
+        },
+        "3.0": {
+          "error": 0.5714285714285714,
+          "side_effect": {
+            "positive_cocci_error_increase": 0.0,
+            "positive_cocci_n": 0,
+            "negative_bacilli_error_increase": 0.031746031746031744,
+            "negative_bacilli_n": 63
+          }
+        }
+      },
+      "saturation": {
+        "error": 0.9206349206349206,
+        "side_effect": {
+          "positive_cocci_error_increase": 0.0,
+          "positive_cocci_n": 0,
+          "negative_bacilli_error_increase": 0.0,
+          "negative_bacilli_n": 63
+        }
+      },
+      "best_variant": "3.0",
+      "drop": {
+        "point": 0.40476190476190477,
+        "ci_low": 0.2857142857142857,
+        "ci_high": 0.5217471227621483
+      },
+      "verdict": "混合"
+    }
+  },
+  "observation_elongation": {
+    "b": {
+      "n": 126,
+      "elongation_mean_wrong": 1.7352360794427064,
+      "elongation_mean_right": 1.6388612400945644,
+      "note": "形の規則が測る細長さ。判定には使わない"
+    },
+    "c": {
+      "n": 126,
+      "elongation_mean_wrong": 1.7299647364433546,
+      "elongation_mean_right": 1.6301116779223213,
+      "note": "形の規則が測る細長さ。判定には使わない"
+    }
+  },
+  "per_model": {
+    "B0": {
+      "n_positive_cocci": 56,
+      "n_negative_bacilli": 0,
+      "original": {
+        "error": 0.8529411764705882,
+        "positive_cocci_error": 0.0,
+        "negative_bacilli_error": NaN
+      },
+      "variants": {
+        "zoom_1.0": {
+          "error": 0.8529411764705882,
+          "positive_cocci_error": 0.0,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_1.25": {
+          "error": 0.9411764705882353,
+          "positive_cocci_error": 0.0,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_1.5": {
+          "error": 0.8970588235294118,
+          "positive_cocci_error": 0.0,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_2.0": {
+          "error": 0.7352941176470589,
+          "positive_cocci_error": 0.0,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_3.0": {
+          "error": 0.4852941176470588,
+          "positive_cocci_error": 0.0,
+          "negative_bacilli_error": NaN
+        },
+        "saturation": {
+          "error": 0.7647058823529411,
+          "positive_cocci_error": 0.0,
+          "negative_bacilli_error": NaN
+        }
+      }
+    },
+    "B2": {
+      "n_positive_cocci": 65,
+      "n_negative_bacilli": 0,
+      "original": {
+        "error": 1.0,
+        "positive_cocci_error": 0.015384615384615385,
+        "negative_bacilli_error": NaN
+      },
+      "variants": {
+        "zoom_1.0": {
+          "error": 1.0,
+          "positive_cocci_error": 0.015384615384615385,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_1.25": {
+          "error": 0.9827586206896551,
+          "positive_cocci_error": 0.015384615384615385,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_1.5": {
+          "error": 1.0,
+          "positive_cocci_error": 0.03076923076923077,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_2.0": {
+          "error": 0.9827586206896551,
+          "positive_cocci_error": 0.0,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_3.0": {
+          "error": 0.8620689655172413,
+          "positive_cocci_error": 0.015384615384615385,
+          "negative_bacilli_error": NaN
+        },
+        "saturation": {
+          "error": 0.7413793103448276,
+          "positive_cocci_error": 0.015384615384615385,
+          "negative_bacilli_error": NaN
+        }
+      }
+    },
+    "C0": {
+      "n_positive_cocci": 0,
+      "n_negative_bacilli": 0,
+      "original": {
+        "error": 0.9558823529411765,
+        "positive_cocci_error": NaN,
+        "negative_bacilli_error": NaN
+      },
+      "variants": {
+        "zoom_1.0": {
+          "error": 0.9558823529411765,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_1.25": {
+          "error": 0.9705882352941176,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_1.5": {
+          "error": 0.75,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_2.0": {
+          "error": 0.47058823529411764,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": NaN
+        },
+        "zoom_3.0": {
+          "error": 0.22058823529411764,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": NaN
+        },
+        "saturation": {
+          "error": 0.8676470588235294,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": NaN
+        }
+      }
+    },
+    "C3": {
+      "n_positive_cocci": 0,
+      "n_negative_bacilli": 63,
+      "original": {
+        "error": 1.0,
+        "positive_cocci_error": NaN,
+        "negative_bacilli_error": 0.0
+      },
+      "variants": {
+        "zoom_1.0": {
+          "error": 1.0,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": 0.0
+        },
+        "zoom_1.25": {
+          "error": 1.0,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": 0.0
+        },
+        "zoom_1.5": {
+          "error": 1.0,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": 0.0
+        },
+        "zoom_2.0": {
+          "error": 0.9827586206896551,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": 0.0
+        },
+        "zoom_3.0": {
+          "error": 0.9827586206896551,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": 0.031746031746031744
+        },
+        "saturation": {
+          "error": 0.9827586206896551,
+          "positive_cocci_error": NaN,
+          "negative_bacilli_error": 0.0
+        }
+      }
+    }
+  }
+}
