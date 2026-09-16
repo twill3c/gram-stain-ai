@@ -1,0 +1,312 @@
+{
+  "generated_at": "2026-09-17T07:04:07+09:00",
+  "rule": "SPEC §3.20(測る前に書いた)",
+  "primary_layer": "features[12]",
+  "stain_mask": "224px で彩度に画像ごとの大津の閾値(top10_reference は loop_008 の上位 10%)",
+  "target_class": "学習済みモデルの予測クラス。乱数化モデルにも同じクラスを描かせる",
+  "overlays": [
+    "B0_neg_cocci_00b6ba7999e9196f.png",
+    "B0_neg_cocci_05ba1a31f04ba89a.png",
+    "B0_neg_cocci_0d3ea262f20ac715.png",
+    "B0_pos_cocci_0a9b47f07e860678.png",
+    "B0_pos_cocci_0aa555af06a9a25a.png",
+    "B0_pos_cocci_0d46ab3e2459fc60.png",
+    "B2_neg_cocci_010bba753fd12b76.png",
+    "B2_neg_cocci_021eaf7859bd37d3.png",
+    "B2_neg_cocci_09a5e9e70e0f353e.png",
+    "B2_pos_cocci_026e33874a360fd1.png",
+    "B2_pos_cocci_09047ba6138e163f.png",
+    "B2_pos_cocci_0a80718e6088edf4.png",
+    "C0_neg_cocci_00b6ba7999e9196f.png",
+    "C0_neg_cocci_05ba1a31f04ba89a.png",
+    "C0_neg_cocci_0d3ea262f20ac715.png",
+    "C3_neg_cocci_010bba753fd12b76.png",
+    "C3_neg_cocci_021eaf7859bd37d3.png",
+    "C3_neg_cocci_09a5e9e70e0f353e.png"
+  ],
+  "layers": {
+    "features[12]": {
+      "sanity": {
+        "median_spearman": 0.0023,
+        "n_pairs": 354,
+        "threshold": 0.5,
+        "passed": true
+      },
+      "degenerate": {
+        "c:neg_cocci_randomized": 6
+      },
+      "rulers": {
+        "b": {
+          "neg_cocci_trained": {
+            "mean_ratio": 1.2707,
+            "ci_low": 1.1601,
+            "ci_high": 1.3785,
+            "n_used": 126
+          },
+          "neg_cocci_randomized": {
+            "mean_ratio": 1.0177,
+            "ci_low": 0.9796,
+            "ci_high": 1.0559,
+            "n_used": 126
+          },
+          "pos_cocci_trained": {
+            "mean_ratio": 1.2464,
+            "ci_low": 1.1883,
+            "ci_high": 1.3065,
+            "n_used": 120
+          },
+          "top10_reference": {
+            "neg_cocci_trained": {
+              "mean_ratio": 1.2991,
+              "ci_low": 1.1849,
+              "ci_high": 1.4096,
+              "n_used": 126
+            },
+            "neg_cocci_randomized": {
+              "mean_ratio": 1.0536,
+              "ci_low": 1.0039,
+              "ci_high": 1.1055,
+              "n_used": 126
+            },
+            "pos_cocci_trained": {
+              "mean_ratio": 1.2403,
+              "ci_low": 1.1873,
+              "ci_high": 1.2947,
+              "n_used": 120
+            }
+          },
+          "verdict": {
+            "location": "誤答の根拠は菌体の上に寄っている",
+            "vs_correct": "違いは見えない"
+          }
+        },
+        "c": {
+          "neg_cocci_trained": {
+            "mean_ratio": 1.2185,
+            "ci_low": 1.142,
+            "ci_high": 1.2915,
+            "n_used": 126
+          },
+          "neg_cocci_randomized": {
+            "mean_ratio": 0.9308,
+            "ci_low": 0.8578,
+            "ci_high": 1.0107,
+            "n_used": 120
+          },
+          "pos_cocci_trained": {
+            "mean_ratio": null,
+            "ci_low": null,
+            "ci_high": null,
+            "n_used": 0
+          },
+          "top10_reference": {
+            "neg_cocci_trained": {
+              "mean_ratio": 1.256,
+              "ci_low": 1.1874,
+              "ci_high": 1.3259,
+              "n_used": 126
+            },
+            "neg_cocci_randomized": {
+              "mean_ratio": 0.8483,
+              "ci_low": 0.7588,
+              "ci_high": 0.9313,
+              "n_used": 120
+            }
+          },
+          "verdict": {
+            "location": "誤答の根拠は菌体の上に寄っている",
+            "vs_correct": "比べる正答が無い"
+          }
+        }
+      }
+    },
+    "features[8]": {
+      "sanity": {
+        "median_spearman": -0.0009,
+        "n_pairs": 372,
+        "threshold": 0.5,
+        "passed": true
+      },
+      "degenerate": {},
+      "rulers": {
+        "b": {
+          "neg_cocci_trained": {
+            "mean_ratio": 1.469,
+            "ci_low": 1.2799,
+            "ci_high": 1.6542,
+            "n_used": 126
+          },
+          "neg_cocci_randomized": {
+            "mean_ratio": 0.9748,
+            "ci_low": 0.9339,
+            "ci_high": 1.0123,
+            "n_used": 126
+          },
+          "pos_cocci_trained": {
+            "mean_ratio": 1.4732,
+            "ci_low": 1.3464,
+            "ci_high": 1.6109,
+            "n_used": 120
+          },
+          "top10_reference": {
+            "neg_cocci_trained": {
+              "mean_ratio": 1.492,
+              "ci_low": 1.333,
+              "ci_high": 1.6435,
+              "n_used": 126
+            },
+            "neg_cocci_randomized": {
+              "mean_ratio": 0.9446,
+              "ci_low": 0.8901,
+              "ci_high": 0.9955,
+              "n_used": 126
+            },
+            "pos_cocci_trained": {
+              "mean_ratio": 1.4802,
+              "ci_low": 1.3571,
+              "ci_high": 1.6149,
+              "n_used": 120
+            }
+          },
+          "verdict": {
+            "location": "誤答の根拠は菌体の上に寄っている",
+            "vs_correct": "違いは見えない"
+          }
+        },
+        "c": {
+          "neg_cocci_trained": {
+            "mean_ratio": 1.4495,
+            "ci_low": 1.2846,
+            "ci_high": 1.624,
+            "n_used": 126
+          },
+          "neg_cocci_randomized": {
+            "mean_ratio": 1.2834,
+            "ci_low": 1.1785,
+            "ci_high": 1.4019,
+            "n_used": 126
+          },
+          "pos_cocci_trained": {
+            "mean_ratio": null,
+            "ci_low": null,
+            "ci_high": null,
+            "n_used": 0
+          },
+          "top10_reference": {
+            "neg_cocci_trained": {
+              "mean_ratio": 1.4516,
+              "ci_low": 1.3295,
+              "ci_high": 1.5708,
+              "n_used": 126
+            },
+            "neg_cocci_randomized": {
+              "mean_ratio": 1.4695,
+              "ci_low": 1.2794,
+              "ci_high": 1.683,
+              "n_used": 126
+            }
+          },
+          "verdict": {
+            "location": "区別できない",
+            "vs_correct": "比べる正答が無い"
+          }
+        }
+      }
+    },
+    "features[3]": {
+      "sanity": {
+        "median_spearman": 0.0082,
+        "n_pairs": 315,
+        "threshold": 0.5,
+        "passed": true
+      },
+      "degenerate": {
+        "c:neg_cocci_randomized": 57
+      },
+      "rulers": {
+        "b": {
+          "neg_cocci_trained": {
+            "mean_ratio": 1.5614,
+            "ci_low": 1.3303,
+            "ci_high": 1.7829,
+            "n_used": 126
+          },
+          "neg_cocci_randomized": {
+            "mean_ratio": 0.854,
+            "ci_low": 0.7992,
+            "ci_high": 0.9169,
+            "n_used": 126
+          },
+          "pos_cocci_trained": {
+            "mean_ratio": 1.5646,
+            "ci_low": 1.2933,
+            "ci_high": 1.8986,
+            "n_used": 120
+          },
+          "top10_reference": {
+            "neg_cocci_trained": {
+              "mean_ratio": 1.5726,
+              "ci_low": 1.366,
+              "ci_high": 1.7751,
+              "n_used": 126
+            },
+            "neg_cocci_randomized": {
+              "mean_ratio": 0.8513,
+              "ci_low": 0.7887,
+              "ci_high": 0.9199,
+              "n_used": 126
+            },
+            "pos_cocci_trained": {
+              "mean_ratio": 1.4549,
+              "ci_low": 1.2413,
+              "ci_high": 1.7122,
+              "n_used": 120
+            }
+          },
+          "verdict": {
+            "location": "誤答の根拠は菌体の上に寄っている",
+            "vs_correct": "違いは見えない"
+          }
+        },
+        "c": {
+          "neg_cocci_trained": {
+            "mean_ratio": 1.539,
+            "ci_low": 1.3688,
+            "ci_high": 1.7251,
+            "n_used": 126
+          },
+          "neg_cocci_randomized": {
+            "mean_ratio": 0.884,
+            "ci_low": 0.8317,
+            "ci_high": 0.9495,
+            "n_used": 69
+          },
+          "pos_cocci_trained": {
+            "mean_ratio": null,
+            "ci_low": null,
+            "ci_high": null,
+            "n_used": 0
+          },
+          "top10_reference": {
+            "neg_cocci_trained": {
+              "mean_ratio": 1.5778,
+              "ci_low": 1.422,
+              "ci_high": 1.7324,
+              "n_used": 126
+            },
+            "neg_cocci_randomized": {
+              "mean_ratio": 0.9238,
+              "ci_low": 0.7572,
+              "ci_high": 1.2321,
+              "n_used": 69
+            }
+          },
+          "verdict": {
+            "location": "誤答の根拠は菌体の上に寄っている",
+            "vs_correct": "比べる正答が無い"
+          }
+        }
+      }
+    }
+  }
+}

@@ -32,3 +32,6 @@ dataset/metadata/.authority_cache/
 ml/checkpoints/
 
 .vercel
+
+# loop_017: Grad-CAM の観察用の重ね絵。赤で重ねたので桃色の菌体と区別しにくく、判定にも使わないので積まない
+/reports/gradcam_neg_cocci/
