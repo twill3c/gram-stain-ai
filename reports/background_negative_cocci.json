@@ -1,0 +1,134 @@
+{
+  "generated_at": "2026-09-17T06:39:50+09:00",
+  "rule": "SPEC §3.18(測る前に書いた)",
+  "ring_chebyshev": 3,
+  "checks": {
+    "side_effect_increase": {
+      "b:positive_cocci": 0.4628099173553719,
+      "c:negative_bacilli": 0.0
+    }
+  },
+  "checks_passed": false,
+  "primary": {
+    "b": {
+      "models": [
+        "B0",
+        "B2"
+      ],
+      "n": 126,
+      "error_original": 0.9206349206349206,
+      "flat": {
+        "error": 0.8174603174603174,
+        "drop": 0.10317460317460314,
+        "ci_low": 0.031001788908765707,
+        "ci_high": 0.17568378378378383
+      },
+      "ring": {
+        "error": 0.8015873015873016,
+        "drop": 0.11904761904761896,
+        "ci_low": 0.030528568123987913,
+        "ci_high": 0.20864114678406528
+      },
+      "shuffle": {
+        "error": 0.8412698412698413,
+        "drop": 0.0793650793650793,
+        "ci_low": 0.0180100454436738,
+        "ci_high": 0.1487693924894882
+      },
+      "per_taxon": {
+        "Neisseria gonorrhoeae": {
+          "n": 68,
+          "error_original": 0.8529411764705882,
+          "error_flat": 0.6764705882352942,
+          "error_ring": 0.6323529411764706,
+          "error_shuffle": 0.7352941176470589
+        },
+        "Veillonella": {
+          "n": 58,
+          "error_original": 1.0,
+          "error_flat": 0.9827586206896551,
+          "error_ring": 1.0,
+          "error_shuffle": 0.9655172413793104
+        }
+      },
+      "verdict": {
+        "replication": "判定しない",
+        "location": null,
+        "nature": null
+      }
+    },
+    "c": {
+      "models": [
+        "C0",
+        "C3"
+      ],
+      "n": 126,
+      "error_original": 0.9761904761904762,
+      "flat": {
+        "error": 0.7857142857142857,
+        "drop": 0.19047619047619047,
+        "ci_low": 0.11605425824175827,
+        "ci_high": 0.26356589147286813
+      },
+      "ring": {
+        "error": 0.6190476190476191,
+        "drop": 0.3571428571428571,
+        "ci_low": 0.23138906547997456,
+        "ci_high": 0.4789959733893557
+      },
+      "shuffle": {
+        "error": 0.9841269841269841,
+        "drop": -0.007936507936507908,
+        "ci_low": -0.04379722115507753,
+        "ci_high": 0.024999999999999915
+      },
+      "per_taxon": {
+        "Neisseria gonorrhoeae": {
+          "n": 68,
+          "error_original": 0.9558823529411765,
+          "error_flat": 0.6029411764705882,
+          "error_ring": 0.29411764705882354,
+          "error_shuffle": 0.9852941176470589
+        },
+        "Veillonella": {
+          "n": 58,
+          "error_original": 1.0,
+          "error_flat": 1.0,
+          "error_ring": 1.0,
+          "error_shuffle": 0.9827586206896551
+        }
+      },
+      "verdict": {
+        "replication": "判定しない",
+        "location": null,
+        "nature": null
+      }
+    }
+  },
+  "per_model": {
+    "B0": {
+      "original": 0.8529411764705882,
+      "flat": 0.6764705882352942,
+      "ring": 0.6323529411764706,
+      "shuffle": 0.7352941176470589
+    },
+    "B2": {
+      "original": 1.0,
+      "flat": 0.9827586206896551,
+      "ring": 1.0,
+      "shuffle": 0.9655172413793104
+    },
+    "C0": {
+      "original": 0.9558823529411765,
+      "flat": 0.6029411764705882,
+      "ring": 0.29411764705882354,
+      "shuffle": 0.9852941176470589
+    },
+    "C3": {
+      "original": 1.0,
+      "flat": 1.0,
+      "ring": 1.0,
+      "shuffle": 0.9827586206896551
+    }
+  }
+}
